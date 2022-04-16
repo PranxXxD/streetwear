@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
@@ -9,7 +11,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="mx-5">Welcome to codeSwear</div>
+      <Navbar />
+      <div className="">
+        <img src="./images/slider.png" alt="" />
+      </div>
+      <Footer />
     </div>
   );
 }
