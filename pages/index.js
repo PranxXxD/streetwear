@@ -1,6 +1,10 @@
 import Head from "next/head";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Image from "next/image";
+
+import slider from "../images/musician.jpg";
+import Content from "../components/content";
 
 export default function Home() {
   return (
@@ -12,9 +16,10 @@ export default function Home() {
       </Head>
 
       <Navbar />
-      <div className="">
-        <img src="./images/slider.png" alt="" />
+      <div className="flex w-auto m-3 md:justify-center md:items-center ">
+        <Image src={slider} alt="" />
       </div>
+      <Content />
       <Footer />
     </div>
   );
