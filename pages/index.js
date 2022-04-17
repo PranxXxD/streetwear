@@ -15,12 +15,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
       <div className="flex w-auto m-3 md:justify-center md:items-center ">
         <Image src={slider} alt="" />
       </div>
-      <Content />
-      <Footer />
     </div>
   );
 }
