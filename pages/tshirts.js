@@ -27,6 +27,7 @@ const Tshirts = () => {
                     The Catalyzer
                   </h2>
                   <p className="mt-1">$16.00</p>
+                  <p className="text-sm">XS,S,M,L,XL,XXL</p>
                 </div>
               </div>
             </Link>
@@ -50,6 +51,7 @@ const Tshirts = () => {
                     The Catalyzer
                   </h2>
                   <p className="mt-1">$16.00</p>
+                  <p className="text-sm">XS,S,M,L,XL,XXL</p>
                 </div>
               </div>
             </Link>
@@ -73,6 +75,7 @@ const Tshirts = () => {
                     The Catalyzer
                   </h2>
                   <p className="mt-1">$16.00</p>
+                  <p className="text-sm">XS,S,M,L,XL,XXL</p>
                 </div>
               </div>
             </Link>
@@ -96,6 +99,7 @@ const Tshirts = () => {
                     The Catalyzer
                   </h2>
                   <p className="mt-1">$16.00</p>
+                  <p className="text-sm">XS,S,M,L,XL,XXL</p>
                 </div>
               </div>
             </Link>
@@ -119,6 +123,7 @@ const Tshirts = () => {
                     The Catalyzer
                   </h2>
                   <p className="mt-1">$16.00</p>
+                  <p className="text-sm">XS,S,M,L,XL,XXL</p>
                 </div>
               </div>
             </Link>
@@ -142,6 +147,7 @@ const Tshirts = () => {
                     The Catalyzer
                   </h2>
                   <p className="mt-1">$16.00</p>
+                  <p className="text-sm">XS,S,M,L,XL,XXL</p>
                 </div>
               </div>
             </Link>
