@@ -1,6 +1,30 @@
+import { useRouter } from "next/router";
 import React from "react";
+import { useState } from "react";
 
-const Slug = () => {
+const Post = () => {
+  const router = useRouter();
+  const { slug } = router.query;
+  const [pin, setPin] = useState();
+  const [service, setService] = useState();
+
+  // code for checking the pincode using fetch api
+  const checkServiceAbility = async () => {
+    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pinJson = await pins.json();
+    console.log(pinJson, pin);
+
+    if (pinJson.includes(parseInt(pin))) {
+      setService(true);
+    } else {
+      setService(false);
+    }
+  };
+
+  // change the state of the input while user is typing
+  const onChangepin = (e) => {
+    setPin(e.target.value);
+  };
   return (
     <>
       <section className="text-gray-600 body-font overflow-hidden">
@@ -160,8 +184,11 @@ const Slug = () => {
                 <span className="title-font font-medium text-2xl text-gray-900">
                   $58.00
                 </span>
-                <button className="flex ml-16 md:ml-8 text-white bg-red-400 border-0 py-2 px-6 focus:outline-none hover:bg-red-500 rounded">
-                  Add to cart
+                <button className="flex ml-16 md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded">
+                  Buy Now
+                </button>
+                <button className="flex md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded">
+                  Add to Cart
                 </button>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-600 ml-4 hover:text-red-600">
                   <svg
@@ -176,6 +203,33 @@ const Slug = () => {
                   </svg>
                 </button>
               </div>
+              <div className="flex space-x-2 mt-6 text-sm">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className=" bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-2 leading-8 transition-colors duration-200 ease-in-out"
+                  onChange={onChangepin}
+                  placeholder="Enter your Pincode"
+                />
+
+                <button
+                  onClick={checkServiceAbility}
+                  className="flex text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded"
+                >
+                  Check Pincode
+                </button>
+              </div>
+              {service && service != null && (
+                <div className="flex mt-3 text-green-500 text-sm">
+                  Yay! service is Availabe
+                </div>
+              )}
+              {!service && service != null && (
+                <div className="flex mt-3 text-red-700 text-sm">
+                  Sorry! service is not Available to this pincode
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -184,4 +238,4 @@ const Slug = () => {
   );
 };
 
-export default Slug;
+export default Post;
