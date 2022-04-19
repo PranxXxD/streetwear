@@ -6,8 +6,10 @@ import {
   AiOutlineShoppingCart,
   AiFillPlusCircle,
   AiFillMinusCircle,
+  AiOutlineClear,
 } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
+// import { GrClearOption } from "react-icons/gr";
 import { FiShoppingBag } from "react-icons/fi";
 import { useRef } from "react";
 
@@ -64,7 +66,7 @@ const Navbar = () => {
 
       <div
         ref={ref}
-        className="w-72 h-full sideCart top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform translate-x-full overflow-hidden"
+        className="w-72 h-full sideCart top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform translate-x-0"
       >
         <h2 className="font-bold text-xl text-center my-6">
           This the streetwear cart
@@ -125,10 +127,16 @@ const Navbar = () => {
             </div>
           </li>
         </ol>
-        <button class="flex mx-auto mt-16 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-sm">
-          <FiShoppingBag className="m-1" />
-          Checkout
-        </button>
+        <div className="flex">
+          <button className="flex mx-auto mt-4  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm">
+            <FiShoppingBag className="m-1" />
+            Checkout
+          </button>
+          <button className="flex mx-auto mt-4 text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm">
+            <AiOutlineClear className="m-1" />
+            Clear Cart
+          </button>
+        </div>
       </div>
     </div>
   );

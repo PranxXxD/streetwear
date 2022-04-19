@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
 
       <div className="flex w-auto m-3 md:justify-center md:items-center ">
-        <Image src={slider} alt="" />
+        <Image src={slider} alt="" height={800} />
       </div>
     </div>
   );
