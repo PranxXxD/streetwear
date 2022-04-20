@@ -13,7 +13,9 @@ import { FaWindowClose } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 import { useRef } from "react";
 
-const Navbar = () => {
+const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
+  // console.log(cart, addToCart, removeFromCart, clrCart, subTotal);
+
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
@@ -78,61 +80,64 @@ const Navbar = () => {
           <FaWindowClose />
         </span>
         <ol className="list-decimal font-semibold">
-          <li>
-            <div className="flex items my-6 ">
-              <span className="w-2/3 flex font-semibold ">
-                Tshirt - streetwear
-              </span>
-              <span className="w-1/3 flex font-semibold items-center justify-center">
-                <AiFillMinusCircle className="cursor-pointer text-red-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-red-500" />
-              </span>
+          {/* display if the cart is empty */}
+          {Object.keys(cart).length == 0 && (
+            <div className="my-4 font-normal">
+              Oops!, No items present in the cart please add Some items to
+              checkout 😊
             </div>
-          </li>
-          <li>
-            <div className="flex items my-6 ">
-              <span className="w-2/3 flex font-semibold ">
-                Tshirt - streetwear
-              </span>
-              <span className="w-1/3 flex font-semibold items-center justify-center">
-                <AiFillMinusCircle className="cursor-pointer text-red-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-red-500" />
-              </span>
-            </div>
-          </li>
-          <li>
-            <div className="flex items my-6 ">
-              <span className="w-2/3 flex font-semibold ">
-                Tshirt - streetwear
-              </span>
-              <span className="w-1/3 flex font-semibold items-center justify-center">
-                <AiFillMinusCircle className="cursor-pointer text-red-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-red-500" />
-              </span>
-            </div>
-          </li>
-          <li>
-            <div className="flex items my-6 ">
-              <span className="w-2/3 flex font-semibold ">
-                Tshirt - streetwear
-              </span>
-              <span className="w-1/3 flex font-semibold items-center justify-center">
-                <AiFillMinusCircle className="cursor-pointer text-red-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-red-500" />
-              </span>
-            </div>
-          </li>
+          )}
+          {/* display the item which added to the cart  */}
+          {Object.keys(cart).map((k) => {
+            return (
+              <li key={k}>
+                <div className="flex items my-6 ">
+                  <span className="w-2/3 flex font-semibold ">
+                    {cart[k].name}
+                  </span>
+                  <span className="w-1/3 flex font-semibold items-center justify-center">
+                    <AiFillMinusCircle
+                      onClick={() =>
+                        removeFromCart(
+                          k,
+                          1,
+                          cart[k].price,
+                          cart[k].name,
+                          cart[k].size,
+                          cart[k].variant
+                        )
+                      }
+                      className="cursor-pointer text-red-500"
+                    />
+                    <span className="mx-2 text-sm">{cart[k].qty}</span>
+                    <AiFillPlusCircle
+                      onClick={() =>
+                        addToCart(
+                          k,
+                          1,
+                          cart[k].price,
+                          cart[k].name,
+                          cart[k].size,
+                          cart[k].variant
+                        )
+                      }
+                      className="cursor-pointer text-red-500"
+                    />
+                  </span>
+                </div>
+              </li>
+            );
+          })}
         </ol>
         <div className="flex">
           <button className="flex mx-auto mt-4  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm">
             <FiShoppingBag className="m-1" />
             Checkout
           </button>
-          <button className="flex mx-auto mt-4 text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm">
+          <button
+            onClick={clrCart}
+            className="flex mx-auto mt-4 text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm"
+          >
             <AiOutlineClear className="m-1" />
             Clear Cart
           </button>
