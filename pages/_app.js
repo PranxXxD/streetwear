@@ -7,10 +7,11 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState({}); //using cart as an object
-  const [subTotal, setSubTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0); //use to set the total of items added to the cart
 
+  // using useEffect to save the cart data in localstorage so that if the page accidentally refresh then also items will available in cart
   useEffect(() => {
-    console.log("Local storage from app.js");
+    // console.log("Local storage from app.js");
     try {
       if (localStorage.getItem("cart")) {
         setCart(JSON.parse(localStorage.getItem("cart")));
