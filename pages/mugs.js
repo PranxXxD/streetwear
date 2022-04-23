@@ -5,8 +5,8 @@ const mugs = () => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto md:ml-[10rem] my-auto flex justify-center">
-          <div className="flex flex-wrap -m-4 ">
+        <div className="container px-5 py-24 mx-auto my-auto ">
+          <div className="flex flex-wrap -m-4 justify-center">
             <Link href={"/products/Wear-The-Street"}>
               <div className="lg:w-1/4 md:w-1/2 p-4 w-full cursor-pointer shadow-lg rounded-3xl m-2 md:m-2">
                 <a className="block relative rounded overflow-hidden">

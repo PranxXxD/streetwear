@@ -8,7 +8,7 @@ import {
   AiFillMinusCircle,
   AiOutlineClear,
 } from "react-icons/ai";
-import { FaWindowClose } from "react-icons/fa";
+import { FaWindowClose, FaRupeeSign } from "react-icons/fa";
 // import { GrClearOption } from "react-icons/gr";
 import { FiShoppingBag } from "react-icons/fi";
 import { useRef } from "react";
@@ -29,7 +29,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
   const ref = useRef();
 
   return (
-    <div className="flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md ">
+    <div className="flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10">
       <div className="logo mx-5">
         <Link href={"/"}>
           <Image width={60} height={50} src={logo} />
@@ -68,7 +68,9 @@ const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
 
       <div
         ref={ref}
-        className="w-72 h-full sideCart top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform translate-x-full"
+        className={`w-72 h-[100vh] sideCart top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform ${
+          Object.keys(cart).length !== 0 ? "translate-x-0" : "translate-x-full"
+        }`}
       >
         <h2 className="font-bold text-xl text-center my-6">
           This the streetwear cart
@@ -129,11 +131,18 @@ const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
             );
           })}
         </ol>
+        <div className="flex ">
+          <span className="flex px-2 font-semibold">
+            SubTotal : <FaRupeeSign className="my-1 px-1" /> {subTotal}
+          </span>
+        </div>
         <div className="flex">
-          <button className="flex mx-auto mt-4  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm">
-            <FiShoppingBag className="m-1" />
-            Checkout
-          </button>
+          <Link href={"/checkout"}>
+            <button className="flex mx-auto mt-4  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm">
+              <FiShoppingBag className="m-1" />
+              Checkout
+            </button>
+          </Link>
           <button
             onClick={clrCart}
             className="flex mx-auto mt-4 text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm"

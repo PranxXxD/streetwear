@@ -182,7 +182,7 @@ const Post = ({ addToCart }) => {
               </div>
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">
-                  $58.00
+                  499.00
                 </span>
                 <button className="flex ml-16 md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded">
                   Buy Now
@@ -193,7 +193,7 @@ const Post = ({ addToCart }) => {
                     addToCart(
                       slug,
                       1,
-                      58,
+                      499,
                       "The Catcher in the Rye",
                       "L",
                       "black"
