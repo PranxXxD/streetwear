@@ -107,6 +107,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
           </div>
         </div>
       </div>
+      {/* Review cart component start here  */}
       <h2 className="text-xl font-semibold">2. Review cart items</h2>
       <div className="sideCart  bg-red-100 p-6 m-2">
         <ol className="list-decimal font-semibold">
@@ -158,7 +159,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
           })}
         </ol>
         <div className="flex ">
-          <span className="flex px-2">
+          <span className="flex px-2 font-semibold">
             SubTotal : <FaRupeeSign className="my-1 px-1" /> {subTotal}
           </span>
         </div>
