@@ -1,7 +1,6 @@
 import React from "react";
-import Link from "next/link";
 
-const Login = () => {
+const Forgotpwd = () => {
   return (
     <div>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -19,11 +18,9 @@ const Login = () => {
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or
-              <Link href={"/signup"}>
-                <span className="font-medium text-red-600 hover:text-red-500 mx-2">
-                  Signup
-                </span>
-              </Link>
+              <a className="font-medium text-red-600 hover:text-red-500 mx-2">
+                Signup
+              </a>
             </p>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
@@ -71,17 +68,8 @@ const Login = () => {
                   for="remember-me"
                   className="ml-2 block text-sm text-gray-900"
                 >
-                  {" "}
-                  Remember me{" "}
+                  Remember me
                 </label>
-              </div>
-
-              <div className="text-sm">
-                <Link href={"/forgotpwd"}>
-                  <a className="font-medium text-red-600 hover:text-red-500">
-                    Forgot your password
-                  </a>
-                </Link>
               </div>
             </div>
 
@@ -116,4 +104,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Forgotpwd;
