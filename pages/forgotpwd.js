@@ -1,4 +1,7 @@
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "../images/logo.png";
 
 const Forgotpwd = () => {
   return (
@@ -6,21 +9,19 @@ const Forgotpwd = () => {
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <img
-              className="mx-auto h-12 w-auto"
-              src="/logo.png"
-              alt="Workflow"
-              width={100}
-              height={100}
-            />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Sign in to your account
+            <div className="flex justify-center ">
+              <Image width={80} height={60} src={logo} />
+            </div>
+            <h2 className="mt-5 text-center text-3xl font-extrabold text-gray-900">
+              Forgot your Password
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or
-              <a className="font-medium text-red-600 hover:text-red-500 mx-2">
-                Signup
-              </a>
+              <Link href={"/login"}>
+                <a className="font-medium text-red-600 hover:text-red-500 mx-2">
+                  Login
+                </a>
+              </Link>
             </p>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
@@ -39,37 +40,6 @@ const Forgotpwd = () => {
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
-              </div>
-              <div>
-                <label for="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autocomplete="current-password"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-                />
-                <label
-                  for="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
               </div>
             </div>
 
@@ -94,7 +64,7 @@ const Forgotpwd = () => {
                     />
                   </svg>
                 </span>
-                Sign in
+                Continue
               </button>
             </div>
           </form>
