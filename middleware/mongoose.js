@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import handler from "../pages/api/hello";
 
 // Initiating the mongoose connection
 
