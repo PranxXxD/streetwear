@@ -5,7 +5,7 @@ import connectDb from "../../middleware/mongoose";
 
 const handler = async (req, res) => {
   if (req.method == "POST") {
-    console.log(req.body);
+    // console.log(req.body);
     for (let i = 0; i < req.body.length; i++) {
       let p = new Products({
         title: req.body[i].title,
@@ -19,11 +19,12 @@ const handler = async (req, res) => {
         availableQty: req.body[i].availableQty,
       });
       await p.save();
-      res.status(200).json({ success: "Success" });
     }
+    res.status(200).json({ success: "Success" });
   } else {
     res.status(400).json({ error: "This is bad request" });
   }
 };
 
+// establish connection with the mongodb
 export default connectDb(handler);
