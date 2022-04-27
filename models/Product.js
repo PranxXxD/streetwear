@@ -15,4 +15,7 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+//preventing from creating the model everytime
+
+mongoose.models = {};
 export default mongoose.model("Product", ProductSchema);
