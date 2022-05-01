@@ -4,8 +4,8 @@ import { useState } from "react";
 import Product from "../../models/Product";
 import mongoose from "mongoose";
 
-const Post = ({ addToCart, product, variants }) => {
-  // console.log(product, variants);
+const Post = ({ addToCart, product, variant }) => {
+  // console.log(product, variant);
   const router = useRouter();
   const { slug } = router.query;
   const [pin, setPin] = useState();
@@ -32,8 +32,8 @@ const Post = ({ addToCart, product, variants }) => {
   const [color, setColor] = useState(product.color);
   const [size, setSize] = useState(product.size);
 
-  const refreshVariants = (newcolor, newsize) => {
-    let url = `http://localhost:3000/products/${variants[newsize][newcolor]["slug"]}`;
+  const refreshvariant = (newcolor, newsize) => {
+    let url = `http://localhost:3000/products/${variant[newsize][newcolor]["slug"]}`;
     window.location = url;
   };
 
@@ -45,14 +45,14 @@ const Post = ({ addToCart, product, variants }) => {
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full lg:h-auto px-24 md:px-36 object-cover object-top rounded"
-              src="https://m.media-amazon.com/images/I/51OximwYDtL._AC_UL480_FMwebp_QL65_.jpg"
+              src={product.img}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
                 BRAND NAME
               </h2>
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                The Catcher in the Rye
+                {product.title} - {product.size}/{product.color}
               </h1>
               <div className="flex mb-4">
                 <span className="flex items-center">
@@ -152,78 +152,71 @@ const Post = ({ addToCart, product, variants }) => {
                   </a>
                 </span>
               </div>
-              <p className="leading-relaxed">
-                Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-                sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo
-                juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-                seitan poutine tumeric. Gastropub blue bottle austin listicle
-                pour-over, neutra jean shorts keytar banjo tattooed umami
-                cardigan.
-              </p>
+              <p className="leading-relaxed">{product.desc}</p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                 <div className="flex">
                   <span className="mr-3">Color</span>
 
-                  {Object.keys(variants).includes("black") &&
-                    Object.keys(variants["black"]).includes(size) && (
+                  {Object.keys(variant).includes("black") &&
+                    Object.keys(variant["black"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshVariants(size, "black");
+                          refreshvariant(size, "black");
                         }}
                         className={`border-2 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none ${
                           color === "black" ? "border-gray-600" : "border-white"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variants).includes("green") &&
-                    Object.keys(variants["green"]).includes(size) && (
+                  {Object.keys(variant).includes("green") &&
+                    Object.keys(variant["green"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshVariants(size, "green");
+                          refreshvariant(size, "green");
                         }}
                         className={`border-2 ml-1 bg-green-800 rounded-full w-6 h-6 focus:outline-none ${
                           color === "green" ? "border-black" : "border-gray-600"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variants).includes("red") &&
-                    Object.keys(variants["red"]).includes(size) && (
+                  {Object.keys(variant).includes("red") &&
+                    Object.keys(variant["red"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshVariants(size, "red");
+                          refreshvariant(size, "red");
                         }}
                         className={`border-2 ml-1 bg-red-600 rounded-full w-6 h-6 focus:outline-none ${
                           color === "red" ? "border-black" : "border-gray-600"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variants).includes("blue") &&
-                    Object.keys(variants["blue"]).includes(size) && (
+                  {Object.keys(variant).includes("blue") &&
+                    Object.keys(variant["blue"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshVariants(size, "blue");
+                          refreshvariant(size, "blue");
                         }}
                         className={`border-2 ml-1 bg-blue-400 rounded-full w-6 h-6 focus:outline-none ${
                           color === "blue" ? "border-black" : "border-gray-600"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variants).includes("pink") &&
-                    Object.keys(variants["pink"]).includes(size) && (
+                  {Object.keys(variant).includes("pink") &&
+                    Object.keys(variant["pink"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshVariants(size, "pink");
+                          refreshvariant(size, "pink");
                         }}
                         className={`border-2 ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none ${
                           color === "pink" ? "border-black" : "border-gray-600"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variants).includes("violet") &&
-                    Object.keys(variants["violet"]).includes(size) && (
+                  {Object.keys(variant).includes("violet") &&
+                    Object.keys(variant["violet"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshVariants(size, "violet");
+                          refreshvariant(size, "violet");
                         }}
                         className={`border-2 ml-1 bg-violet-400 rounded-full w-6 h-6 focus:outline-none ${
                           color === "violet"
@@ -240,25 +233,25 @@ const Post = ({ addToCart, product, variants }) => {
                     <select
                       value={size}
                       onChange={(e) => {
-                        refreshVariants(e.target.value, color);
+                        refreshvariant(e.target.value, color);
                       }}
                       className="rounded border appearance-none border-gray-600 py-2 focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-red-500 text-base pl-3 pr-10"
                     >
-                      {Object.keys(variants[color]).includes("S") && (
+                      {Object.keys(variant[color]).includes("S") && (
                         <option value={"S"}>S</option>
                       )}
-                      {Object.keys(variants[color]).includes("M") && (
+                      {Object.keys(variant[color]).includes("M") && (
                         <option value={"M"}>M</option>
                       )}
-                      {Object.keys(variants[color]).includes("L") && (
+                      {Object.keys(variant[color]).includes("L") && (
                         <option value={"L"}>L</option>
                       )}
-                      {Object.keys(variants[color]).includes("XL") && (
+                      {Object.keys(variant[color]).includes("XL") && (
                         <option value={"XL"}>XL</option>
                       )}
-                      {Object.keys(variants[color]).includes("XXL") && (
+                      {Object.keys(variant[color]).includes("XXL") && (
                         <option value={"XXL"}>XXL</option>
-                      )}{" "}
+                      )}
                     </select>
                     <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                       <svg
@@ -286,14 +279,7 @@ const Post = ({ addToCart, product, variants }) => {
                 {/*Added the item to the cart when user tap the add to cart button */}
                 <button
                   onClick={() =>
-                    addToCart(
-                      slug,
-                      1,
-                      499,
-                      "The Catcher in the Rye",
-                      "L",
-                      "black"
-                    )
+                    addToCart(slug, 1, 499, product.title, size, color)
                   }
                   className="flex md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded"
                 >
@@ -354,11 +340,11 @@ export async function getServerSideProps(context) {
   }
   // fetch the single item with the unique slug
   let product = await Product.findOne({ slug: context.query.slug });
-  // find the variants with the item title
-  let variants = await Product.find({ title: product.title });
+  // find the variant with the item title
+  let variant = await Product.find({ title: product.title });
   let colorSizeSlug = {}; //{red : { XL : { slug : 'Wear-the-street-premium-collection'}}}
   // iterate through the items and display the item is the particular color & size is availabe in db
-  for (let item of variants) {
+  for (let item of variant) {
     if (Object.keys(colorSizeSlug).includes(item.color)) {
       colorSizeSlug[item.color][item.size] = { slug: item.slug };
     }
@@ -372,7 +358,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),
-      variants: JSON.parse(JSON.stringify(colorSizeSlug)),
+      variant: JSON.parse(JSON.stringify(colorSizeSlug)),
     }, // will be passed to the page component as props
   };
 }

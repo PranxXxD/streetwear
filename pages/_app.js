@@ -35,12 +35,12 @@ function MyApp({ Component, pageProps }) {
   };
 
   //funtion for adding a item to cart
-  const addToCart = (itemCode, qty, price, name, size, vairant) => {
+  const addToCart = (itemCode, qty, price, name, size, variant) => {
     let newCart = cart;
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
     } else {
-      newCart[itemCode] = { qty: 1, price, name, size, vairant };
+      newCart[itemCode] = { qty: 1, price, name, size, variant };
     }
 
     setCart(newCart);
@@ -48,7 +48,7 @@ function MyApp({ Component, pageProps }) {
   };
 
   //funtion for removing a item from cart
-  const removeFromCart = (itemCode, qty, price, name, size, vairant) => {
+  const removeFromCart = (itemCode, qty, price, name, size, variant) => {
     let newCart = cart;
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty - qty;

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Product from "../models/Product";
 import mongoose from "mongoose";
+import { FaRupeeSign } from "react-icons/fa";
 
 const Tshirts = ({ products }) => {
   // console.log(products);
@@ -33,8 +34,11 @@ const Tshirts = ({ products }) => {
                       >
                         {products[item].title}
                       </h2>
-                      <p className="mt-1">{products[item].price}</p>
-                      <div className="text-sm">
+                      <p className="mt-1 flex justify-center">
+                        <FaRupeeSign className="text-md mt-1 px-1" />
+                        {products[item].price}
+                      </p>
+                      <div className="text-sm mt-1">
                         {products[item].size.includes("S") && (
                           <span className="border border-gray-300 mx-1 px-1">
                             S
@@ -78,7 +82,7 @@ const Tshirts = ({ products }) => {
                           <button className="border-2 border-gray-300 ml-1 bg-pink-400 rounded-full w-6 h-6 focus:outline-none"></button>
                         )}{" "}
                         {products[item].color.includes("violet") && (
-                          <button className="border-2 border-gray-300 ml-1 bg-violet-700 rounded-full w-6 h-6 focus:outline-none"></button>
+                          <button className="border-2 border-gray-300 ml-1 bg-violet-400 rounded-full w-6 h-6 focus:outline-none"></button>
                         )}
                       </div>
                     </div>
@@ -104,7 +108,7 @@ export async function getServerSideProps(context) {
   let tshirts = {};
   // looping through the product array
   for (let item of products) {
-    //push the new item color & size in thsirts array if it is not availbe
+    //push the new item color & size in thsirts array if it is not available
     // taking title as a key and tshirts as a value
     if (item.title in tshirts) {
       if (

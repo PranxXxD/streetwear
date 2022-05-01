@@ -1,4 +1,7 @@
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "../images/logo.png";
 
 const Footer = () => {
   return (
@@ -7,130 +10,120 @@ const Footer = () => {
         <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
             <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-10 h-10 text-white p-2 bg-red-600 rounded-full"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-              <span className="ml-3 text-xl">Tailblocks</span>
+              <Link href={"/"}>
+                <Image width={60} height={60} src={logo} />
+              </Link>
+              <span className="ml-2 text-xl">StreetWear.com</span>
             </a>
             <p className="mt-2 text-sm text-gray-500">
-              Air plant banjo lyft occupy retro adaptogen indego
+              Wear the Street-Fashion!
             </p>
+            <span className=" text-xs text-gray-500">
+              Be the one of from the fashion street
+            </span>
           </div>
           <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+                Shop
+              </h2>
+              <nav className="list-none mb-10">
+                <Link href={"/tshirts"}>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-400 cursor-pointer">
+                      tshirts
+                    </a>
+                  </li>
+                </Link>
+                <Link href={"/hoodies"}>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-400 cursor-pointer">
+                      hoodies
+                    </a>
+                  </li>
+                </Link>
+                <Link href={"/shirts"}>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-400 cursor-pointer">
+                      shirts
+                    </a>
+                  </li>
+                </Link>
+                <Link href={"/mugs"}>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-400 cursor-pointer">
+                      mugs
+                    </a>
+                  </li>
+                </Link>
+              </nav>
+            </div>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-2">
+              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+                About
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    First Link
+                  <a className="text-gray-600 hover:text-gray-400">
+                    Contact Us
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Second Link
+                  <a className="text-gray-600 hover:text-gray-400">
+                    StreetWear stores
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Third Link
-                  </a>
+                  <a className="text-gray-600 hover:text-gray-400">About</a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Fourth Link
+                  <a className="text-gray-600 hover:text-gray-400">
+                    Corporate informations
                   </a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+                Help
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    First Link
+                  <a className="text-gray-600 hover:text-gray-400">Payments</a>
+                </li>
+                <li>
+                  <a className="text-gray-600 hover:text-gray-400">Shipping</a>
+                </li>
+                <li>
+                  <a className="text-gray-600 hover:text-gray-400">
+                    Cancellation & Returns
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Second Link
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Third Link
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Fourth Link
-                  </a>
+                  <a className="text-gray-600 hover:text-gray-400">FAQ</a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+                Policy
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    First Link
+                  <a className="text-gray-600 hover:text-gray-400">
+                    Return Policy
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Second Link
+                  <a className="text-gray-600 hover:text-gray-400">
+                    Terms Of Use
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Third Link
-                  </a>
+                  <a className="text-gray-600 hover:text-gray-400">Security</a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Fourth Link
-                  </a>
-                </li>
-              </nav>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    First Link
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Second Link
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Third Link
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    Fourth Link
-                  </a>
+                  <a className="text-gray-600 hover:text-gray-400">Privacy</a>
                 </li>
               </nav>
             </div>
@@ -139,14 +132,14 @@ const Footer = () => {
         <div className="bg-gray-100">
           <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p className="text-gray-500 text-sm text-center sm:text-left">
-              © 2020 Tailblocks —
+              © 2022 StreetWear.com — All rights reserved
               <a
-                href="https://twitter.com/knyttneve"
+                href="https://twitter.com/PranxXxD"
                 rel="noopener noreferrer"
                 className="text-gray-600 ml-1"
                 target="_blank"
               >
-                @knyttneve
+                @PranxXxD
               </a>
             </p>
             <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
