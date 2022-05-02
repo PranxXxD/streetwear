@@ -74,7 +74,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
 
       <div
         ref={ref}
-        className={`w-72 h-[100vh] sideCart top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform ${
+        className={`w-72 h-[100vh] sideCart  overflow-y-scroll top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform ${
           Object.keys(cart).length !== 0 ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -100,7 +100,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
             return (
               <li key={k}>
                 <div className="flex items my-6 ">
-                  <span className="w-2/3 flex font-semibold ">
+                  <span className="w-3/3 flex-wrap flex font-semibold ">
                     {cart[k].name}({cart[k].size})/({cart[k].variant})
                   </span>
                   <span className="w-1/3 flex font-semibold items-center justify-center">

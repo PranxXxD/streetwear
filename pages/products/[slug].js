@@ -4,7 +4,7 @@ import { useState } from "react";
 import Product from "../../models/Product";
 import mongoose from "mongoose";
 
-const Post = ({ addToCart, product, variant }) => {
+const Post = ({ buyNow, addToCart, product, variant }) => {
   // console.log(product, variant);
   const router = useRouter();
   const { slug } = router.query;
@@ -273,7 +273,12 @@ const Post = ({ addToCart, product, variant }) => {
                 <span className="title-font font-medium text-2xl text-gray-900">
                   499.00
                 </span>
-                <button className="flex ml-16 md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded">
+                <button
+                  onClick={() => {
+                    buyNow(slug, 1, 499, product.title, size, color);
+                  }}
+                  className="flex ml-16 md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded"
+                >
                   Buy Now
                 </button>
                 {/*Added the item to the cart when user tap the add to cart button */}

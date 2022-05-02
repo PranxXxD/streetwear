@@ -4,11 +4,12 @@ import Content from "../components/content";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "../styles/globals.css";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState({}); //using cart as an object
   const [subTotal, setSubTotal] = useState(0); //use to set the total of items added to the cart
-
+  const router = useRouter();
   // using useEffect to save the cart data in localstorage so that if the page accidentally refresh then also items will available in cart
   useEffect(() => {
     // console.log("Local storage from app.js");
@@ -46,6 +47,13 @@ function MyApp({ Component, pageProps }) {
     setCart(newCart);
     saveCart(newCart);
   };
+  // buyNow functionality which clr the existing cart and direct redirect to checkout page
+  const buyNow = (itemCode, qty, price, name, size, variant) => {
+    let newCart = { itemCode: { qty: 1, price, name, size, variant } };
+    setCart(newCart);
+    saveCart(newCart);
+    router.push("/checkout");
+  };
 
   //funtion for removing a item from cart
   const removeFromCart = (itemCode, qty, price, name, size, variant) => {
@@ -78,6 +86,7 @@ function MyApp({ Component, pageProps }) {
       />
       <Component
         cart={cart}
+        buyNow={buyNow}
         addToCart={addToCart}
         removeFromCart={removeFromCart}
         clrCart={clrCart}
