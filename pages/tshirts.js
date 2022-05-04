@@ -5,8 +5,9 @@ import mongoose from "mongoose";
 import { FaRupeeSign } from "react-icons/fa";
 
 const Tshirts = ({ products }) => {
-  // console.log(products);
+  console.log(products);
   return (
+    
     <div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto my-auto ">
