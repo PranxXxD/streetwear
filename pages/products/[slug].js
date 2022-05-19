@@ -362,7 +362,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      product: JSON.parse(JSON.stringify(product)),
+      product: JSON.parse(JSON.stringify(products)),
       variant: JSON.parse(JSON.stringify(colorSizeSlug)),
     }, // will be passed to the page component as props
   };

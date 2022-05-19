@@ -5,9 +5,8 @@ import mongoose from "mongoose";
 import { FaRupeeSign } from "react-icons/fa";
 
 const Tshirts = ({ products }) => {
-  console.log(products);
+  // console.log(products);
   return (
-    
     <div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto my-auto ">
@@ -103,7 +102,7 @@ export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect(process.env.MONGO_URI);
   }
-  let products = await Product.find({ category: "tshirt" });
+  let products = await Product.find({ category: "tshirts" });
   // console.log(products);
   // tshirt is an object
   let tshirts = {};

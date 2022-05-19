@@ -2,12 +2,13 @@
 
 import Products from "../../models/Product";
 import connectDb from "../../middleware/mongoose";
+import Product from "../../models/Product";
 
 const handler = async (req, res) => {
   if (req.method == "POST") {
     // console.log(req.body);
     for (let i = 0; i < req.body.length; i++) {
-      let p = new Products({
+      let p = new Product({
         title: req.body[i].title,
         slug: req.body[i].slug,
         desc: req.body[i].desc,
