@@ -56,7 +56,7 @@ const Tshirts = ({ products }) => {
                         )}
                         {products[item].size.includes("XL") && (
                           <span className="border border-gray-300 mx-1 px-1">
-                            XXL
+                            XL
                           </span>
                         )}
                         {products[item].size.includes("XXL") && (
@@ -82,7 +82,7 @@ const Tshirts = ({ products }) => {
                           <button className="border-2 border-gray-300 ml-1 bg-pink-400 rounded-full w-6 h-6 focus:outline-none"></button>
                         )}{" "}
                         {products[item].color.includes("violet") && (
-                          <button className="border-2 border-gray-300 ml-1 bg-violet-400 rounded-full w-6 h-6 focus:outline-none"></button>
+                          <button className="border-2 border-gray-300 ml-1 bg-violet-500 rounded-full w-6 h-6 focus:outline-none"></button>
                         )}
                       </div>
                     </div>
