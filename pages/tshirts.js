@@ -102,7 +102,7 @@ export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect(process.env.MONGO_URI);
   }
-  let products = await Product.find({ category: "tshirts" });
+  let products = await Product.find({ category: "tshirt" });
   // console.log(products);
   // tshirt is an object
   let tshirts = {};

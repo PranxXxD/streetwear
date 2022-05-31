@@ -9,7 +9,7 @@ const handler = async (req, res) => {
   let tshirts = {};
   // looping through the product array
   for (let item of products) {
-    //display item color & size in thsirts array if it is availabe
+    //add the item color & size in tshirts array if it is availabe
     // taking title as a key and tshirts as a value
     if (item.title in tshirts) {
       if (
@@ -17,6 +17,12 @@ const handler = async (req, res) => {
         item.availableQty > 0
       ) {
         tshirts[item.title].color.push(item.color);
+      }
+      if (
+        !tshirts[item.title].size.includes(item.size) &&
+        item.availableQty > 0
+      ) {
+        tshirts[item.title].size.push(item.size);
       }
     }
     // display the tshirt if the color & size is available

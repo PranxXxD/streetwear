@@ -4,8 +4,8 @@ import { useState } from "react";
 import Product from "../../models/Product";
 import mongoose from "mongoose";
 
-const Post = ({ buyNow, addToCart, product, variant }) => {
-  // console.log(product, variant);
+const Post = ({ buyNow, addToCart, product, variants }) => {
+  // console.log(product, variants);
   const router = useRouter();
   const { slug } = router.query;
   const [pin, setPin] = useState();
@@ -32,8 +32,9 @@ const Post = ({ buyNow, addToCart, product, variant }) => {
   const [color, setcolor] = useState(product.color);
   const [size, setSize] = useState(product.size);
 
-  const refreshvariant = (newcolor, newsize) => {
-    let url = `http://localhost:3000/products/${variant[newsize][newcolor]["slug"]}`;
+  // refresh the page when ever user select the particular size
+  const refreshvariants = (newcolor, newsize) => {
+    let url = `http://localhost:3000/products/${variants[newsize][newcolor]["slug"]}`;
     window.location = url;
   };
 
@@ -157,74 +158,85 @@ const Post = ({ buyNow, addToCart, product, variant }) => {
                 <div className="flex">
                   <span className="mr-3">color</span>
 
-                  {Object.keys(variant).includes("black") &&
-                    Object.keys(variant["black"]).includes(size) && (
+                  {Object.keys(variants).includes("black") &&
+                    Object.keys(variants["black"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshvariant(size, "black");
+                          refreshvariants(size, "black");
                         }}
                         className={`border-2 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none ${
-                          color === "black" ? "border-gray-600" : "border-white"
+                          color === "black"
+                            ? " border-gray-400 border-4 border-opacity-80"
+                            : "border-gray-600 bg-opacity-80"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variant).includes("green") &&
-                    Object.keys(variant["green"]).includes(size) && (
+                  {Object.keys(variants).includes("green") &&
+                    Object.keys(variants["green"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshvariant(size, "green");
+                          refreshvariants(size, "green");
                         }}
                         className={`border-2 ml-1 bg-green-800 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "green" ? "border-black" : "border-gray-600"
+                          color === "green"
+                            ? " border-gray-400 border-4 border-opacity-80"
+                            : "border-gray-600 bg-opacity-50"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variant).includes("red") &&
-                    Object.keys(variant["red"]).includes(size) && (
+                  {Object.keys(variants).includes("red") &&
+                    Object.keys(variants["red"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshvariant(size, "red");
+                          refreshvariants(size, "red");
                         }}
                         className={`border-2 ml-1 bg-red-800 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "red" ? "border-black" : "border-gray-600"
+                          color === "red"
+                            ? " border-gray-400 border-4 border-opacity-80"
+                            : "border-gray-600 bg-opacity-50"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variant).includes("blue") &&
-                    Object.keys(variant["blue"]).includes(size) && (
+                  {Object.keys(variants).includes("blue") &&
+                    Object.keys(variants["blue"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshvariant(size, "blue");
+                          refreshvariants(size, "blue");
                         }}
                         className={`border-2 ml-1 bg-blue-400 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "blue" ? "border-black" : "border-gray-600"
+                          color === "blue"
+                            ? " border-gray-400 border-4 border-opacity-80"
+                            : "border-gray-600 bg-opacity-50"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variant).includes("pink") &&
-                    Object.keys(variant["pink"]).includes(size) && (
+                  {Object.keys(variants).includes("pink") &&
+                    Object.keys(variants["pink"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshvariant(size, "pink");
+                          refreshvariants(size, "pink");
                         }}
                         className={`border-2 ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "pink" ? "border-black" : "border-gray-600"
+                          color === "pink"
+                            ? " border-gray-400 border-4 border-opacity-80"
+                            : "border-gray-600 bg-opacity-50"
                         }`}
                       ></button>
                     )}
-                  {Object.keys(variant).includes("violet") &&
-                    Object.keys(variant["violet"]).includes(size) && (
+                  {Object.keys(variants).includes("violet") &&
+                    Object.keys(variants["violet"]).includes(size) && (
                       <button
                         onClick={() => {
-                          refreshvariant(size, "violet");
+                          refreshvariants(size, "violet");
                         }}
                         className={`border-2 ml-1 bg-violet-400 rounded-full w-6 h-6 focus:outline-none ${
                           color === "violet"
-                            ? "border-black"
-                            : "border-gray-600"
+                            ? " border-gray-400 border-4 border-opacity-80"
+                            : "border-gray-600 bg-opacity-50"
                         }`}
                       ></button>
                     )}
+
                   {/* Size component */}
                 </div>
                 <div className="flex ml-6 items-center">
@@ -233,23 +245,23 @@ const Post = ({ buyNow, addToCart, product, variant }) => {
                     <select
                       value={size}
                       onChange={(e) => {
-                        refreshvariant(e.target.value, color);
+                        refreshvariants(e.target.value, color);
                       }}
                       className="rounded border appearance-none border-gray-600 py-2 focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-red-500 text-base pl-3 pr-10"
                     >
-                      {Object.keys(variant[color]).includes("S") && (
+                      {Object.keys(variants[color]).includes("S") && (
                         <option value={"S"}>S</option>
                       )}
-                      {Object.keys(variant[color]).includes("M") && (
+                      {Object.keys(variants[color]).includes("M") && (
                         <option value={"M"}>M</option>
                       )}
-                      {Object.keys(variant[color]).includes("L") && (
+                      {Object.keys(variants[color]).includes("L") && (
                         <option value={"L"}>L</option>
                       )}
-                      {Object.keys(variant[color]).includes("XL") && (
+                      {Object.keys(variants[color]).includes("XL") && (
                         <option value={"XL"}>XL</option>
                       )}
-                      {Object.keys(variant[color]).includes("XXL") && (
+                      {Object.keys(variants[color]).includes("XXL") && (
                         <option value={"XXL"}>XXL</option>
                       )}
                     </select>
@@ -345,11 +357,11 @@ export async function getServerSideProps(context) {
   }
   // fetch the single item with the unique slug
   let product = await Product.findOne({ slug: context.query.slug });
-  // find the variant with the item title
-  let variant = await Product.find({ title: product.title });
+  // find the variants with the item title
+  let variants = await Product.find({ title: product.title });
   let colorSizeSlug = {}; //{red : { XL : { slug : 'Wear-the-street-premium-collection'}}}
   // iterate through the items and display the item is the particular color & size is availabe in db
-  for (let item of variant) {
+  for (let item of variants) {
     if (Object.keys(colorSizeSlug).includes(item.color)) {
       colorSizeSlug[item.color][item.size] = { slug: item.slug };
     }
@@ -363,7 +375,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),
-      variant: JSON.parse(JSON.stringify(colorSizeSlug)),
+      variants: JSON.parse(JSON.stringify(colorSizeSlug)),
     }, // will be passed to the page component as props
   };
 }
