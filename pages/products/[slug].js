@@ -3,6 +3,15 @@ import React from "react";
 import { useState } from "react";
 import Product from "../../models/Product";
 import mongoose from "mongoose";
+import {
+  ToastContainer,
+  toast,
+  Slide,
+  Flip,
+  Zoom,
+  Bounce,
+} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Post = ({ buyNow, addToCart, product, variants }) => {
   // console.log(product, variants);
@@ -18,8 +27,30 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
     // console.log(pinJson, pin);
 
     if (pinJson.includes(parseInt(pin))) {
+      // display the pop toast after clicking the checkpincode button
+      toast("Service available to this pincode!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "success",
+      });
       setService(true);
     } else {
+      // display the pop toast after clicking the checkpincode button
+      toast("Sorry!, service not available to this pincode", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
       setService(false);
     }
   };
@@ -41,6 +72,19 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
   return (
     <>
       <section className="text-gray-600 body-font overflow-hidden">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        {/* Same as */}
+        <ToastContainer />
         <div className="container px-5 py-14 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
@@ -334,12 +378,12 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
               </div>
               {service && service != null && (
                 <div className="flex mt-3 text-green-500 text-sm">
-                  Yay! service is Availabe
+                  Service available to this pincode!
                 </div>
               )}
               {!service && service != null && (
                 <div className="flex mt-3 text-red-700 text-sm">
-                  Sorry! service is not Available to this pincode
+                  Sorry! service not available to this pincode
                 </div>
               )}
             </div>
