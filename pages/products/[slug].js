@@ -12,6 +12,7 @@ import {
   Bounce,
 } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaRupeeSign } from "react-icons/fa";
 
 const Post = ({ buyNow, addToCart, product, variants }) => {
   // console.log(product, variants);
@@ -326,23 +327,31 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
                 </div>
               </div>
               <div className="flex">
-                <span className="title-font font-medium text-2xl text-gray-900">
-                  499.00
+                <FaRupeeSign className=" text-sm mt-2.5 mx-1 " />
+                <span className="title-font flex font-medium text-2xl text-gray-900">
+                  {product.price}
                 </span>
                 <button
                   onClick={() => {
-                    buyNow(slug, 1, 499, product.title, size, color);
+                    buyNow(slug, 1, product.price, product.title, size, color);
                   }}
-                  className="flex ml-16 md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded"
+                  className="flex ml-16 md:ml-6 text-white bg-red-400 border-0 py-2 px-3 focus:outline-none hover:bg-red-500 rounded"
                 >
                   Buy Now
                 </button>
                 {/*Added the item to the cart when user tap the add to cart button */}
                 <button
                   onClick={() =>
-                    addToCart(slug, 1, 499, product.title, size, color)
+                    addToCart(
+                      slug,
+                      1,
+                      product.price,
+                      product.title,
+                      size,
+                      color
+                    )
                   }
-                  className="flex md:ml-8 text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded"
+                  className="flex md:ml-6 text-white bg-red-400 border-0 py-2 px-3 focus:outline-none hover:bg-red-500 rounded"
                 >
                   Add to Cart
                 </button>
@@ -401,8 +410,11 @@ export async function getServerSideProps(context) {
   }
   // fetch the single item with the unique slug
   let product = await Product.findOne({ slug: context.query.slug });
-  // find the variants with the item title
-  let variants = await Product.find({ title: product.title });
+  // find the variants with the item title & Category
+  let variants = await Product.find({
+    title: product.title,
+    category: product.category,
+  });
   let colorSizeSlug = {}; //{red : { XL : { slug : 'Wear-the-street-premium-collection'}}}
   // iterate through the items and display the item is the particular color & size is availabe in db
   for (let item of variants) {
