@@ -4,7 +4,7 @@ import Product from "../models/Product";
 import mongoose from "mongoose";
 import { FaRupeeSign } from "react-icons/fa";
 import Image from "next/image";
-import outofstock from "../images/outofstock.png";
+import outofstock from "../images/outofstock.jpg";
 
 const shirts = ({ products }) => {
   // console.log(products);
@@ -19,21 +19,20 @@ const shirts = ({ products }) => {
               <>
                 <section class="text-gray-600 body-font">
                   <div class="container mx-auto flex md:flex-row flex-col items-center">
-                    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-1/2 md:mb-0">
+                    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0">
                       <Image
                         className="object-cover object-center rounded"
-                        width={400}
-                        height={200}
+                        width={300}
+                        height={300}
                         src={outofstock}
                       />
                     </div>
-                    <div class="lg:flex-grow md:w-1/2 lg:pl-10 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+                    <div class="lg:flex-grow md:w-1/2  flex flex-col md:items-start md:text-left items-center text-center">
                       <h2 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
                         Sorry, hoodies are out of stock,
                         <br class="hidden lg:inline-block" />
                         new stock coming soon!
                       </h2>
-                      <p></p>
 
                       <div class="flex justify-center">
                         <button class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
