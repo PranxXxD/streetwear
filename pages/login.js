@@ -1,11 +1,84 @@
 import React from "react";
 import Link from "next/link";
+import { set } from "mongoose";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import logo from "../images/logo.png";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleChange = (e) => {
+    if (e.target.name == "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name == "password") {
+      setPassword(e.target.value);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { email, password };
+
+    let res = await fetch("http://localhost:3000/api/login", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let response = await res.json();
+    console.log(response);
+    setEmail("");
+    setPassword("");
+    //loggin user if the credentials are correct and redirect to the homepage
+    if (response.success) {
+      toast.success("You are successfully logged in", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "success",
+      });
+      setTimeout(() => {
+        router.push("http://localhost:3000");
+      }, 2000);
+    }
+    // show invalid credentials won't redirect to homepage
+    else {
+      toast.error(response.error, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
+    }
+  };
   return (
     <div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
@@ -24,15 +97,21 @@ const Login = () => {
               </Link>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-8 space-y-6"
+            method="POST"
+          >
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label for="email-address" className="sr-only">
+                <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input
-                  id="email-address"
+                  value={email}
+                  onChange={handleChange}
+                  id="email"
                   name="email"
                   type="email"
                   autocomplete="email"
@@ -42,10 +121,12 @@ const Login = () => {
                 />
               </div>
               <div>
-                <label for="password" className="sr-only">
+                <label htmlFor="password" className="sr-only">
                   Password
                 </label>
                 <input
+                  value={password}
+                  onChange={handleChange}
                   id="password"
                   name="password"
                   type="password"
@@ -56,7 +137,6 @@ const Login = () => {
                 />
               </div>
             </div>
-
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -66,7 +146,7 @@ const Login = () => {
                   className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                 />
                 <label
-                  for="remember-me"
+                  htmlFor="remember-me"
                   className="ml-2 block text-sm text-gray-900"
                 >
                   {" "}
@@ -82,7 +162,6 @@ const Login = () => {
                 </Link>
               </div>
             </div>
-
             <div>
               <button
                 type="submit"
