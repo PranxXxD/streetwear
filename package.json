@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.0",
     "init": "^0.1.2",
     "mongoose": "^6.3.3",
