@@ -3,6 +3,7 @@
 import connectDb from "../../middleware/mongoose";
 import User from "../../models/User";
 var CryptoJS = require("crypto-js");
+var jwt = require("jsonwebtoken");
 
 const handler = async (req, res) => {
   if (req.method == "POST") {
@@ -17,9 +18,13 @@ const handler = async (req, res) => {
     if (user) {
       // check the given inputs from the user and then authenticate
       if (req.body.email == user.email && req.body.password == decryptedPass) {
-        res
-          .status(200)
-          .json({ success: true, email: user.email, name: user.name });
+        var token = jwt.sign(
+          { email: user.email, name: user.name },
+          "jwtsecret",
+          { expiresIn: "2d" }
+        );
+
+        res.status(200).json({ success: true, token });
       } else {
         //   throw the error message if the user enter the wrong credentials
         res.status(200).json({ success: false, error: "Invalid Credentials" });

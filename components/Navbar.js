@@ -13,10 +13,33 @@ import { FaWindowClose, FaRupeeSign } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
 import { useRef } from "react";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
+const Navbar = ({
+  logout,
+  user,
+  cart,
+  addToCart,
+  removeFromCart,
+  clrCart,
+  subTotal,
+}) => {
   // console.log(cart, addToCart, removeFromCart, clrCart, subTotal);
-
+  const [dropDown, setDropDown] = useState(false);
+  if (logout) {
+    toast.success("You are successfully logged out", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      type: "success",
+    });
+  }
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
@@ -31,7 +54,18 @@ const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
 
   return (
     <div className="flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10">
-      <div className="logo mx-5">
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="logo mr-auto md:mx-5">
         <Link href={"/"}>
           <Image width={60} height={50} src={logo} />
         </Link>
@@ -60,12 +94,61 @@ const Navbar = ({ cart, addToCart, removeFromCart, clrCart, subTotal }) => {
           </Link>
         </ul>
       </div>
-      <div className="cart absolute right-0 mx-5 top-4 cursor-pointer flex">
-        <Link href={"/login"}>
-          <a>
+      <div className="cart absolute items-center right-0 mx-5 top-4 cursor-pointer flex">
+        <a
+          onMouseOver={() => {
+            setDropDown(true);
+          }}
+          onMouseLeave={() => {
+            setDropDown(false);
+          }}
+        >
+          {dropDown && (
+            <div
+              onMouseOver={() => {
+                setDropDown(true);
+              }}
+              onMouseLeave={() => {
+                setDropDown(false);
+              }}
+              className="absolute right-8 bg-red-200 top-6 py-4 rounded-md px-5 w-36"
+            >
+              <ul>
+                <Link href={"/myaccount"}>
+                  <a>
+                    <li className="py-2 hover:text-red-400 text-black text-sm font-medium">
+                      My Account
+                    </li>
+                  </a>
+                </Link>
+                <Link href={"/orders"}>
+                  <li className="py-2 hover:text-red-400  text-black text-sm font-medium">
+                    Orders
+                  </li>
+                </Link>
+                <Link href={"/"}>
+                  <li
+                    onClick={logout}
+                    className="py-2 hover:text-red-400 text-black text-sm font-medium"
+                  >
+                    Logout
+                  </li>
+                </Link>
+              </ul>
+            </div>
+          )}
+          {user.value && (
             <MdAccountCircle className="text-xl md:text-3xl mx-2" />
-          </a>
-        </Link>
+          )}{" "}
+        </a>
+
+        {!user.value && (
+          <Link href={"/login"}>
+            <button className="flex text-center w-19 mx-2 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
+              Login
+            </button>
+          </Link>
+        )}
         <AiOutlineShoppingCart
           onClick={toggleCart}
           className="text-xl md:text-3xl"

@@ -9,6 +9,9 @@ import { useRouter } from "next/router";
 function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState({}); //using cart as an object
   const [subTotal, setSubTotal] = useState(0); //use to set the total of items added to the cart
+  // use to set the user session in local storage
+  const [user, setUser] = useState({ value: null });
+  const [key, setKey] = useState(0);
   const router = useRouter();
   // using useEffect to save the cart data in localstorage so that if the page accidentally refresh then also items will available in cart
   useEffect(() => {
@@ -22,7 +25,18 @@ function MyApp({ Component, pageProps }) {
       // console.log(error);
       localStorage.clear();
     }
-  }, []);
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUser({ value: token });
+      setKey(Math.random());
+    }
+  }, [router.query]);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser({ value: null });
+    setKey(Math.random);
+  };
 
   const saveCart = (myCart) => {
     // save the item data in the json form in localstorage
@@ -77,7 +91,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Navbar
-        key={subTotal}
+        logout={logout}
+        user={user}
+        key={key}
         cart={cart}
         addToCart={addToCart}
         removeFromCart={removeFromCart}

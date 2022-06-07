@@ -38,6 +38,7 @@ const Login = () => {
     setPassword("");
     //loggin user if the credentials are correct and redirect to the homepage
     if (response.success) {
+      localStorage.setItem("token", response.token);
       toast.success("You are successfully logged in", {
         position: "top-center",
         autoClose: 2000,
