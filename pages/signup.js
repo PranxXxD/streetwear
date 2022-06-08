@@ -6,11 +6,21 @@ import { set } from "mongoose";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Signup = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const router = useRouter();
+
+  // prevent user to get back to the forget page once the user is logged in
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.name == "name") {

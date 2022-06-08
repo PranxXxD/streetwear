@@ -2,8 +2,19 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../images/logo.png";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Forgotpwd = () => {
+  // prevent user to get back to the forget page once the user is logged in
+  const router = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  }, []);
+
   return (
     <div>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

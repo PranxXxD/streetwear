@@ -28,18 +28,18 @@ const Navbar = ({
 }) => {
   // console.log(cart, addToCart, removeFromCart, clrCart, subTotal);
   const [dropDown, setDropDown] = useState(false);
-  if (logout) {
-    toast.success("You are successfully logged out", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      type: "success",
-    });
-  }
+  // if (logout) {
+  //   toast.success("You are successfully logged out", {
+  //     position: "top-center",
+  //     autoClose: 2000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     type: "success",
+  //   });
+  // }
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
@@ -54,7 +54,7 @@ const Navbar = ({
 
   return (
     <div className="flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10">
-      <ToastContainer
+      {/* <ToastContainer
         position="top-center"
         autoClose={2000}
         hideProgressBar={false}
@@ -64,7 +64,7 @@ const Navbar = ({
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
       <div className="logo mr-auto md:mx-5">
         <Link href={"/"}>
           <Image width={60} height={50} src={logo} />
@@ -111,7 +111,7 @@ const Navbar = ({
               onMouseLeave={() => {
                 setDropDown(false);
               }}
-              className="absolute right-8 bg-red-200 top-6 py-4 rounded-md px-5 w-36"
+              className="absolute right-8 bg-white shadow-lg border-2 top-6 py-4 rounded-md px-5 w-36"
             >
               <ul>
                 <Link href={"/myaccount"}>
@@ -126,7 +126,7 @@ const Navbar = ({
                     Orders
                   </li>
                 </Link>
-                <Link href={"/"}>
+                <Link href={"/login"}>
                   <li
                     onClick={logout}
                     className="py-2 hover:text-red-400 text-black text-sm font-medium"

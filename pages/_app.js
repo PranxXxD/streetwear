@@ -5,10 +5,13 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "../styles/globals.css";
 import { useRouter } from "next/router";
+import LoadingBar from "react-top-loading-bar";
 
 function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState({}); //using cart as an object
   const [subTotal, setSubTotal] = useState(0); //use to set the total of items added to the cart
+  // top loading bar
+  const [progress, setProgress] = useState(0);
   // use to set the user session in local storage
   const [user, setUser] = useState({ value: null });
   const [key, setKey] = useState(0);
@@ -30,6 +33,13 @@ function MyApp({ Component, pageProps }) {
       setUser({ value: token });
       setKey(Math.random());
     }
+    // to set the progress bar when user route through the pages
+    router.events.on("routeChangeStart", () => {
+      setProgress(40);
+    });
+    router.events.on("routeChangeComplete", () => {
+      setProgress(100);
+    });
   }, [router.query]);
 
   const logout = () => {
@@ -90,6 +100,13 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <LoadingBar
+        // color="#f11946"
+        color="e74c3c"
+        progress={progress}
+        waitingTime={200}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <Navbar
         logout={logout}
         user={user}

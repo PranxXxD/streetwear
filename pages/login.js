@@ -7,11 +7,18 @@ import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import logo from "../images/logo.png";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  // prevent user to get back to the forget page once the user is logged in
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.name == "email") {
@@ -33,7 +40,7 @@ const Login = () => {
       body: JSON.stringify(data),
     });
     let response = await res.json();
-    console.log(response);
+    // console.log(response);
     setEmail("");
     setPassword("");
     //loggin user if the credentials are correct and redirect to the homepage
@@ -139,22 +146,6 @@ const Login = () => {
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  {" "}
-                  Remember me{" "}
-                </label>
-              </div>
-
               <div className="text-sm">
                 <Link href={"/forgotpwd"}>
                   <a className="font-medium text-red-600 hover:text-red-500">
