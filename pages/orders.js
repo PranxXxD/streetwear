@@ -107,7 +107,7 @@ export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect(process.env.MONGO_URI);
   }
-  // fetch the single item with the unique slug
+  // fetch the single item with the user id
   let orders = await Order.find({});
 
   return {

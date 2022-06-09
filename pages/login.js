@@ -11,8 +11,8 @@ import { useEffect } from "react";
 
 const Login = () => {
   const router = useRouter();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // prevent user to get back to the forget page once the user is logged in
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -32,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     const data = { email, password };
 
-    let res = await fetch("http://localhost:3000/api/login", {
+    let res = await fetch(`${NEXT_PUBLIC_HOST}/api/login`, {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const Login = () => {
         type: "success",
       });
       setTimeout(() => {
-        router.push("http://localhost:3000");
+        router.push(NEXT_PUBLIC_HOST);
       }, 2000);
     }
     // show invalid credentials won't redirect to homepage

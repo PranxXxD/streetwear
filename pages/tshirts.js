@@ -35,7 +35,9 @@ const Tshirts = ({ products }) => {
                         {products[item].title}
                       </h2>
                       <p className="mt-1 flex justify-center">
-                        <FaRupeeSign className="text-md mt-1 px-1" />
+                        <a>
+                          <FaRupeeSign className="text-md mt-1 px-1" />
+                        </a>
                         {products[item].price}
                       </p>
                       <div className="text-sm mt-1">

@@ -66,7 +66,7 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
 
   // refresh the page when ever user select the particular size
   const refreshvariants = (newcolor, newsize) => {
-    let url = `http://localhost:3000/products/${variants[newsize][newcolor]["slug"]}`;
+    let url = `${NEXT_PUBLIC_HOST}/products/${variants[newsize][newcolor]["slug"]}`;
     window.location = url;
   };
 

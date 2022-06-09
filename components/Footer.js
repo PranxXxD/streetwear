@@ -11,7 +11,9 @@ const Footer = () => {
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
             <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
               <Link href={"/"}>
-                <Image width={60} height={60} src={logo} />
+                <span>
+                  <Image width={60} height={60} src={logo} />
+                </span>
               </Link>
               <span className="ml-2 text-xl">StreetWear.com</span>
             </a>

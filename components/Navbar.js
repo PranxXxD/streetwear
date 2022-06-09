@@ -67,7 +67,9 @@ const Navbar = ({
       /> */}
       <div className="logo mr-auto md:mx-5">
         <Link href={"/"}>
-          <Image width={60} height={50} src={logo} />
+          <a>
+            <Image width={60} height={50} src={logo} />
+          </a>
         </Link>
       </div>
       <div className="nav ">
@@ -95,7 +97,7 @@ const Navbar = ({
         </ul>
       </div>
       <div className="cart absolute items-center right-0 mx-5 top-4 cursor-pointer flex">
-        <a
+        <span
           onMouseOver={() => {
             setDropDown(true);
           }}
@@ -140,7 +142,7 @@ const Navbar = ({
           {user.value && (
             <MdAccountCircle className="text-xl md:text-3xl mx-2" />
           )}{" "}
-        </a>
+        </span>
 
         {!user.value && (
           <Link href={"/login"}>

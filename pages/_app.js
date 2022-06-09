@@ -108,16 +108,18 @@ function MyApp({ Component, pageProps }) {
         waitingTime={200}
         onLoaderFinished={() => setProgress(0)}
       />
-      <Navbar
-        logout={logout}
-        user={user}
-        key={key}
-        cart={cart}
-        addToCart={addToCart}
-        removeFromCart={removeFromCart}
-        clrCart={clrCart}
-        subTotal={subTotal}
-      />
+      {key && (
+        <Navbar
+          logout={logout}
+          user={user}
+          key={key}
+          cart={cart}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+          clrCart={clrCart}
+          subTotal={subTotal}
+        />
+      )}
       <Component
         cart={cart}
         buyNow={buyNow}

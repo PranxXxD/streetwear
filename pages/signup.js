@@ -10,9 +10,9 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 const Signup = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   // prevent user to get back to the forget page once the user is logged in
@@ -36,7 +36,7 @@ const Signup = () => {
     e.preventDefault();
     const data = { name, email, password };
 
-    let res = await fetch("http://localhost:3000/api/signup", {
+    let res = await fetch(`${NEXT_PUBLIC_HOST}/api/signup`, {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
