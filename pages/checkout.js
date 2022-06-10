@@ -2,10 +2,70 @@ import React from "react";
 import Link from "next/link";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { FaRupeeSign } from "react-icons/fa";
+import Head from "next/head";
+import Script from "next/script";
 
 const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
+  const initiatePayment = async () => {
+    let oid = Math.floor(Math.random() * Date.now());
+
+    // get a transaction token
+    const data = { cart, subTotal, oid, email: "email" };
+
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let txnRes = await a.json();
+    // console.log(txnRes);
+    let txnToken = txnRes.txnToken;
+
+    var config = {
+      root: "",
+      flow: "DEFAULT",
+      data: {
+        orderId: oid /* update order id */,
+        token: txnToken /* update token value */,
+        tokenType: "TXN_TOKEN",
+        amount: subTotal /* update amount */,
+      },
+      handler: {
+        notifyMerchant: function (eventName, data) {
+          console.log("notifyMerchant handler function called");
+          console.log("eventName => ", eventName);
+          console.log("data => ", data);
+        },
+      },
+    };
+
+    window.Paytm.CheckoutJS.init(config)
+      .then(function onSuccess() {
+        // console.log(init);
+
+        // after successfully updating configuration, invoke JS Checkout
+        window.Paytm.CheckoutJS.invoke();
+      })
+      .catch(function onError(error) {
+        console.log("error => ", error);
+      });
+  };
+
   return (
     <div className="container md:w-[72rem] p-2 sm:m-auto ">
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </Head>
+      <Script
+        type="application/javascript"
+        crossorigin="anonymous"
+        src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_MID}.js`}
+      />
       <h1 className="font-bold my-8 text-center text-3xl">Checkout</h1>
       <h2 className="text-xl font-bold">1. Delivery Details</h2>
       <div className="mx-auto flex">
@@ -167,7 +227,10 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
         </div>
       </div>
       <div className="flex">
-        <button className="flex mx-auto my-2  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm">
+        <button
+          className="flex mx-auto my-2  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm"
+          onClick={initiatePayment}
+        >
           Pay <FaRupeeSign className="my-1 px-1" /> {subTotal}
         </button>
       </div>
