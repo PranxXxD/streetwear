@@ -20,7 +20,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
       body: JSON.stringify(data),
     });
     let txnRes = await a.json();
-    // console.log(txnRes);
+    console.log(txnRes);
     let txnToken = txnRes.txnToken;
 
     var config = {
