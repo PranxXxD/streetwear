@@ -34,16 +34,16 @@ export default async function handler(req, res) {
       signature: checksum,
     };
 
-    const requestAsync = () => {
+    const requestAsync = async () => {
       return new Promise((resolve, reject) => {
         var post_data = JSON.stringify(paytmParams);
 
         var options = {
           /* for Staging */
-          // hostname: "securegw-stage.paytm.in,"
+          hostname: "securegw-stage.paytm.in",
 
           /* for Production */
-          hostname: "securegw.paytm.in",
+          //   hostname: "securegw.paytm.in",
 
           port: 443,
           path: `/theia/api/v1/initiateTransaction?mid=${process.env.NEXT_PUBLIC_PAYTM_MID}&orderId=${req.body.oid}`,

@@ -32,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     const data = { email, password };
 
-    let res = await fetch(`${NEXT_PUBLIC_HOST}/api/login`, {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const Login = () => {
         type: "success",
       });
       setTimeout(() => {
-        router.push(NEXT_PUBLIC_HOST);
+        router.push(process.env.NEXT_PUBLIC_HOST);
       }, 2000);
     }
     // show invalid credentials won't redirect to homepage
