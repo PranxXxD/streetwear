@@ -30,6 +30,7 @@ export default async function handler(req, res) {
       JSON.stringify(paytmParams.body),
       process.env.PAYTM_MKEY
     );
+
     paytmParams.head = {
       signature: checksum,
     };

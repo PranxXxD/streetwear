@@ -44,13 +44,11 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
     // initialze configuration using init method
     window.Paytm.CheckoutJS.init(config)
       .then(function onSuccess() {
-        console.log("init");
         // after successfully updating configuration, invoke JS Checkout
         window.Paytm.CheckoutJS.invoke();
       })
       .catch(function onError(error) {
         console.log("error => ", error);
-        // console.log("init");
       });
   };
 
