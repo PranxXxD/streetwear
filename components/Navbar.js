@@ -159,7 +159,7 @@ const Navbar = ({
 
       <div
         ref={ref}
-        className={`w-[19rem] h-[100vh] sideCart overflow-y-scroll top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform ${
+        className={`w-[19rem] h-auto sideCart overflow-y-scroll top-0 right-0 absolute bg-red-200 px-8 py-10 transform transition-transform ${
           Object.keys(cart).length !== 0 ? "translate-x-0" : "translate-x-full"
         }`}
       >

@@ -1,8 +1,12 @@
 const https = require("https");
 const PaytmChecksum = require("paytmChecksum");
+import connectDb from "../../middleware/mongoose";
+import Order from "../../models/Order";
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   if (req.method == "POST") {
+    //Initiate an order corresponding to this orderId
+
     // insert and entry in the orders table with staus as pending
 
     var paytmParams = {};
@@ -74,4 +78,5 @@ export default async function handler(req, res) {
     const myr = await requestAsync();
     res.status(200).json(myr);
   }
-}
+};
+export default connectDb(handler);
