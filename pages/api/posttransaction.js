@@ -1,9 +1,32 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import connectDb from "../../middleware/mongoose";
+import Order from "../../models/Order";
 
-export default function handler(req, res) {
+const handler = async (req, res) => {
+  // validate paytm checksum
+
   // Updating the staus into the orders table afte the checking the transaction status
-  //initiating shipping
-  //Redirecting the user to the orders confrimation page
+  if (req.body.STATUS == "TXN_SUCCESS") {
+    await Order.findOneAndUpdate(
+      {
+        orderId: req.body.ORDERID,
+      },
+      { status: "Paid", paymentInfo: JSON.stringify(req.body) }
+    );
+  } else if (req.body.STATUS == "PENDING") {
+    await Order.findOneAndUpdate(
+      {
+        orderId: req.body.ORDERID,
+      },
+      { status: "Pending", paymentInfo: JSON.stringify(req.body) }
+    );
+  }
+};
+//initiating shipping
 
-  res.status(200).json({ body: req.body });
-}
+//Redirecting the user to the orders confrimation page
+res.redirect("/order", 200);
+
+//   res.status(200).json({ body: req.body });
+
+export default connectDb(handler);

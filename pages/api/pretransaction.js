@@ -5,8 +5,23 @@ import Order from "../../models/Order";
 
 const handler = async (req, res) => {
   if (req.method == "POST") {
+    // Check if the cart is tampered with
+
+    //check if the cart items are out of stock
+
+    //check if the details are valid
+
     //Initiate an order corresponding to this orderId
 
+    let order = new Order({
+      email: req.body.email,
+      orderId: req.body.oid,
+      amount: req.body.subTotal,
+      address: req.body.address,
+      products: req.body.cart,
+    });
+
+    await order.save();
     // insert and entry in the orders table with staus as pending
 
     var paytmParams = {};

@@ -5,15 +5,10 @@ const OrderSchema = new mongoose.Schema(
     email: { type: String, required: true },
     orderId: { type: String, required: true },
     paymentInfo: { type: String, default: "" },
-    products: [
-      {
-        productId: { type: String },
-        quantity: { type: Number, default: 1 },
-      },
-    ],
+    products: { type: Object, required: true },
     address: { type: String, required: true },
     amount: { type: Number, required: true },
-    status: { type: String, default: "pending", required: true },
+    status: { type: String, default: "initiated", required: true },
   },
   { timestamps: true }
 );
