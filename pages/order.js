@@ -1,7 +1,14 @@
 import React from "react";
 import { FaRupeeSign } from "react-icons/fa";
+import mongoose from "mongoose";
+import Order from "../models/Order";
+import { useRouter } from "next/router";
 
-const Order = () => {
+const MyOrder = ({ order }) => {
+  // console.log(order);
+  const products = order.products;
+  // console.log(products);
+
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden">
@@ -12,41 +19,44 @@ const Order = () => {
                 StreetWear.com
               </h2>
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">
-                Order id : #1223444
+                Order id : {order.orderId}
               </h1>
 
               <p className="leading-relaxed mb-4">
-                Your order has been confirmed
+                Your order has been confirmed and the payment status is :
+                {order.status}
               </p>
 
-              <div class="flex mb-4 text-center">
-                <a class="flex-grow text-red-500  border-red-500 py-2 text-lg px-1">
+              <div className="flex mb-4 text-center">
+                <a className="flex-grow text-red-500  border-red-500 py-2 text-lg px-1">
                   Item Description
                 </a>
-                <a class="flex-grow  border-gray-300 py-2 text-lg px-1">Qty</a>
-                <a class="flex-grow  border-gray-300 py-2 text-lg px-1">
+                <a className="flex-grow  border-gray-300 py-2 text-lg px-1">
+                  Qty
+                </a>
+                <a className="flex-grow  border-gray-300 py-2 text-lg px-1">
                   Item price
                 </a>
               </div>
-              <div className="flex border-t border-gray-200 py-2">
-                <span className="text-gray-500">The Catcher in the Rye</span>
-                <span className="ml-auto text-gray-900">1</span>
-                <span className="ml-auto text-gray-900">499</span>
-              </div>
-              <div className="flex border-t border-gray-200 py-2">
-                <span className="text-gray-500">The Catcher in the Rye</span>
-                <span className="ml-auto text-gray-900">1</span>
-                <span className="ml-auto text-gray-900">499</span>
-              </div>
-              <div className="flex border-t border-b mb-6 border-gray-200 py-2">
-                <span className="text-gray-500">The Catcher in the Rye</span>
-                <span className="ml-auto text-gray-900">1</span>
-                <span className="ml-auto text-gray-900">499</span>
-              </div>
+              {Object.keys(products).map((key) => {
+                <div key={key} className="flex border-t border-gray-200 py-2">
+                  <span className="text-gray-500">
+                    {products[key].name} ({products[key].size}/
+                    {products[key].variant})
+                  </span>
+                  <span className="ml-auto text-gray-900">
+                    {products[key].qty}
+                  </span>
+                  <span className="ml-auto text-gray-900">
+                    {products[key].price}
+                  </span>
+                </div>;
+              })}
+
               <div className="flex title-font font-medium text-2xl text-gray-900">
                 {/* <span className="title-font font-medium text-2xl text-gray-900"> */}
                 SubTotal :- <FaRupeeSign className="my-2 mx-1 text-sm" />
-                998
+                {order.amount}
                 {/* </span> */}
               </div>
               <button className="flex text-white bg-red-500 border-0 py-2 my-5 px-3 focus:outline-none hover:bg-red-600 rounded">
@@ -65,4 +75,18 @@ const Order = () => {
   );
 };
 
-export default Order;
+// fetching the data from the mongodb
+export async function getServerSideProps(context) {
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+  // fetch the single item with the unique slug
+  let order = await Order.findById(context.query.id);
+  return {
+    props: {
+      order: JSON.parse(JSON.stringify(order)),
+    }, // will be passed to the page component as props
+  };
+}
+
+export default MyOrder;

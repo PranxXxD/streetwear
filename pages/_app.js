@@ -74,7 +74,9 @@ function MyApp({ Component, pageProps }) {
   };
   // buyNow functionality which clr the existing cart and direct redirect to checkout page
   const buyNow = (itemCode, qty, price, name, size, variant) => {
-    let newCart = { itemCode: { qty: 1, price, name, size, variant } };
+    let newCart = {};
+    newCart[itemCode] = { qty: 1, price, name, size, variant };
+
     setCart(newCart);
     saveCart(newCart);
     router.push("/checkout");
