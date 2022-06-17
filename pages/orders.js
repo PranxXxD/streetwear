@@ -1,16 +1,32 @@
 import React from "react";
-import Order from "../models/Order";
-import mongoose from "mongoose";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import Link from "next/link";
 
 const orders = () => {
   const router = useRouter();
+  const [orders, setOrders] = useState([]);
+
   useEffect(() => {
+    const fetchOrders = async () => {
+      let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders`, {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: localStorage.getItem("token") }),
+      });
+      let res = await a.json();
+      setOrders(res.orders);
+    };
     if (!localStorage.getItem("token")) {
       router.push("/");
+    } else {
+      fetchOrders();
     }
   }, []);
+
   return (
     <div>
       <h1 className="text-center font-semibold p-8 text-xl">My Orders</h1>
@@ -32,65 +48,46 @@ const orders = () => {
                         scope="col"
                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
-                        First
+                        email
                       </th>
                       <th
                         scope="col"
                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
-                        Last
+                        amount
                       </th>
                       <th
                         scope="col"
                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
-                        Handle
+                        Details
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        1
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Mark
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Otto
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @mdo
-                      </td>
-                    </tr>
-                    <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        2
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Jacob
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Thornton
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @fat
-                      </td>
-                    </tr>
-                    <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        3
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Larry
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Wild
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @twitter
-                      </td>
-                    </tr>
+                    {orders.map((item) => {
+                      return (
+                        <tr
+                          key={item._id}
+                          class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                        >
+                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {item.orderId}
+                          </td>
+                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {item.email}
+                          </td>
+                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {item.price}
+                          </td>
+                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <Link href={"/order?id=" + item.orderId}>
+                              <a>Details</a>
+                            </Link>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -101,18 +98,5 @@ const orders = () => {
     </div>
   );
 };
-
-// to display the orders from the database
-export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URI);
-  }
-  // fetch the single item with the user id
-  let orders = await Order.find({});
-
-  return {
-    props: { orders: orders },
-  };
-}
 
 export default orders;

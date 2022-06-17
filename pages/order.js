@@ -2,12 +2,11 @@ import React from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import mongoose from "mongoose";
 import Order from "../models/Order";
-import { useRouter } from "next/router";
 
 const MyOrder = ({ order }) => {
   // console.log(order);
   const products = order.products;
-  // console.log(products);
+  // console.log(order.products);
 
   return (
     <div>
@@ -21,12 +20,10 @@ const MyOrder = ({ order }) => {
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">
                 Order id : {order.orderId}
               </h1>
-
               <p className="leading-relaxed mb-4">
                 Your order has been confirmed and the payment status is :
                 {order.status}
               </p>
-
               <div className="flex mb-4 text-center">
                 <a className="flex-grow text-red-500  border-red-500 py-2 text-lg px-1">
                   Item Description
@@ -39,18 +36,20 @@ const MyOrder = ({ order }) => {
                 </a>
               </div>
               {Object.keys(products).map((key) => {
-                <div key={key} className="flex border-t border-gray-200 py-2">
-                  <span className="text-gray-500">
-                    {products[key].name} ({products[key].size}/
-                    {products[key].variant})
-                  </span>
-                  <span className="ml-auto text-gray-900">
-                    {products[key].qty}
-                  </span>
-                  <span className="ml-auto text-gray-900">
-                    {products[key].price}
-                  </span>
-                </div>;
+                return (
+                  <div key={key} className="flex border-t border-gray-200 py-2">
+                    <span className="text-gray-500">
+                      {products[key].name}(
+                      {products[key].size / products[key].variant})
+                    </span>
+                    <span className=" m-auto text-gray-900">
+                      {products[key].qty}
+                    </span>
+                    <span className=" m-auto text-gray-900">
+                      {products[key].price}
+                    </span>
+                  </div>
+                );
               })}
 
               <div className="flex title-font font-medium text-2xl text-gray-900">

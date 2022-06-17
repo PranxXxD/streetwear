@@ -14,8 +14,6 @@ import { FiShoppingBag } from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
 import { useRef } from "react";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = ({
   logout,
@@ -28,18 +26,7 @@ const Navbar = ({
 }) => {
   // console.log(cart, addToCart, removeFromCart, clrCart, subTotal);
   const [dropDown, setDropDown] = useState(false);
-  // if (logout) {
-  //   toast.success("You are successfully logged out", {
-  //     position: "top-center",
-  //     autoClose: 2000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     type: "success",
-  //   });
-  // }
+
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
@@ -54,17 +41,6 @@ const Navbar = ({
 
   return (
     <div className="flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10">
-      {/* <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      /> */}
       <div className="logo mr-auto md:mx-5">
         <Link href={"/"}>
           <a>
