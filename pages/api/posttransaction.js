@@ -21,11 +21,12 @@ const handler = async (req, res) => {
       { status: "Pending", paymentInfo: JSON.stringify(req.body) }
     );
   }
-};
-//initiating shipping
 
-//Redirecting the user to the orders confrimation page
-res.redirect("/order?id=" + order._Id, 200);
+  //initiating shipping
+
+  //Redirecting the user to the orders confrimation page
+  res.redirect("/order?id=" + order._id, 200);
+};
 
 //   res.status(200).json({ body: req.body });
 

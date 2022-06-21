@@ -2,6 +2,8 @@ import React from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import mongoose from "mongoose";
 import Order from "../models/Order";
+import Image from "next/image";
+import order_ from "../images/order_.jpg";
 
 const MyOrder = ({ order }) => {
   // console.log(order);
@@ -17,8 +19,8 @@ const MyOrder = ({ order }) => {
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
                 StreetWear.com
               </h2>
-              <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">
-                Order id : {order.orderId}
+              <h1 className="text-gray-900 text-xl md:text-3xl title-font font-medium mb-4">
+                Order id : #{order.orderId}
               </h1>
               <p className="leading-relaxed mb-4">
                 Your order has been confirmed and the payment status is :
@@ -28,10 +30,10 @@ const MyOrder = ({ order }) => {
                 <a className="flex-grow text-red-500  border-red-500 py-2 text-lg px-1">
                   Item Description
                 </a>
-                <a className="flex-grow  border-gray-300 py-2 text-lg px-1">
+                <a className="flex-grow border-gray-300 py-2 text-lg px-1">
                   Qty
                 </a>
-                <a className="flex-grow  border-gray-300 py-2 text-lg px-1">
+                <a className="flex-grow border-gray-300 py-2 text-lg px-1">
                   Item price
                 </a>
               </div>
@@ -39,7 +41,7 @@ const MyOrder = ({ order }) => {
                 return (
                   <div key={key} className="flex border-t border-gray-200 py-2">
                     <span className="text-gray-500">
-                      {products[key].name}(
+                      {products[key].name} (
                       {products[key].size / products[key].variant})
                     </span>
                     <span className=" m-auto text-gray-900">
@@ -62,10 +64,12 @@ const MyOrder = ({ order }) => {
                 Track Order
               </button>
             </div>
-            <img
+            <Image
               alt="ecommerce"
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src="https://dummyimage.com/400x400"
+              src={order_}
+              width={370}
+              height={50}
             />
           </div>
         </div>
@@ -81,6 +85,7 @@ export async function getServerSideProps(context) {
   }
   // fetch the single item with the unique slug
   let order = await Order.findById(context.query.id);
+  // console.log(context.query.id);
   return {
     props: {
       order: JSON.parse(JSON.stringify(order)),

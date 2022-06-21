@@ -19,6 +19,7 @@ const handler = async (req, res) => {
       amount: req.body.subTotal,
       address: req.body.address,
       products: req.body.cart,
+      // img: req.body.img,
     });
 
     await order.save();
