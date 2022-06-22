@@ -23,11 +23,11 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
 
   // code for checking the pincode using fetch api
   const checkServiceAbility = async () => {
-    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
     let pinJson = await pins.json();
     // console.log(pinJson, pin);
 
-    if (pinJson.includes(parseInt(pin))) {
+    if (Object.keys(pinJson).includes(pin)) {
       // display the pop toast after clicking the checkpincode button
       toast("Service available to this pincode!", {
         position: "bottom-center",

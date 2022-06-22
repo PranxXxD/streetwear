@@ -23,8 +23,13 @@ const MyOrder = ({ order }) => {
                 Order id : #{order.orderId}
               </h1>
               <p className="leading-relaxed mb-4">
-                Your order has been confirmed and the payment status is :
-                {order.status}
+                Your order has been sucessfully placed!
+              </p>
+              <p className="leading-relaxed mb-4">
+                Your payment status is :
+                <span className="ml-1 font-semibold text-slate-600">
+                  {order.status}
+                </span>
               </p>
               <div className="flex mb-4 text-center">
                 <a className="flex-grow text-red-500  border-red-500 py-2 text-lg px-1">

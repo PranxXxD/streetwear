@@ -16,7 +16,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
   const [state, setState] = useState("");
   const [disable, setDisable] = useState(true);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     e.preventDefault();
     if (e.target.name === "name") {
       setName(e.target.value);
@@ -28,6 +28,20 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
       setAddress(e.target.value);
     } else if (e.target.name === "pincode") {
       setPincode(e.target.value);
+      if (e.target.value.length == 6) {
+        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
+        let pinJson = await pins.json();
+        if (Object.keys(pinJson).includes(e.target.value)) {
+          setCity(pinJson[e.target.value][0]);
+          setState(pinJson[e.target.value][1]);
+        } else {
+          setCity("");
+          setState("");
+        }
+      } else {
+        setCity("");
+        setState("");
+      }
     }
 
     setTimeout(() => {
@@ -203,12 +217,12 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
               State
             </label>
             <input
+              onChange={handleChange}
               value={city}
               type="state"
               id="state"
               name="state"
               className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              readOnly={true}
             />
           </div>
         </div>
@@ -218,12 +232,12 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
               City
             </label>
             <input
-              value={city}
+              onChange={handleChange}
+              value={state}
               type="city"
               id="city"
               name="city"
               className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              readOnly={true}
             />
           </div>
         </div>
