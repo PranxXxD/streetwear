@@ -5,6 +5,9 @@ import { FaRupeeSign } from "react-icons/fa";
 import Head from "next/head";
 import Script from "next/script";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Warning } from "postcss";
 
 const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
   const [name, setName] = useState("");
@@ -83,39 +86,64 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
     });
     let txnRes = await a.json();
     console.log(txnRes);
-    let txnToken = txnRes.txnToken;
+    if (txnRes.sucess) {
+      let txnToken = txnRes.txnToken;
 
-    var config = {
-      root: "",
-      flow: "DEFAULT",
-      data: {
-        orderId: oid /* update order id */,
-        token: txnToken /* update token value */,
-        tokenType: "TXN_TOKEN",
-        amount: subTotal /* update amount */,
-      },
-      handler: {
-        notifyMerchant: function (eventName, data) {
-          console.log("notifyMerchant handler function called");
-          console.log("eventName => ", eventName);
-          console.log("data => ", data);
+      var config = {
+        root: "",
+        flow: "DEFAULT",
+        data: {
+          orderId: oid /* update order id */,
+          token: txnToken /* update token value */,
+          tokenType: "TXN_TOKEN",
+          amount: subTotal /* update amount */,
         },
-      },
-    };
+        handler: {
+          notifyMerchant: function (eventName, data) {
+            console.log("notifyMerchant handler function called");
+            console.log("eventName => ", eventName);
+            console.log("data => ", data);
+          },
+        },
+      };
 
-    // initialze configuration using init method
-    window.Paytm.CheckoutJS.init(config)
-      .then(function onSuccess() {
-        // after successfully updating configuration, invoke JS Checkout
-        window.Paytm.CheckoutJS.invoke();
-      })
-      .catch(function onError(error) {
-        console.log("error => ", error);
+      // initialze configuration using init method
+      window.Paytm.CheckoutJS.init(config)
+        .then(function onSuccess() {
+          // after successfully updating configuration, invoke JS Checkout
+          window.Paytm.CheckoutJS.invoke();
+        })
+        .catch(function onError(error) {
+          console.log("error => ", error);
+        });
+    } else {
+      console.log(txnRes.error);
+      toast.error(txnRes.error, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
       });
+    }
   };
 
   return (
     <div className="container md:w-[72rem] p-2 sm:m-auto ">
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Head>
         <meta
           name="viewport"
