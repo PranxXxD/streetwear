@@ -23,8 +23,7 @@ const handler = async (req, res) => {
           process.env.JWT_SECRET_KEY,
           { expiresIn: "2d" }
         );
-
-        res.status(200).json({ success: true, token });
+        res.status(200).json({ success: true, token, email: user.email });
       } else {
         //   throw the error message if the user enter the wrong credentials
         res.status(200).json({ success: false, error: "Invalid Credentials" });

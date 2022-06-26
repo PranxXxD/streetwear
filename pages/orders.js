@@ -15,12 +15,14 @@ const orders = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ token: localStorage.getItem("token") }),
+        body: JSON.stringify({
+          token: JSON.parse(localStorage.getItem("myuser")).token,
+        }),
       });
       let res = await a.json();
       setOrders(res.orders);
     };
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("myuser")) {
       router.push("/");
     } else {
       fetchOrders();

@@ -15,7 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   // prevent user to get back to the forget page once the user is logged in
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("myuser")) {
       router.push("/");
     }
   }, []);
@@ -45,7 +45,13 @@ const Login = () => {
     setPassword("");
     //loggin user if the credentials are correct and redirect to the homepage
     if (response.success) {
-      localStorage.setItem("token", response.token);
+      localStorage.setItem(
+        "myuser",
+        JSON.stringify({
+          token: response.token,
+          email: response.email,
+        })
+      );
       toast.success("You are successfully logged in", {
         position: "top-center",
         autoClose: 2000,
