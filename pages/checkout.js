@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Warning } from "postcss";
 
-const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
+const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -117,7 +117,8 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
           console.log("error => ", error);
         });
     } else {
-      console.log(txnRes.error);
+      // console.log(txnRes.error);
+      clrCart();
       toast.error(txnRes.error, {
         position: "top-center",
         autoClose: 1000,

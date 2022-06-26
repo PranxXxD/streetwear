@@ -4,10 +4,20 @@ import mongoose from "mongoose";
 import Order from "../models/Order";
 import Image from "next/image";
 import order_ from "../images/order_.jpg";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const MyOrder = ({ order }) => {
   // console.log(order);
   const products = order.products;
+  const router = useRouter();
+
+  useEffectffect(() => {
+    if (router.query.clrCart == 1) {
+      clrCart();
+    }
+  }, []);
+
   // console.log(order.products);
 
   return (
