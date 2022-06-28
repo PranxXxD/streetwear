@@ -1,5 +1,5 @@
 const https = require("https");
-const PaytmChecksum = require("paytmChecksum");
+const PaytmChecksum = require("PaytmChecksum");
 import connectDb from "../../middleware/mongoose";
 import Order from "../../models/Order";
 import Product from "../../models/Product";
@@ -52,7 +52,6 @@ const handler = async (req, res) => {
       amount: req.body.subTotal,
       address: req.body.address,
       products: req.body.cart,
-      // img: req.body.img,
     });
 
     await order.save();
@@ -79,6 +78,7 @@ const handler = async (req, res) => {
      * Generate checksum by parameters we have in body
      * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
      */
+
     const checksum = await PaytmChecksum.generateSignature(
       JSON.stringify(paytmParams.body),
       process.env.PAYTM_MKEY

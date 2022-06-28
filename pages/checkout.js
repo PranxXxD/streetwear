@@ -7,15 +7,9 @@ import Script from "next/script";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
-const Checkout = ({
-  user,
-  cart,
-  clrCart,
-  addToCart,
-  removeFromCart,
-  subTotal,
-}) => {
+const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -32,13 +26,7 @@ const Checkout = ({
       setUser(user);
       setEmail(user.email);
     }
-  }, [input]);
-
-  const myuser = JSON.parse(localStorage.getItem("myuser"));
-  if (myuser) {
-    setUser({ value: myuser.token, email: myuser.email });
-    setKey(Math.random());
-  }
+  }, []);
 
   const handleChange = async (e) => {
     e.preventDefault();
@@ -91,7 +79,7 @@ const Checkout = ({
       cart,
       subTotal,
       oid,
-      email: email,
+      email,
       name,
       phone,
       address,
@@ -105,6 +93,7 @@ const Checkout = ({
       },
       body: JSON.stringify(data),
     });
+    // console.log(data);
     let txnRes = await a.json();
     console.log(txnRes);
     if (txnRes.sucess) {

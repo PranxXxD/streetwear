@@ -7,12 +7,12 @@ import order_ from "../images/order_.jpg";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const MyOrder = ({ order }) => {
+const MyOrder = ({ order, clrCart }) => {
   // console.log(order);
   const products = order.products;
   const router = useRouter();
 
-  useEffectffect(() => {
+  useEffect(() => {
     if (router.query.clrCart == 1) {
       clrCart();
     }

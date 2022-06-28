@@ -117,14 +117,16 @@ const Navbar = ({
           )}
           {user.value && (
             <MdAccountCircle className="text-xl md:text-3xl mx-2" />
-          )}{" "}
+          )}
         </span>
 
         {!user.value && (
           <Link href={"/login"}>
-            <button className="flex text-center w-19 mx-2 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
-              Login
-            </button>
+            <a>
+              <button className="flex text-center w-19 mx-2 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
+                Login
+              </button>
+            </a>
           </Link>
         )}
         <AiOutlineShoppingCart
