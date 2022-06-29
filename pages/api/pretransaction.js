@@ -9,6 +9,13 @@ const handler = async (req, res) => {
     // Check if the cart is tampered with
     let product;
     let sumTotal = 0;
+    if (req.body.subTotal <= 0) {
+      res.status(200).json({
+        sucess: false,
+        error: "Your cart is empty, add someitems to the cart and try again",
+      });
+      return;
+    }
     let cart = req.body.cart;
     for (let item in cart) {
       // console.log(item);
@@ -43,6 +50,20 @@ const handler = async (req, res) => {
     }
 
     //check if the details are valid
+    if (req.body.phone !== 10 || !Number.isInteger(req.body.phone)) {
+      res.status(200).json({
+        sucess: false,
+        error: "Please enter your 10 digit valid phone number",
+      });
+      return;
+    }
+    if (req.body.pincode !== 6 || !Number.isInteger(req.body.pincode)) {
+      res.status(200).json({
+        sucess: false,
+        error: "Please enter your 6 digit valid pincode",
+      });
+      return;
+    }
 
     //Initiate an order corresponding to this orderId
 

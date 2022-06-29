@@ -15,7 +15,7 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
-  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
   const [state, setState] = useState("");
   const [disable, setDisable] = useState(true);
   const [user, setUser] = useState({ value: null });
@@ -44,14 +44,14 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
         let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
         let pinJson = await pins.json();
         if (Object.keys(pinJson).includes(e.target.value)) {
-          setCity(pinJson[e.target.value][0]);
+          setDistrict(pinJson[e.target.value][0]);
           setState(pinJson[e.target.value][1]);
         } else {
-          setCity("");
+          setDistrict("");
           setState("");
         }
       } else {
-        setCity("");
+        setDistrict("");
         setState("");
       }
     }
@@ -232,6 +232,7 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
               Phone
             </label>
             <input
+              placeholder="Your 10 digit number"
               onChange={handleChange}
               value={phone}
               type="phone"
@@ -268,7 +269,7 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
             </label>
             <input
               onChange={handleChange}
-              value={city}
+              value={state}
               type="state"
               id="state"
               name="state"
@@ -278,15 +279,18 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
         </div>
         <div className="px-2 w-1/2">
           <div className=" mb-4">
-            <label htmlFor="city" className="leading-7 text-sm text-gray-600">
-              City
+            <label
+              htmlFor="District"
+              className="leading-7 text-sm text-gray-600"
+            >
+              District
             </label>
             <input
               onChange={handleChange}
-              value={state}
-              type="city"
-              id="city"
-              name="city"
+              value={district}
+              type="district"
+              id="district"
+              name="district"
               className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>

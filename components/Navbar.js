@@ -207,14 +207,18 @@ const Navbar = ({
         </div>
         <div className="flex w-48 space-x-1">
           <Link href={"/checkout"}>
-            <button className="flex mx-auto text-center mt-4 w-19  text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-600 rounded text-xs">
+            <button
+              disabled={Object.keys(cart).length == 0}
+              className="disabled:bg-red-300 flex mx-auto text-center mt-4 w-19  text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-600 rounded text-xs"
+            >
               <FiShoppingBag className="my-1 mx-1 text-center" />
               Checkout
             </button>
           </Link>
           <button
+            disabled={Object.keys(cart).length == 0}
             onClick={clrCart}
-            className="flex mx-auto mt-4 text-center text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-600 rounded text-xs"
+            className="disabled:bg-red-300 flex mx-auto mt-4 text-center text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-600 rounded text-xs"
           >
             <AiOutlineClear className="m-1 text-center" />
             Clear Cart
