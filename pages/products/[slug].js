@@ -13,6 +13,7 @@ import {
 } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaRupeeSign } from "react-icons/fa";
+import { useEffect } from "react";
 
 const Post = ({ buyNow, addToCart, product, variants }) => {
   // console.log(product, variants);
@@ -21,6 +22,13 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
   const [pin, setPin] = useState();
   const [service, setService] = useState();
 
+  const [color, setColor] = useState(product.color);
+  const [size, setSize] = useState(product.size);
+
+  useEffect(() => {
+    setColor(product.color);
+    setSize(product.size);
+  }, [router.query]);
   // code for checking the pincode using fetch api
   const checkServiceAbility = async () => {
     let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
@@ -61,13 +69,11 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
     setPin(e.target.value);
   };
 
-  const [color, setcolor] = useState(product.color);
-  const [size, setSize] = useState(product.size);
-
   // refresh the page when ever user select the particular size
   const refreshvariants = (newcolor, newsize) => {
     let url = `${process.env.NEXT_PUBLIC_HOST}/products/${variants[newsize][newcolor]["slug"]}`;
-    window.location = url;
+    // window.location = url;
+    router.push(url);
   };
 
   return (
