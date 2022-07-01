@@ -50,14 +50,14 @@ const handler = async (req, res) => {
     }
 
     //check if the details are valid
-    if (req.body.phone !== 10 || !Number.isInteger(req.body.phone)) {
+    if (req.body.phone.length !== 10 || Number.isInteger(req.body.phone)) {
       res.status(200).json({
         sucess: false,
         error: "Please enter your 10 digit valid phone number",
       });
       return;
     }
-    if (req.body.pincode !== 6 || !Number.isInteger(req.body.pincode)) {
+    if (req.body.pincode.length !== 6 || Number.isInteger(req.body.pincode)) {
       res.status(200).json({
         sucess: false,
         error: "Please enter your 6 digit valid pincode",
@@ -83,7 +83,7 @@ const handler = async (req, res) => {
     paytmParams.body = {
       requestType: "Payment",
       mid: process.env.NEXT_PUBLIC_PAYTM_MID,
-      websiteName: "YOUR_WEBSITE_NAME",
+      websiteName: "WEBSTAGING",
       orderId: req.body.oid,
       callbackUrl: `${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
       txnAmount: {
@@ -138,7 +138,7 @@ const handler = async (req, res) => {
           post_res.on("end", function () {
             // console.log("Response: ", response);
             let ress = JSON.parse(response).body;
-            ress.sucess = true;
+            ress.success = true;
             resolve(ress);
           });
         });

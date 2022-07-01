@@ -194,8 +194,8 @@ const Navbar = ({
             {Object.keys(cart).map((k) => {
               return (
                 <li key={k}>
-                  <div className="flex items my-6 ">
-                    <span className="w-2/3 text-sm flex font-semibold ">
+                  <div className="flex items-center my-6 ">
+                    <span className="w-auto text-sm flex font-semibold ">
                       {cart[k].name}({cart[k].size})/({cart[k].variant})
                     </span>
                     <span className="w-1/3 flex font-semibold items-center justify-center">

@@ -96,7 +96,7 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
     // console.log(data);
     let txnRes = await a.json();
     console.log(txnRes);
-    if (txnRes.sucess) {
+    if (txnRes.success) {
       let txnToken = txnRes.txnToken;
 
       var config = {
@@ -108,7 +108,22 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
           tokenType: "TXN_TOKEN",
           amount: subTotal /* update amount */,
         },
+        // send the merchant id with the request
+        merchant: {
+          mid: process.env.NEXT_PUBLIC_PAYTM_MID,
+          redirect: false,
+        },
+        payMode: {
+          labels: {},
+          filter: {
+            exclude: [],
+          },
+        },
+
         handler: {
+          transactionStatus: function transactionStatus(paymentStatus) {
+            console.log(paymentStatus);
+          },
           notifyMerchant: function (eventName, data) {
             console.log("notifyMerchant handler function called");
             console.log("eventName => ", eventName);
