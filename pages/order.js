@@ -6,13 +6,17 @@ import Image from "next/image";
 import order_ from "../images/order_.jpg";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const MyOrder = ({ order, clrCart }) => {
   // console.log(order);
   const products = order.products;
   const router = useRouter();
+  const [date, setDate] = useState();
 
   useEffect(() => {
+    const d = new Date(order.createdAt);
+    setDate(d);
     if (router.query.clrCart == 1) {
       clrCart();
     }
@@ -36,8 +40,20 @@ const MyOrder = ({ order, clrCart }) => {
                 Your order has been sucessfully placed!
               </p>
               <p className="leading-relaxed mb-4">
+                Your order placed on:
+                <b className="p-1">
+                  {date &&
+                    date.toLocaleDateString("en-IN", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                </b>
+              </p>
+              <p className="leading-relaxed mb-4">
                 Your payment status is :
-                <span className="ml-1 font-semibold text-slate-600">
+                <span className="ml-1 font-bold text-slate-600">
                   {order.status}
                 </span>
               </p>

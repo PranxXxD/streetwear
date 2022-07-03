@@ -1,5 +1,5 @@
 const https = require("https");
-const PaytmChecksum = require("PaytmChecksum");
+const PaytmChecksum = require("paytmChecksum");
 import connectDb from "../../middleware/mongoose";
 import Order from "../../models/Order";
 import Product from "../../models/Product";
@@ -50,16 +50,22 @@ const handler = async (req, res) => {
     }
 
     //check if the details are valid
-    if (req.body.phone.length !== 10 || Number.isInteger(req.body.phone)) {
+    if (
+      req.body.phone.length !== 10 ||
+      !Number.isInteger(Number(req.body.phone))
+    ) {
       res.status(200).json({
-        sucess: false,
+        success: false,
         error: "Please enter your 10 digit valid phone number",
       });
       return;
     }
-    if (req.body.pincode.length !== 6 || Number.isInteger(req.body.pincode)) {
+    if (
+      req.body.pincode.length !== 6 ||
+      !Number.isInteger(Number(req.body.pincode))
+    ) {
       res.status(200).json({
-        sucess: false,
+        success: false,
         error: "Please enter your 6 digit valid pincode",
       });
       return;

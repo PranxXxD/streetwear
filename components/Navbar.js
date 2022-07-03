@@ -83,7 +83,7 @@ const Navbar = ({
               onMouseLeave={() => {
                 setDropDown(false);
               }}
-              className="absolute right-6 bg-white shadow-lg border-2 top-4 py-4 rounded-md px-5 w-32 z-30"
+              className="fixed right-6 bg-white shadow-lg border-2 top-4 py-4 rounded-md px-5 w-32 z-30"
             >
               <ul>
                 <Link href={"/myaccount"}>
@@ -95,7 +95,7 @@ const Navbar = ({
                 </Link>
                 <Link href={"/orders"}>
                   <li className="py-2 hover:text-red-400  text-black text-sm font-medium">
-                    Orders
+                    My Orders
                   </li>
                 </Link>
                 <Link href={"/login"}>
@@ -129,22 +129,22 @@ const Navbar = ({
         </div>
         <div className="nav ">
           <ul className="flex items-center space-x-3 font-bold md:text-md ">
-            <Link href={"/tshirts "}>
+            <Link href={"/tshirts"}>
               <a className="hover:text-red-600">
                 <li>Tshirts</li>
               </a>
             </Link>
-            <Link href={"/hoodies "}>
+            <Link href={"/hoodies"}>
               <a className="hover:text-red-600">
                 <li>Hoodies</li>
               </a>
             </Link>
-            <Link href={"/shirts "}>
+            <Link href={"/shirts"}>
               <a className="hover:text-red-600">
                 <li>Shirts</li>
               </a>
             </Link>
-            <Link href={"/mugs "}>
+            <Link href={"/mugs"}>
               <a className="hover:text-red-600">
                 <li>Mugs</li>
               </a>

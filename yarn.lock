@@ -910,7 +910,7 @@ draht@1.0.1:
   dependencies:
     eventemitter2 "5.0.1"
 
-ecdsa-sig-formatter@1.0.11, ecdsa-sig-formatter@^1.0.5:
+ecdsa-sig-formatter@1.0.11:
   version "1.0.11"
   resolved "https://registry.npmjs.org/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz"
   integrity sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==
@@ -2152,14 +2152,6 @@ next@12.1.4:
     "@next/swc-win32-ia32-msvc" "12.1.4"
     "@next/swc-win32-x64-msvc" "12.1.4"
 
-njwt@0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/njwt/-/njwt-0.4.0.tgz#7324ed9d76a9d54b5e265cb7b6a3c55f146fd3c7"
-  integrity sha512-c1X5yN8uAa1fdTo2oULAh4SbXWrz7/WTXzEfIcXb1A1t49R0JNdNQg3A/cyLhtrX6ZsoKY8ueRR0FX3+Z4NxhA==
-  dependencies:
-    ecdsa-sig-formatter "^1.0.5"
-    uuid "^2.0.1"
-
 nocache@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/nocache/-/nocache-2.0.0.tgz"
@@ -3079,11 +3071,6 @@ uuid@3.3.2:
   version "3.3.2"
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.3.2.tgz"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
-
-uuid@^2.0.1:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
-  integrity sha512-FULf7fayPdpASncVy4DLh3xydlXEJJpvIELjYjNeQWYUZ9pclcpvCZSr2gkmN2FrrGcI7G/cJsIEwk5/8vfXpg==
 
 uuidv4@2.0.0:
   version "2.0.0"
