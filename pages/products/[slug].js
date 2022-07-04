@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
 import Product from "../../models/Product";
+import Error from "next/error";
 import mongoose from "mongoose";
 import {
   ToastContainer,
@@ -15,19 +16,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaRupeeSign } from "react-icons/fa";
 import { useEffect } from "react";
 
-const Post = ({ buyNow, addToCart, product, variants }) => {
+const Post = ({ buyNow, addToCart, product, variants, error }) => {
   // console.log(product, variants);
   const router = useRouter();
   const { slug } = router.query;
   const [pin, setPin] = useState();
   const [service, setService] = useState();
 
-  const [color, setColor] = useState(product.color);
-  const [size, setSize] = useState(product.size);
+  const [color, setColor] = useState();
+  const [size, setSize] = useState();
 
   useEffect(() => {
-    setColor(product.color);
-    setSize(product.size);
+    // console.log(product.availableQty);
+    if (!error) {
+      setColor(product.color);
+      setSize(product.size);
+    }
   }, [router.query]);
   // code for checking the pincode using fetch api
   const checkServiceAbility = async () => {
@@ -75,6 +79,10 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
     // window.location = url;
     router.push(url);
   };
+
+  if (error == 404) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <>
@@ -300,21 +308,22 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
                       }}
                       className="rounded border appearance-none border-gray-600 py-2 focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-red-500 text-base pl-3 pr-10"
                     >
-                      {Object.keys(variants[color]).includes("S") && (
+                      {color && Object.keys(variants[color]).includes("S") && (
                         <option value={"S"}>S</option>
                       )}
-                      {Object.keys(variants[color]).includes("M") && (
+                      {color && Object.keys(variants[color]).includes("M") && (
                         <option value={"M"}>M</option>
                       )}
-                      {Object.keys(variants[color]).includes("L") && (
+                      {color && Object.keys(variants[color]).includes("L") && (
                         <option value={"L"}>L</option>
                       )}
-                      {Object.keys(variants[color]).includes("XL") && (
+                      {color && Object.keys(variants[color]).includes("XL") && (
                         <option value={"XL"}>XL</option>
                       )}
-                      {Object.keys(variants[color]).includes("XXL") && (
-                        <option value={"XXL"}>XXL</option>
-                      )}
+                      {color &&
+                        Object.keys(variants[color]).includes("XXL") && (
+                          <option value={"XXL"}>XXL</option>
+                        )}
                     </select>
                     <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                       <svg
@@ -333,20 +342,31 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
                 </div>
               </div>
               <div className="flex">
-                <FaRupeeSign className=" text-sm mt-2.5 mx-1 " />
-                <span className="title-font flex font-medium text-2xl text-gray-900">
-                  {product.price}
-                </span>
+                {product.availableQty > 0 && (
+                  <FaRupeeSign className=" text-sm mt-2.5 mx-1 " />
+                )}
+                {product.availableQty > 0 && (
+                  <span className="title-font flex font-medium text-2xl text-gray-900">
+                    {product.price}
+                  </span>
+                )}
+                {product.availableQty <= 0 && (
+                  <span className="title-font flex font-medium text-xl text-gray-900">
+                    Out of Stock!
+                  </span>
+                )}
                 <button
                   onClick={() => {
                     buyNow(slug, 1, product.price, product.title, size, color);
                   }}
-                  className="flex ml-16 md:ml-6 text-white bg-red-400 border-0 py-2 px-3 focus:outline-none hover:bg-red-500 rounded"
+                  disabled={product.availableQty <= 0}
+                  className="flex ml-16 md:ml-6 disabled:bg-red-300 text-white bg-red-400 border-0 py-2 px-3 focus:outline-none hover:bg-red-500 rounded"
                 >
                   Buy Now
                 </button>
                 {/*Added the item to the cart when user tap the add to cart button */}
                 <button
+                  disabled={product.availableQty <= 0}
                   onClick={() =>
                     addToCart(
                       slug,
@@ -357,11 +377,14 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
                       color
                     )
                   }
-                  className="flex md:ml-6 text-white bg-red-400 border-0 py-2 px-3 focus:outline-none hover:bg-red-500 rounded"
+                  className="flex md:ml-6 text-white disabled:bg-red-300 bg-red-400 border-0 py-2 px-3 focus:outline-none hover:bg-red-500 rounded"
                 >
                   Add to Cart
                 </button>
-                <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-600 ml-4 hover:text-red-600">
+                <button
+                  disabled={product.availableQty <= 0}
+                  className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-600 ml-4 hover:text-red-600"
+                >
                   <svg
                     fill="currentcolor"
                     strokeLinecap="round"
@@ -411,11 +434,22 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
 
 // fetching the data from the mongodb
 export async function getServerSideProps(context) {
+  let error = null;
+
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect(process.env.MONGO_URI);
   }
   // fetch the single item with the unique slug
   let product = await Product.findOne({ slug: context.query.slug });
+
+  //display the error msg if user accessing the product which is not in database
+  if (product == null) {
+    return {
+      props: {
+        error: 404,
+      }, // will be passed to the page component as props
+    };
+  }
   // find the variants with the item title & Category
   let variants = await Product.find({
     title: product.title,
