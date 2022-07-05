@@ -58,20 +58,20 @@ const MyOrder = ({ order, clrCart }) => {
                 </span>
               </p>
               <div className="flex mb-4 text-center">
-                <a className="flex-grow text-red-500  border-red-500 py-2 text-lg px-1">
+                <a className="flex-grow  m-auto text-red-500  border-red-500 py-2 text-lg px-1">
                   Item Description
                 </a>
-                <a className="flex-grow border-gray-300 py-2 text-lg px-1">
+                <a className="flex-grow  m-auto border-gray-300 py-2 text-lg px-1">
                   Qty
                 </a>
-                <a className="flex-grow border-gray-300 py-2 text-lg px-1">
+                <a className="flex-grow m-auto  border-gray-300 py-2 text-lg px-1">
                   Item price
                 </a>
               </div>
               {Object.keys(products).map((key) => {
                 return (
                   <div key={key} className="flex border-t border-gray-200 py-2">
-                    <span className="text-gray-500">
+                    <span className="m-auto text-gray-500">
                       {products[key].name} (
                       {products[key].size / products[key].variant})
                     </span>
@@ -79,7 +79,8 @@ const MyOrder = ({ order, clrCart }) => {
                       {products[key].qty}
                     </span>
                     <span className=" m-auto text-gray-900">
-                      {products[key].price}
+                      {products[key].qty} X ₹ {products[key].price} = ₹
+                      {products[key].price * products[key].qty}
                     </span>
                   </div>
                 );

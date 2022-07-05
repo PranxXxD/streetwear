@@ -1,7 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import connectDb from "../../middleware/mongoose";
 import Order from "../../models/Order";
-import PaytmChecksum from "paytmchecksum";
+// import PaytmChecksum from "paytmchecksum";
+import Product from "../../models/Product";
+
+const checksum_lib = require("./checksum");
 
 const handler = async (req, res) => {
   // validate paytm checksum
@@ -17,7 +20,7 @@ const handler = async (req, res) => {
     }
   }
 
-  var isValidChecksum = PaytmChecksum.verifySignature(
+  var isValidChecksum = checksum_lib.verifySignature(
     paytmParams,
     process.env.PAYTM_MKEY,
     paytmChecksum
@@ -34,13 +37,17 @@ const handler = async (req, res) => {
       {
         orderId: req.body.ORDERID,
       },
-      { status: "Paid", paymentInfo: JSON.stringify(req.body) }
+      {
+        status: "Paid",
+        paymentInfo: JSON.stringify(req.body),
+        transactionid: req.body.TXNID,
+      }
     );
 
     // update the stock inventory after the order is completed
     let products = order.products;
     for (slug in products) {
-      console.log(products[slug].qty);
+      // console.log(products[slug].qty);
       await Product.findOneAndUpdate(
         { slug: slug },
         { $inc: { availableQty: -products[slug].qty } }
@@ -51,7 +58,11 @@ const handler = async (req, res) => {
       {
         orderId: req.body.ORDERID,
       },
-      { status: "Pending", paymentInfo: JSON.stringify(req.body) }
+      {
+        status: "Pending",
+        paymentInfo: JSON.stringify(req.body),
+        transactionid: req.body.TXNID,
+      }
     );
   }
 

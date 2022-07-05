@@ -62,6 +62,9 @@ function MyApp({ Component, pageProps }) {
 
   //funtion for adding a item to cart
   const addToCart = (itemCode, qty, price, name, size, variant) => {
+    if (Object.keys(cart).length == 0) {
+      setCart(Math.random());
+    }
     let newCart = cart;
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;

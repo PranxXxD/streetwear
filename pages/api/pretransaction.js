@@ -2,6 +2,7 @@ const https = require("https");
 const PaytmChecksum = require("paytmChecksum");
 import connectDb from "../../middleware/mongoose";
 import Order from "../../models/Order";
+import pincode from "../../pincode data/pincode.json";
 import Product from "../../models/Product";
 
 const handler = async (req, res) => {
@@ -13,6 +14,7 @@ const handler = async (req, res) => {
       res.status(200).json({
         sucess: false,
         error: "Your cart is empty, add someitems to the cart and try again",
+        cartClear: false,
       });
       return;
     }
@@ -28,6 +30,7 @@ const handler = async (req, res) => {
           sucess: false,
           error:
             "Some items in the cart are out of stock please try again later",
+          cartClear: true,
         });
       }
 
@@ -36,6 +39,7 @@ const handler = async (req, res) => {
           sucess: false,
           error:
             "The product price of someitem in cart has been changed kindly check again",
+          cartClear: true,
         });
         return;
       }
@@ -44,9 +48,20 @@ const handler = async (req, res) => {
           sucess: false,
           error:
             "The product price of someitem in cart has been changed kindly check again",
+          cartClear: true,
         });
         return;
       }
+    }
+
+    //check if the pincode is serviceable
+    if (!Object.keys(pincode).includes(req.body.pincode)) {
+      res.status(200).json({
+        success: false,
+        error: "The pincode you've entered is not serviceable",
+        cartClear: false,
+      });
+      return;
     }
 
     //check if the details are valid
@@ -57,6 +72,7 @@ const handler = async (req, res) => {
       res.status(200).json({
         success: false,
         error: "Please enter your 10 digit valid phone number",
+        cartClear: false,
       });
       return;
     }
@@ -67,6 +83,7 @@ const handler = async (req, res) => {
       res.status(200).json({
         success: false,
         error: "Please enter your 6 digit valid pincode",
+        cartClear: false,
       });
       return;
     }
@@ -145,6 +162,7 @@ const handler = async (req, res) => {
             // console.log("Response: ", response);
             let ress = JSON.parse(response).body;
             ress.success = true;
+            ress.cartClear = false;
             resolve(ress);
           });
         });
