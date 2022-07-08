@@ -118,7 +118,7 @@ const Navbar = ({
         </span>
       )}
       <div
-        className={`flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10 ${
+        className={`sticky flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md top-0 bg-white z-10 ${
           !sidebar && "overflow-hidden"
         }`}
       >
