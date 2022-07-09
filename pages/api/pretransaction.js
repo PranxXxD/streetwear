@@ -92,9 +92,14 @@ const handler = async (req, res) => {
 
     let order = new Order({
       email: req.body.email,
+      name: req.body.name,
+      phone: req.body.phone,
       orderId: req.body.oid,
       amount: req.body.subTotal,
       address: req.body.address,
+      address: req.body.district,
+      address: req.body.state,
+      // address: req.body.pincode,
       products: req.body.cart,
     });
 

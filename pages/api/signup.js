@@ -6,7 +6,7 @@ var CryptoJS = require("crypto-js");
 
 const handler = async (req, res) => {
   if (req.method == "POST") {
-    console.log(req.body);
+    // console.log(req.body);
     // destructuring object
     const { name, email } = req.body;
     // encrypting the password

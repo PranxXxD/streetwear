@@ -21,13 +21,43 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
   const [user, setUser] = useState({ value: null });
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("myuser"));
-    if (user && user.token) {
-      setUser(user);
-      setEmail(user.email);
+    const myuser = JSON.parse(localStorage.getItem("myuser"));
+    if (myuser && myuser.token) {
+      setUser(myuser);
+      setEmail(myuser.email);
+      fetchData(myuser.token);
     }
   }, []);
 
+  // fetch data from db and populate in checkout form
+  const fetchData = async (token) => {
+    let data = { token: token };
+    // console.log(data);
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let res = await a.json();
+    // console.log(res);
+
+    setAddress(res.address);
+    setName(res.name);
+    setPhone(res.phone);
+    setPincode(res.pincode);
+    getPincode(res.pincode);
+  };
+
+  const getPincode = async (pin) => {
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
+    let pinJson = await pins.json();
+    if (Object.keys(pinJson).includes(pin)) {
+      setDistrict(pinJson[pin][0]);
+      setState(pinJson[pin][1]);
+    }
+  };
   const handleChange = async (e) => {
     e.preventDefault();
     if (e.target.name === "name") {
@@ -41,19 +71,14 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
     } else if (e.target.name === "pincode") {
       setPincode(e.target.value);
       if (e.target.value.length == 6) {
-        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
-        let pinJson = await pins.json();
-        if (Object.keys(pinJson).includes(e.target.value)) {
-          setDistrict(pinJson[e.target.value][0]);
-          setState(pinJson[e.target.value][1]);
-        } else {
-          setDistrict("");
-          setState("");
-        }
+        getPincode(e.target.value);
       } else {
         setDistrict("");
         setState("");
       }
+    } else {
+      setDistrict("");
+      setState("");
     }
 
     setTimeout(() => {
@@ -95,7 +120,7 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
     });
     // console.log(data);
     let txnRes = await a.json();
-    console.log(txnRes);
+    // console.log(txnRes);
     if (txnRes.success) {
       let txnToken = txnRes.txnToken;
 

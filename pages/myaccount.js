@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyAccount = () => {
   const [name, setName] = useState("");
@@ -10,19 +12,40 @@ const MyAccount = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [password, setPassword] = useState("");
-  const [cpassword, setCpassword] = useState();
+  const [cpassword, setCpassword] = useState("");
+  const [npassword, setNpassword] = useState("");
   const [user, setUser] = useState({ value: null });
   const router = useRouter();
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("myuser"));
-    if (!user) {
+    const myuser = JSON.parse(localStorage.getItem("myuser"));
+    if (!myuser) {
       router.push("/");
     }
-    if (user && user.token) {
-      setUser(user);
-      setEmail(user.email);
+    if (myuser && myuser.token) {
+      setUser(myuser);
+      setEmail(myuser.email);
+      fetchData(myuser.token);
     }
   }, []);
+
+  const fetchData = async (token) => {
+    let data = { token: token };
+    // console.log(data);
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let res = await a.json();
+    // console.log(res);
+
+    setAddress(res.address);
+    setName(res.name);
+    setPhone(res.phone);
+    setPincode(res.pincode);
+  };
 
   const handleChange = async (e) => {
     e.preventDefault();
@@ -38,22 +61,99 @@ const MyAccount = () => {
       setPincode(e.target.value);
     } else if (e.target.name === "password") {
       setPassword(e.target.value);
-    } else if (e.target.name === "Cpincode") {
+    } else if (e.target.name === "cpassword") {
       setCpassword(e.target.value);
+    } else if (e.target.name === "npassword") {
+      setNpassword(e.target.value);
     }
   };
+
+  // Updating user's details
   const handleUserSubmit = async () => {
-    let data = { token: user.token };
-    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+    let data = { token: user.token, name, address, email, pincode, phone };
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updateuser`, {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
+    let res = await a.json();
+    // console.log(res);
+    if (res.success) {
+      toast.success("Successfully Updated Details!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "success",
+      });
+    }
+  };
+
+  // Updating password
+  const handlePasswordSubmit = async () => {
+    let res;
+    if (npassword == cpassword) {
+      let data = { token: user.token, password, cpassword, npassword };
+      let a = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST}/api/updatepassword`,
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      res = await a.json();
+      // console.log(res);
+    } else {
+      res = { success: false };
+    }
+    if (res.success) {
+      toast.success("Successfully Updated!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "success",
+      });
+    } else {
+      toast.error("Error in Updating password!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
+    }
+    setPassword("");
+    setCpassword("");
+    setNpassword("");
   };
   return (
     <div className="container md:w-[72rem] p-2 sm:m-auto ">
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <h2 className="text-xl mx-auto text-center my-6 font-bold">
         1. Update Details
       </h2>
@@ -166,7 +266,6 @@ const MyAccount = () => {
               Password
             </label>
             <input
-              placeholder="Your 10 digit number"
               onChange={handleChange}
               value={password}
               type="password"
@@ -179,10 +278,28 @@ const MyAccount = () => {
         <div className="px-2 w-1/2">
           <div className=" mb-4">
             <label
+              htmlFor="npassword"
+              className="leading-7 text-sm text-gray-600"
+            >
+              New Password
+            </label>
+            <input
+              onChange={handleChange}
+              value={npassword}
+              type="password"
+              id="npassword"
+              name="npassword"
+              className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+          </div>
+        </div>
+        <div className="px-2 w-1/2">
+          <div className=" mb-4">
+            <label
               htmlFor="cpassword"
               className="leading-7 text-sm text-gray-600"
             >
-              Confirm Password
+              Confirm New Password
             </label>
             <input
               onChange={handleChange}
@@ -197,7 +314,7 @@ const MyAccount = () => {
       </div>
       <button
         className="flex mx-auto my-2 disabled:bg-red-300  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm"
-        onChange={handleChange}
+        onClick={handlePasswordSubmit}
       >
         Update
       </button>
