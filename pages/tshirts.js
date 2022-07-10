@@ -8,11 +8,40 @@ const Tshirts = ({ products }) => {
   // console.log(products);
   return (
     <div>
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font min-h-screen">
         <div className="container px-5 py-24 mx-auto my-auto ">
-          <div className="flex flex-wrap -m-4 justify-center ">
+          <div className="flex flex-wrap -m-4 justify-center mx-5 ">
             {/* rendering the products using map method */}
             {/* products is an object so need to use OBject.keys method to display  */}
+            {Object.keys(products).length === 0 && (
+              <>
+                <section className="text-gray-600 body-font">
+                  <div className="container mx-auto flex md:flex-row flex-col items-center">
+                    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0">
+                      <Image
+                        className="object-cover object-center rounded"
+                        width={300}
+                        height={300}
+                        src={outofstock}
+                      />
+                    </div>
+                    <div className="lg:flex-grow md:w-1/2  flex flex-col md:items-start md:text-left items-center text-center">
+                      <h2 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+                        Sorry, Tshirts are out of stock,
+                        <br className="hidden lg:inline-block" />
+                        new stock coming soon!
+                      </h2>
+
+                      <div className="flex justify-center">
+                        <button className="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
+                          Get Notify
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </>
+            )}
             {Object.keys(products).map((item) => {
               return (
                 <Link key={item._id} href={`/products/${products[item].slug}`}>

@@ -14,7 +14,7 @@ const handler = async (req, res) => {
       process.env.AES_SECRET_KEY
     );
     let decryptedPass = bytes.toString(CryptoJS.enc.Utf8);
-    console.log(decryptedPass);
+    // console.log(decryptedPass);
     if (
       decryptedPass == req.body.password &&
       req.body.npassword == req.body.cpassword
