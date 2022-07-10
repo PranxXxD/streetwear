@@ -62,13 +62,17 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
     e.preventDefault();
     if (e.target.name === "name") {
       setName(e.target.value);
-    } else if (e.target.name === "email") {
+    }
+    if (e.target.name === "email") {
       setEmail(e.target.value);
-    } else if (e.target.name === "phone") {
+    }
+    if (e.target.name === "phone") {
       setPhone(e.target.value);
-    } else if (e.target.name === "address") {
+    }
+    if (e.target.name === "address") {
       setAddress(e.target.value);
-    } else if (e.target.name === "pincode") {
+    }
+    if (e.target.name === "pincode") {
       setPincode(e.target.value);
       if (e.target.value.length == 6) {
         getPincode(e.target.value);
