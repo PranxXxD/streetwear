@@ -4,6 +4,8 @@ import Image from "next/image";
 import logo from "../images/logo.png";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Forgotpwd = () => {
   // prevent user to get back to the forget page once the user is logged in
@@ -13,8 +15,8 @@ const Forgotpwd = () => {
   const [cpassword, setCpassword] = useState("");
 
   useEffect(() => {
-    console.log(router.query);
-    if (localStorage.getItem("token")) {
+    // console.log(router.query);
+    if (localStorage.getItem("myuser")) {
       router.push("/");
     }
   }, []);
@@ -47,9 +49,27 @@ const Forgotpwd = () => {
     // console.log(data);
     let res = await a.json();
     if (res.success) {
-      console.log("Reset password email has been sent");
+      toast.success("Reset passsword mail has been sent", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "success",
+      });
     } else {
-      console.log("some error occured");
+      toast.error("Some Error Ocurred", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
     }
   };
 
@@ -69,16 +89,45 @@ const Forgotpwd = () => {
       // console.log(data);
       let res = await a.json();
       if (res.success) {
-        console.log("Reset password email has been sent");
+        toast.success("Your password has been reset Successfully", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "success",
+        });
       }
     } else {
-      console.log("some error occured");
+      toast.error("Some Error Ocurred", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
     }
   };
 
   return (
     <div>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div className="max-w-md w-full space-y-8">
           <div>
             <div className="flex justify-center ">
@@ -96,7 +145,7 @@ const Forgotpwd = () => {
               </Link>
             </p>
           </div>
-          {router.query && (
+          {router.query.token && (
             <form className="mt-8 space-y-3" action="#" method="POST">
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md shadow-sm -space-y-px">
@@ -177,7 +226,7 @@ const Forgotpwd = () => {
               )}
             </form>
           )}
-          {!router.query && (
+          {!router.query.token && (
             <form className="mt-8 space-y-6" action="#" method="POST">
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md shadow-sm -space-y-px">
@@ -202,8 +251,9 @@ const Forgotpwd = () => {
               <div>
                 <button
                   onClick={SendResetEmail}
+                  disabled={!email}
                   type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:bg-red-300"
                 >
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                     {/* <!-- Heroicon name: solid/lock-closed --> */}
