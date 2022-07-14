@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 const Forgotpwd = () => {
   // prevent user to get back to the forget page once the user is logged in
@@ -116,6 +117,13 @@ const Forgotpwd = () => {
 
   return (
     <div>
+      <Head>
+        <title>streetWear.com</title>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </Head>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <ToastContainer
           position="top-center"

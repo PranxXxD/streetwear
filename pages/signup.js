@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -62,6 +63,13 @@ const Signup = () => {
 
   return (
     <div>
+      <Head>
+        <title>streetWear.com</title>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </Head>
       <ToastContainer
         position="top-right"
         autoClose={2000}

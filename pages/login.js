@@ -7,6 +7,7 @@ import Image from "next/image";
 import logo from "../images/logo.png";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const Login = () => {
   const router = useRouter();
@@ -81,6 +82,13 @@ const Login = () => {
   };
   return (
     <div>
+      <Head>
+        <title>streetWear.com</title>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </Head>
       <ToastContainer
         position="top-center"
         autoClose={2000}

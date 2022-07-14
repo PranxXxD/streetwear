@@ -3,11 +3,19 @@ import Link from "next/link";
 import Product from "../models/Product";
 import mongoose from "mongoose";
 import { FaRupeeSign } from "react-icons/fa";
+import Head from "next/head";
 
 const Tshirts = ({ products }) => {
   // console.log(products);
   return (
     <div>
+      <Head>
+        <title>streetWear.com</title>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </Head>
       <section className="text-gray-600 body-font min-h-screen">
         <div className="container px-5 py-24 mx-auto my-auto ">
           <div className="flex flex-wrap -m-4 justify-center mx-5 ">

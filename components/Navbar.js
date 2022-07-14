@@ -45,6 +45,7 @@ const Navbar = ({
       "/hoodies",
       "/mugs",
       "/checkout",
+      "/admin",
     ];
     if (exempted.includes(router.pathname)) {
       setSidebar(false);

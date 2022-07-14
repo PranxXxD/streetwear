@@ -7,6 +7,7 @@ import order_ from "../images/order_.jpg";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
+import Head from "next/head";
 
 const MyOrder = ({ order, clrCart }) => {
   // console.log(order);
@@ -26,6 +27,13 @@ const MyOrder = ({ order, clrCart }) => {
 
   return (
     <div>
+      <Head>
+        <title>streetWear.com</title>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </Head>
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">

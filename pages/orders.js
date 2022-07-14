@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 const orders = () => {
   const router = useRouter();
@@ -31,6 +32,13 @@ const orders = () => {
 
   return (
     <div className="min-h-screen">
+      <Head>
+        <title>streetWear.com</title>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </Head>
       <h1 className="text-center font-semibold p-8 text-xl">My Orders</h1>
       <div className="container mx-auto w-3/4">
         <div className="flex flex-col ">
