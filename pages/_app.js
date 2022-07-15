@@ -124,7 +124,7 @@ function MyApp({ Component, pageProps }) {
           clrCart={clrCart}
           subTotal={subTotal}
         />
-      }
+      }{" "}
       <Component
         cart={cart}
         buyNow={buyNow}
@@ -134,8 +134,6 @@ function MyApp({ Component, pageProps }) {
         subTotal={subTotal}
         {...pageProps}
       />
-      <Content />
-
       <Footer />
     </>
   );

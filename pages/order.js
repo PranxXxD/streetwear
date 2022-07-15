@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
 import Head from "next/head";
+import Content from "../components/content";
 
 const MyOrder = ({ order, clrCart }) => {
   // console.log(order);
@@ -114,6 +115,7 @@ const MyOrder = ({ order, clrCart }) => {
           </div>
         </div>
       </section>
+      <Content />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import Content from "../components/content";
 
 const orders = () => {
   const router = useRouter();
@@ -105,6 +106,7 @@ const orders = () => {
           </div>
         </div>
       </div>
+      <Content />
     </div>
   );
 };

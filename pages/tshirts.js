@@ -4,6 +4,7 @@ import Product from "../models/Product";
 import mongoose from "mongoose";
 import { FaRupeeSign } from "react-icons/fa";
 import Head from "next/head";
+import Content from "../components/content";
 
 const Tshirts = ({ products }) => {
   // console.log(products);
@@ -132,6 +133,7 @@ const Tshirts = ({ products }) => {
           </div>
         </div>
       </section>
+      <Content />
     </div>
   );
 };

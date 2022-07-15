@@ -6,6 +6,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import outofstock from "../images/outofstock.jpg";
 import Image from "next/image";
 import Head from "next/head";
+import Content from "../components/content";
 
 const hoodies = ({ products }) => {
   // console.log(products);
@@ -134,6 +135,7 @@ const hoodies = ({ products }) => {
           </div>
         </div>
       </section>
+      <Content />
     </div>
   );
 };
