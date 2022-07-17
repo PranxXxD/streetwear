@@ -29,6 +29,7 @@ const Add = () => {
     });
   };
 
+  // Fetch API request to add products
   const submitForm = async () => {
     const data = { title, slug, type, color, size };
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/products`, {

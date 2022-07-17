@@ -5,7 +5,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 import { Grid } from "@mui/material";
 import ProductPerfomance from "../../src/components/dashboard/ProductPerfomance";
-const AllProducts = () => {
+import mongoose from "mongoose";
+import Product from "../../models/Product";
+
+const AllProducts = ({ products }) => {
   return (
     <>
       <Head>
@@ -22,7 +25,7 @@ const AllProducts = () => {
         <FullLayout>
           <Grid container spacing={0}>
             <Grid item xs={12} lg={12}>
-              <ProductPerfomance />
+              <ProductPerfomance products={products} />
             </Grid>
           </Grid>
         </FullLayout>
@@ -30,5 +33,20 @@ const AllProducts = () => {
     </>
   );
 };
+
+// fetching the data from the mongodb
+export async function getServerSideProps(context) {
+  let error = null;
+
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+  // fetch the single item with the unique slug
+  let products = await Product.find();
+
+  return {
+    props: { products: JSON.parse(JSON.stringify(products)) }, // will be passed to the page component as props
+  };
+}
 
 export default AllProducts;
