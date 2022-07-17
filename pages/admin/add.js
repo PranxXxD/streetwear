@@ -1,10 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import FullLayout from "../../src/layouts/FullLayout";
 import theme from "../../src/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
+import {
+  Grid,
+  Stack,
+  TextField,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+  FormLabel,
+  FormControl,
+  Button,
+} from "@mui/material";
+import BaseCard from "../../src/components/baseCard/BaseCard";
 
 const Add = () => {
+  const [form, setForm] = useState({});
+
+  const handleChange = async (e) => {
+    e.preventDefault();
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitForm = async () => {
+    const data = { title, slug, type, color, size };
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/products`, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    // console.log(data);
+    let prdctData = await a.json();
+    console.log(prdctData);
+  };
   return (
     <>
       <Head>
@@ -18,7 +55,55 @@ const Add = () => {
             display: none;
           }
         `}</style>
-        <FullLayout>Add products</FullLayout>
+        <FullLayout>
+          <Grid container spacing={0}>
+            <Grid item xs={12} lg={12}>
+              <BaseCard title="Add a Product">
+                <Stack spacing={3}>
+                  <TextField
+                    value={form.title ? form.title : ""}
+                    name="title"
+                    label="Title"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    value={form.slug ? form.slug : ""}
+                    name="slug"
+                    label="Slug"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    value={form.type ? form.type : ""}
+                    name="type"
+                    label="Type"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    value={form.color ? form.color : ""}
+                    name="color"
+                    label="Color"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    value={form.size ? form.size : ""}
+                    name="size"
+                    label="Size"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                </Stack>
+                <br />
+                <Button onClick={submitForm} variant="outlined" mt={2}>
+                  Submit
+                </Button>
+              </BaseCard>
+            </Grid>
+          </Grid>
+        </FullLayout>
       </ThemeProvider>
     </>
   );
