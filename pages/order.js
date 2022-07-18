@@ -13,6 +13,7 @@ import Content from "../components/content";
 const MyOrder = ({ order, clrCart }) => {
   // console.log(order);
   const products = order.products;
+  // console.log(products);
   const router = useRouter();
   const [date, setDate] = useState();
 
