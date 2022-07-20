@@ -3,6 +3,9 @@ import FullLayout from "../../src/layouts/FullLayout";
 import theme from "../../src/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   Grid,
   Stack,
@@ -31,8 +34,8 @@ const Add = () => {
 
   // Fetch API request to add products
   const submitForm = async () => {
-    const data = { title, slug, type, color, size };
-    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/products`, {
+    const data = [form];
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addproducts`, {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -42,6 +45,17 @@ const Add = () => {
     // console.log(data);
     let prdctData = await a.json();
     console.log(prdctData);
+    setForm("");
+    toast("Product has been added to database", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      type: "success",
+    });
   };
   return (
     <>
@@ -56,6 +70,17 @@ const Add = () => {
             display: none;
           }
         `}</style>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <FullLayout>
           <Grid container spacing={0}>
             <Grid item xs={12} lg={12}>
@@ -76,9 +101,9 @@ const Add = () => {
                     onChange={handleChange}
                   />
                   <TextField
-                    value={form.type ? form.type : ""}
-                    name="type"
-                    label="Type"
+                    value={form.category ? form.category : ""}
+                    name="category"
+                    label="Category"
                     variant="outlined"
                     onChange={handleChange}
                   />
@@ -93,6 +118,20 @@ const Add = () => {
                     value={form.size ? form.size : ""}
                     name="size"
                     label="Size"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    value={form.price ? form.price : ""}
+                    name="price"
+                    label="Price"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    value={form.availableQty ? form.availableQty : ""}
+                    name="availableQty"
+                    label="AvailableQty"
                     variant="outlined"
                     onChange={handleChange}
                   />
