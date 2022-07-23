@@ -18,7 +18,7 @@ const Signup = () => {
 
   // prevent user to get back to the forget page once the user is logged in
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("myuser")) {
       router.push("/");
     }
   }, []);

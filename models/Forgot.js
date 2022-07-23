@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ForgotSchema = new mongoose.Schema(
   {
-    Userid: { type: String, required: true },
+    // Userid: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     token: { type: String, required: true },
   },
