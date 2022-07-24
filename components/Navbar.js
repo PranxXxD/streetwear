@@ -158,17 +158,19 @@ const Navbar = ({
             </Link>
           </ul>
         </div>
-        <div className="h-[2.5rem] absolute right-0 mx-20 p-2.5 top-1 rounded-[2.5rem] w-0 hover:w-56 hover:pb-1">
-          <input
-            className="border-none bg-none float-left p-0 text-gray-400 leading-10 w-0 hover:w-56 hover:bg-red-500 transition:0.4ms hover:pb-1"
-            type="text"
-            placeholder="Search"
-            id="input"
-          />
-          <button className="hover:bg-red-500 hover:text-black text-white border-2 float-right w-10 h-10 rounded-[50%] bg-red-400 flex justify-center items-center transition:0.4ms">
-            <AiOutlineSearch id="Search" />
-          </button>
-        </div>
+        {user.value && (
+          <div className="h-[2.5rem] absolute right-0 mx-20 p-2.5 top-1 rounded-[2.5rem] w-0 hover:w-56 hover:pb-1">
+            <input
+              className="border-none bg-none float-left p-0 text-gray-400 leading-10 w-0 hover:w-56 hover:bg-red-500 transition:0.4ms hover:pb-1"
+              type="text"
+              placeholder="Search"
+              id="input"
+            />
+            <button className="hover:bg-red-500 hover:text-black text-white border-2 float-right w-10 h-10 rounded-[50%] bg-red-400 flex justify-center items-center transition:0.4ms">
+              <AiOutlineSearch id="Search" />
+            </button>
+          </div>
+        )}
         <div className="cart absolute items-center right-0 mx-5 top-4 cursor-pointer flex">
           {!user.value && (
             <Link href={"/login"}>

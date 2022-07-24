@@ -101,6 +101,7 @@ const Forgotpwd = () => {
           type: "success",
         });
       }
+      router.push("/");
     } else {
       toast.error("Some Error Ocurred", {
         position: "top-center",
