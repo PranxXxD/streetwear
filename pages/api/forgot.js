@@ -4,6 +4,7 @@ import User from "../../models/User";
 import connectDb from "../../middleware/mongoose";
 var CryptoJS = require("crypto-js");
 import jsonwebtoken from "jsonwebtoken";
+import sendEmail from "../../utilities/sendEmail";
 
 const handler = async (req, res) => {
   // check if the user exists in the database
@@ -25,33 +26,28 @@ const handler = async (req, res) => {
 
       // sending reset email
 
-      let Email = `We have sent you this email in response to your request to reset your password on streetWear.com. 
-      To reset your password, please follow the link below:
-     <a href="https://streetWear.com/forgotpwd?token=${token}">Click here to reset the password </a>
-
-     <br/><br/>
-
-     We recommend that you keep your password secure and not share it with aIf you feel your password has been compromised, you can change it by going to your My Account Page and change the password
-
-     <br/><br/>`;
       await forgot.save();
-      res.status(200).json({ success: true, token, Email });
-      return;
-    } else {
-      //   Reset User Password
-      if (req.body.npassword == req.body.cpassword) {
-        await User.findOneAndUpdate(
-          { email: user.email },
-          {
-            npassword: CryptoJS.AES.encrypt(
-              req.body.cpassword,
-              process.env.AES_SECRET_KEY
-            ).toString(),
-          }
-        );
-        res.status(200).json({ success: true });
-        return;
+      try {
+        await new sendEmail(user, token).sendMagicLink();
+        return res.status(200).json({ success: true });
+      } catch (error) {
+        user.token = undefined;
+        res.status(500).json({ error: true, message: "Internal Server Error" });
       }
+    } else if (req.body.npassword == req.body.cpassword) {
+      //   Reset User Password
+
+      await User.findOneAndUpdate(
+        { email: user.email },
+        {
+          npassword: CryptoJS.AES.encrypt(
+            req.body.cpassword,
+            process.env.AES_SECRET_KEY
+          ).toString(),
+        }
+      );
+      res.status(200).json({ success: true });
+      return;
     }
   } else {
     res.status(400).json({ success: false });

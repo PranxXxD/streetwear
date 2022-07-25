@@ -1,0 +1,37 @@
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+module.exports = class Email {
+  constructor(user, url) {
+    this.to = user.email;
+    this.url = url;
+    this.fromEmail = "streetWear@mail.com";
+    this.fromName = "streetWear";
+  }
+
+  async sendMagicLink() {
+    const mailOptions = {
+      to: this.to,
+      from: {
+        email: this.fromEmail,
+        name: this.fromName,
+      },
+      templateId: "d-c72fa3714d134605bdb922dd26a79d2b",
+      dynamic_template_data: {
+        url: this.url,
+      },
+    };
+    await sgMail.send(mailOptions).then(() => {}, console.error);
+  }
+};
+
+// text: `We have sent you this email in response to your request to reset your password on       streetWear.com.
+// To reset your password, please follow the link below:
+// <a href="https://streetWear.com/forgotpwd?token=${token}">Click here to reset the password </a>
+
+// <br/><br/>
+
+// We recommend that you keep your password secure and not share it with aIf you feel your password has been compromised, you can change it by going to your My Account Page and change the password
+
+// <br/><br/>`,
+// html: "text/html",
