@@ -90,7 +90,7 @@ const Navbar = ({
               onMouseLeave={() => {
                 setDropDown(false);
               }}
-              className="fixed right-6 bg-white shadow-lg border-2 top-4 py-4 rounded-md px-5 w-32 z-30"
+              className="fixed right-14 bg-white shadow-lg border-2 top-9 py-4 rounded-md px-6 w-32 z-30"
             >
               <ul>
                 <Link href={"/myaccount"}>
