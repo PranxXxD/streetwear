@@ -5,20 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import {
-  Grid,
-  Stack,
-  TextField,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
-  FormLabel,
-  FormControl,
-  Button,
-} from "@mui/material";
+import { Grid, Stack, TextField, File, Button } from "@mui/material";
 import BaseCard from "../../src/components/baseCard/BaseCard";
 
 const Add = () => {
@@ -132,6 +119,13 @@ const Add = () => {
                     value={form.availableQty ? form.availableQty : ""}
                     name="availableQty"
                     label="AvailableQty"
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    value={form.image ? form.image : ""}
+                    typle="file"
+                    name="img"
                     variant="outlined"
                     onChange={handleChange}
                   />
