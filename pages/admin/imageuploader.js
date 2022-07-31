@@ -3,17 +3,50 @@ import FullLayout from "../../src/layouts/FullLayout";
 import theme from "../../src/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
-import { Grid, TextField, ImageList, ImageListItem } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  ImageList,
+  ImageListItem,
+  Button,
+} from "@mui/material";
 import BaseCard from "../../src/components/baseCard/BaseCard";
 import Product from "../../models/Product";
 import mongoose from "mongoose";
-import { FileUpload } from "primereact/fileupload";
-import "primereact/resources/themes/lara-light-blue/theme.css";
+import "primereact/resources/themes/lara-light-teal/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import axios from "axios";
 
 // adding an image to database and showing in dashboard -> pending
 const ImageUploader = ({ products }) => {
+  const [file, setFile] = useState(null);
+
+  const selectFile = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
+
+  const uploadFile = async () => {
+    // For UX info
+    // setUploadingStatus("Uploading file to AWS S3");
+
+    // Making a POST req to create earlier API route
+    let { data } = await axios.post("/api/awsintegration", {
+      name: file.name,
+      type: file.type,
+    });
+    //fetching out an url
+    const url = data.url;
+    //uploading a file
+    await axios.put(url, file, {
+      headers: {
+        "Content-type": file.type,
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    setFile(null);
+  };
   return (
     <>
       <Head>
@@ -31,7 +64,15 @@ const ImageUploader = ({ products }) => {
           <Grid container spacing={0}>
             <Grid item xs={12} lg={12}>
               <BaseCard title="Upload an Image">
-                <FileUpload name="demo" url="../api/profile" multiple />
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    selectFile(e);
+                  }}
+                />
+                <Button onClick={uploadFile} variant="outlined" mt={2}>
+                  Submit
+                </Button>
                 <ImageList
                   sx={{ height: 400 }}
                   variant="quilted"
@@ -41,6 +82,7 @@ const ImageUploader = ({ products }) => {
                   {products.map((product) => {
                     return (
                       <img
+                        key={product._id}
                         alt="ecommerce"
                         className="h-[30vh] md:h-[36vh] block m-auto p-4 row-auto col-auto"
                         src={product.img}
