@@ -18,9 +18,13 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import axios from "axios";
 
+const Bucket_Url = " https://streetwearbucket.s3.ap-south-1.amazonaws.com";
+
 // adding an image to database and showing in dashboard -> pending
 const ImageUploader = ({ products }) => {
   const [file, setFile] = useState(null);
+  const [fileUploaded, setFileUploaded] = useState(null);
+  const [uploadingStatus, setUploadingStatus] = useState();
 
   const selectFile = (e) => {
     e.preventDefault();
@@ -29,13 +33,14 @@ const ImageUploader = ({ products }) => {
 
   const uploadFile = async () => {
     // For UX info
-    // setUploadingStatus("Uploading file to AWS S3");
+    setUploadingStatus("Uploading file to AWS S3");
 
     // Making a POST req to create earlier API route
     let { data } = await axios.post("/api/awsintegration", {
       name: file.name,
       type: file.type,
     });
+    console.log(data);
     //fetching out an url
     const url = data.url;
     //uploading a file
@@ -45,6 +50,7 @@ const ImageUploader = ({ products }) => {
         "Access-Control-Allow-Origin": "*",
       },
     });
+    setFileUploaded(Bucket_Url + file.name);
     setFile(null);
   };
   return (
@@ -70,9 +76,17 @@ const ImageUploader = ({ products }) => {
                     selectFile(e);
                   }}
                 />
-                <Button onClick={uploadFile} variant="outlined" mt={2}>
-                  Submit
-                </Button>
+                {file && (
+                  <>
+                    {/* <p>Selected file: {file.name}</p> */}
+                    <Button onClick={uploadFile} variant="outlined" mt={2}>
+                      Submit
+                    </Button>
+                  </>
+                )}
+                {uploadingStatus && <p>{uploadingStatus}</p>}
+                {fileUploaded && <img src={fileUploaded} />}
+
                 <ImageList
                   sx={{ height: 400 }}
                   variant="quilted"

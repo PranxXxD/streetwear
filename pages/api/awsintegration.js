@@ -3,7 +3,7 @@ import S3 from "aws-sdk/clients/s3";
 //  * PROFILE IMAGE STORING STARTS
 
 const s3 = new S3({
-  region: "ap-south-1",
+  region: "us-west-1",
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY_ID,
   signatureVersion: "v4",
@@ -11,13 +11,15 @@ const s3 = new S3({
 
 export const config = {
   api: {
-    bodyParse: false,
+    bodyParse: {
+      sizeLimit: "8mb",
+    },
   },
 };
 
 export default async function handler(req, res) {
-  if (req.method != "POST") {
-    return res.status(500).json({ error: "Error" });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Error" });
   }
   try {
     //retreiving name and type from body of the request
@@ -35,6 +37,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ url });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: "Error uploading file" });
+    return res.status(400).json({ message: err });
   }
 }

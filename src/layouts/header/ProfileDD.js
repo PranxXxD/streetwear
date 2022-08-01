@@ -13,6 +13,7 @@ import {
   Button,
   Divider,
 } from "@mui/material";
+
 const ProfileDD = () => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
 
@@ -90,23 +91,29 @@ const ProfileDD = () => {
               onClick={handleClose4}
             >
               <ListItemButton>
-                <ListItemText primary="Edit Profile" />
+                <Link href={"../../../admin/editprofile"}>Edit Profile</Link>
               </ListItemButton>
               <ListItemButton>
-                <ListItemText primary="Account" />
+                <Link href={"../../../admin/profile"}>Profile</Link>
               </ListItemButton>
               <ListItemButton>
-                <ListItemText primary="Change Password" />
+                <Link href={"../../../admin/changepwd"}>Change Password</Link>
               </ListItemButton>
               <ListItemButton>
-                <ListItemText primary="My Settings" />
+                <Link href={"../../../admin/mysettings"}>
+                  <a>
+                    <li className="py-2 hover:text-red-400 text-black text-sm font-medium">
+                      My Settings
+                    </li>
+                  </a>
+                </Link>
               </ListItemButton>
             </List>
           </Box>
           <Divider />
           <Box p={2}>
             <Link to="/">
-              <Button fullWidth variant="contained" color="primary">
+              <Button fullWidth variant="outlined" color="primary">
                 Logout
               </Button>
             </Link>
