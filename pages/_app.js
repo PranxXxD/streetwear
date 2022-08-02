@@ -124,7 +124,7 @@ function MyApp({ Component, pageProps }) {
           clrCart={clrCart}
           subTotal={subTotal}
         />
-      }{" "}
+      }
       <Component
         cart={cart}
         buyNow={buyNow}

@@ -173,13 +173,22 @@ const Navbar = ({
         )}
         <div className="cart absolute items-center right-0 mx-5 top-4 cursor-pointer flex">
           {!user.value && (
-            <Link href={"/login"}>
-              <a>
-                <button className="flex text-center w-19 mx-2 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
-                  Login
-                </button>
-              </a>
-            </Link>
+            <>
+              <Link href={"/login"}>
+                <a>
+                  <button className="flex text-center w-19 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
+                    Login
+                  </button>
+                </a>
+              </Link>
+              <Link href={"/admin/adminlogin"}>
+                <a>
+                  <button className="flex text-center w-19 mx-2 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
+                    AdminLogin
+                  </button>
+                </a>
+              </Link>
+            </>
           )}
           <AiOutlineShoppingCart
             onClick={toggleCart}

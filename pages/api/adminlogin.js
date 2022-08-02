@@ -9,21 +9,24 @@ const handler = async (req, res) => {
   if (req.method == "POST") {
     // console.log(req.body);
     // find the user by the email id
-    let user = await Admin.findOne({ email: req.body.email });
+    let admin = await Admin.findOne({ email: req.body.email });
     // decrypting the password
-    let bytes = CryptoJS.AES.decrypt(user.password, process.env.AES_SECRET_KEY);
+    let bytes = CryptoJS.AES.decrypt(
+      admin.password,
+      process.env.AES_SECRET_KEY
+    );
     // console.log(bytes.toString(CryptoJS.enc.Utf8));
     let decryptedPass = bytes.toString(CryptoJS.enc.Utf8);
 
-    if (user) {
+    if (admin) {
       // check the given inputs from the user and then authenticate
-      if (req.body.email == user.email && req.body.password == decryptedPass) {
+      if (req.body.email == admin.email && req.body.password == decryptedPass) {
         let token = jwt.sign(
-          { email: user.email, name: user.name },
+          { email: admin.email, name: admin.name },
           process.env.JWT_SECRET_KEY,
           { expiresIn: "2d" }
         );
-        res.status(200).json({ success: true, token, email: user.email });
+        res.status(200).json({ success: true, token, email: admin.email });
       } else {
         //   throw the error message if the user enter the wrong credentials
         res.status(200).json({ success: false, error: "Invalid Credentials" });
