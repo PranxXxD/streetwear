@@ -15,6 +15,7 @@ const Adminlogin = () => {
   const [password, setPassword] = useState("");
   // prevent user to get back to the forget page once the user is logged in
   useEffect(() => {
+    // console.log(localStorage.getItem("myadmin"));
     if (localStorage.getItem("myadmin")) {
       router.push("/admin");
     }

@@ -15,7 +15,7 @@ const handler = async (req, res) => {
       admin.password,
       process.env.AES_SECRET_KEY
     );
-    // console.log(bytes.toString(CryptoJS.enc.Utf8));
+    console.log(bytes.toString(CryptoJS.enc.Utf8));
     let decryptedPass = bytes.toString(CryptoJS.enc.Utf8);
 
     if (admin) {

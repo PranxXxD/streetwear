@@ -8,6 +8,8 @@ import "../styles/style.css";
 import { useRouter } from "next/router";
 import LoadingBar from "react-top-loading-bar";
 import Menuitems from "../../src/layouts/sidebar/MenuItems";
+import ProfileDD from "../../src/layouts/header/ProfileDD";
+import Sidebar from "../../src/layouts/sidebar/Sidebar";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -16,6 +18,8 @@ export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [admin, setAdmin] = useState({ value: null });
   const [progress, setProgress] = useState(0);
+  const [key, setKey] = useState(0);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -23,6 +27,7 @@ export default function MyApp(props) {
     if (myadmin) {
       setAdmin({ value: myadmin.token, email: myadmin.email });
       setKey(Math.random());
+      router.push("/admin");
     }
     router.events.on("routeChangeStart", () => {
       setProgress(40);
@@ -34,9 +39,9 @@ export default function MyApp(props) {
 
   const logout = () => {
     localStorage.removeItem("myadmin");
-    setUser({ value: null });
+    setAdmin({ value: null });
     setKey(Math.random);
-    router.push("/adminlogin");
+    router.push("../../../admin/adminlogin");
   };
 
   return (
@@ -52,8 +57,8 @@ export default function MyApp(props) {
         waitingTime={200}
         onLoaderFinished={() => setProgress(0)}
       />
-      <Menuitems admin={admin} logout={logout} />
-      <Component {...pageProps} />
+      {/* <ProfileDD admin={admin} logout={logout} key={key} /> */}
+      <Component {...pageProps} admin={admin} logout={logout} key={key} />
       <CssBaseline />
     </CacheProvider>
   );

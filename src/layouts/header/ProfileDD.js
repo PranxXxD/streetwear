@@ -13,8 +13,9 @@ import {
   Button,
   Divider,
 } from "@mui/material";
-
-const ProfileDD = () => {
+import mongoose from "mongoose";
+import Admin from "../../../models/Admin";
+const ProfileDD = ({ logout, admins }) => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
 
   const handleClick4 = (event) => {
@@ -41,34 +42,38 @@ const ProfileDD = () => {
             height="30"
             className="roundedCircle"
           />
-          <Box
-            sx={{
-              display: {
-                xs: "none",
-                sm: "flex",
-              },
-              alignItems: "center",
-            }}
-          >
-            <Typography
-              color="textSecondary"
-              variant="h5"
-              fontWeight="400"
-              sx={{ ml: 1 }}
-            >
-              Hi,
-            </Typography>
-            <Typography
-              variant="h5"
-              fontWeight="700"
-              sx={{
-                ml: 1,
-              }}
-            >
-              Julia
-            </Typography>
-            <FeatherIcon icon="chevron-down" width="20" height="20" />
-          </Box>
+          {admins &&
+            admins.map((admin) => (
+              <Box
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "flex",
+                  },
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  color="textSecondary"
+                  variant="h5"
+                  fontWeight="400"
+                  sx={{ ml: 1 }}
+                >
+                  Hi,
+                </Typography>
+
+                <Typography
+                  variant="h5"
+                  fontWeight="700"
+                  sx={{
+                    ml: 1,
+                  }}
+                >
+                  {admin.email}
+                </Typography>
+                <FeatherIcon icon="chevron-down" width="20" height="20" />
+              </Box>
+            ))}
         </Box>
       </Button>
       <Menu
@@ -112,8 +117,13 @@ const ProfileDD = () => {
           </Box>
           <Divider />
           <Box p={2}>
-            <Link to="/">
-              <Button fullWidth variant="outlined" color="primary">
+            <Link href={"../../../admin/adminlogin"}>
+              <Button
+                onClick={logout}
+                fullWidth
+                variant="outlined"
+                color="primary"
+              >
                 Logout
               </Button>
             </Link>
@@ -123,5 +133,20 @@ const ProfileDD = () => {
     </>
   );
 };
+
+// fetching the data from the mongodb
+export async function getServerSideProps(context) {
+  let error = null;
+
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+  // fetch the single item with the unique slug
+  let admins = await Admin.findOne({ email: context.query.email });
+
+  return {
+    props: { admins: JSON.parse(JSON.stringify(admins)) }, // will be passed to the page component as props
+  };
+}
 
 export default ProfileDD;
