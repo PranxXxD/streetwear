@@ -1,7 +1,6 @@
 import React from "react";
 import FeatherIcon from "feather-icons-react";
 import Image from "next/image";
-import userimg from "../../../assets/images/users/user2.jpg";
 import {
   Box,
   Menu,
@@ -14,7 +13,7 @@ import {
   Divider,
 } from "@mui/material";
 
-const ProfileDD = ({ logout }) => {
+const Admin = () => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
 
   const handleClick4 = (event) => {
@@ -34,14 +33,7 @@ const ProfileDD = ({ logout }) => {
         onClick={handleClick4}
       >
         <Box display="flex" alignItems="center">
-          <Image
-            src={userimg}
-            alt={userimg}
-            width="30"
-            height="30"
-            className="roundedCircle"
-          />
-
+          <Image width="30" height="30" className="roundedCircle" />
           <Box
             sx={{
               display: {
@@ -59,14 +51,15 @@ const ProfileDD = ({ logout }) => {
             >
               Hi,
             </Typography>
-
             <Typography
               variant="h5"
               fontWeight="700"
               sx={{
                 ml: 1,
               }}
-            ></Typography>
+            >
+              Julia
+            </Typography>
             <FeatherIcon icon="chevron-down" width="20" height="20" />
           </Box>
         </Box>
@@ -91,19 +84,19 @@ const ProfileDD = ({ logout }) => {
               onClick={handleClose4}
             >
               <ListItemButton>
-                <Link href={"../../../admin/editprofile"}>Edit Profile</Link>
+                <Link href={"/editprofile"}>Edit Profile</Link>
               </ListItemButton>
               <ListItemButton>
-                <Link href={"../../../admin/profile"}>Profile</Link>
+                <Link href={"/profile"}>Profile</Link>
               </ListItemButton>
               <ListItemButton>
-                <Link href={"../../../admin/changepwd"}>Change Password</Link>
+                <Link href={"/changepwd"}>Change Password</Link>
               </ListItemButton>
               <ListItemButton>
-                <Link href={"../../../admin/mysettings"}>
+                <Link to={"/mysettings"}>
                   <a>
                     <li className="py-2 hover:text-red-400 text-black text-sm font-medium">
-                      My Settings
+                      My Account
                     </li>
                   </a>
                 </Link>
@@ -112,13 +105,8 @@ const ProfileDD = ({ logout }) => {
           </Box>
           <Divider />
           <Box p={2}>
-            <Link href={"admin/adminlogin"}>
-              <Button
-                onClick={logout}
-                fullWidth
-                variant="outlined"
-                color="primary"
-              >
+            <Link to="/">
+              <Button fullWidth variant="contained" color="primary">
                 Logout
               </Button>
             </Link>
@@ -129,4 +117,4 @@ const ProfileDD = ({ logout }) => {
   );
 };
 
-export default ProfileDD;
+export default Admin;

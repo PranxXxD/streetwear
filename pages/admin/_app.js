@@ -7,9 +7,6 @@ import createEmotionCache from "../src/createEmotionCache";
 import "../styles/style.css";
 import { useRouter } from "next/router";
 import LoadingBar from "react-top-loading-bar";
-import Menuitems from "../../src/layouts/sidebar/MenuItems";
-import ProfileDD from "../../src/layouts/header/ProfileDD";
-import Sidebar from "../../src/layouts/sidebar/Sidebar";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -40,8 +37,8 @@ export default function MyApp(props) {
   const logout = () => {
     localStorage.removeItem("myadmin");
     setAdmin({ value: null });
-    setKey(Math.random);
-    router.push("../../../admin/adminlogin");
+    setKey(Math.random());
+    router.push("/adminlogin");
   };
 
   return (
@@ -57,7 +54,6 @@ export default function MyApp(props) {
         waitingTime={200}
         onLoaderFinished={() => setProgress(0)}
       />
-      {/* <ProfileDD admin={admin} logout={logout} key={key} /> */}
       <Component {...pageProps} admin={admin} logout={logout} key={key} />
       <CssBaseline />
     </CacheProvider>

@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import connectDb from "../../middleware/mongoose";
 import Order from "../../models/Order";
-// import PaytmChecksum from "paytmchecksum";
+import PaytmChecksum from "paytmchecksum";
 import Product from "../../models/Product";
 
-const checksum_lib = require("./checksum");
+// const checksum_lib = require("./checksum");
 
 const handler = async (req, res) => {
   // validate paytm checksum
@@ -20,7 +20,7 @@ const handler = async (req, res) => {
     }
   }
 
-  var isValidChecksum = checksum_lib.verifySignature(
+  var isValidChecksum = PaytmChecksum.verifySignature(
     paytmParams,
     process.env.PAYTM_MKEY,
     paytmChecksum
@@ -31,9 +31,9 @@ const handler = async (req, res) => {
   }
 
   // Updating the staus into the orders table after checking the transaction status
-  let order;
-  if (req.body.STATUS == "TXN_SUCCESS") {
-    order = await Order.findOneAndUpdate(
+
+  if (req.body.STATUS == TXN_SUCCESS) {
+    await Order.findOneAndUpdate(
       {
         orderId: req.body.ORDERID,
       },
@@ -53,8 +53,8 @@ const handler = async (req, res) => {
         { $inc: { availableQty: -products[slug].qty } }
       );
     }
-  } else if (req.body.STATUS == "PENDING") {
-    order = await Order.findOneAndUpdate(
+  } else if (req.body.STATUS == PENDING) {
+    await Order.findOneAndUpdate(
       {
         orderId: req.body.ORDERID,
       },
@@ -69,9 +69,10 @@ const handler = async (req, res) => {
   //initiating shipping
 
   //Redirecting the user to the orders confrimation page
-  res.redirect("/order?clrCart=1&id=" + order._id, 200);
+  // res.redirect("/order?clrCart=1&id=" + order._id, 200);
+  // res.redirect(200, "/order");
+  res.status(200).json({ body: req.body });
+  return;
 };
-
-//   res.status(200).json({ body: req.body });
 
 export default connectDb(handler);

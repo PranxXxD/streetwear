@@ -178,6 +178,7 @@ const handler = async (req, res) => {
     };
     const myr = await requestAsync();
     res.status(200).json(myr);
+    return;
   }
 };
 export default connectDb(handler);
