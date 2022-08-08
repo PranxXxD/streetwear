@@ -15,6 +15,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { FaRupeeSign } from "react-icons/fa";
 import { useEffect } from "react";
+import styled from "@emotion/styled";
 
 const Post = ({ buyNow, addToCart, product, variants, error }) => {
   // console.log(product, variants);
@@ -83,6 +84,46 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
   if (error == 404) {
     return <Error statusCode={404} />;
   }
+
+  const addToWishList = (color, size) => {
+    let url = `${process.env.NEXT_PUBLIC_HOST}/products/${variants[size][color]["slug"]}`;
+    // window.location = url;
+    // router.push(url);
+    history.pushState(url, "addedSuccess");
+    localStorage.setItem("bgcolor", "tomato");
+    if ((document.getElementById("bgcolor").style.color = "tomato")) {
+      toast("Item added to WishList", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "success",
+      });
+    }
+  };
+
+  const removeWishList = (color, size) => {
+    let url = `${process.env.NEXT_PUBLIC_HOST}/products/${variants[size][color]["slug"]}`;
+    // window.location = url;
+    // router.push(url);
+    history.pushState(url, "RemovedSuccess");
+    localStorage.clear();
+    if ((document.getElementById("bgcolor").style.color = "gray")) {
+      toast("Item removed from the WishList", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
+    }
+  };
 
   return (
     <>
@@ -381,21 +422,34 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
                 >
                   Add to Cart
                 </button>
-                <button
-                  disabled={product.availableQty <= 0}
-                  className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-600 ml-4 hover:text-red-600"
-                >
-                  <svg
-                    fill="currentcolor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                  </svg>
-                </button>
+                {Object.keys(variants).includes(color) &&
+                  Object.keys(variants[color]).includes(size) && (
+                    <button
+                      onClick={() => {
+                        addToWishList(size, color);
+                        document.getElementById("bgcolor").style.color =
+                          "tomato";
+                      }}
+                      onDoubleClick={() => {
+                        removeWishList(size, color);
+                        document.getElementById("bgcolor").style.color = "gray";
+                      }}
+                      disabled={product.availableQty <= 0}
+                      id="bgcolor"
+                      className="bgcolor rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-600 ml-4 hover:text-red-600"
+                    >
+                      <svg
+                        fill="currentcolor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        className="w-5 h-5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                      </svg>
+                    </button>
+                  )}
               </div>
               <div className="flex space-x-2 mt-6 text-sm">
                 <input
