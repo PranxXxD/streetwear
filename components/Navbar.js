@@ -130,7 +130,7 @@ const Navbar = ({
         <div className="logo mr-auto md:mx-5">
           <Link href={"/"}>
             <a>
-              <Image width={60} height={50} src={logo} />
+              <Image width={60} height={50} src={logo} />]{" "}
             </a>
           </Link>
         </div>
@@ -214,9 +214,12 @@ const Navbar = ({
           <ol className="list-decimal font-semibold">
             {/* display if the cart is empty */}
             {Object.keys(cart).length == 0 && (
-              <div className="my-4 font-normal">
-                Oops!, No items present in the cart please add Some items to
-                checkout 😊
+              <div className=" my-4 font-normal ">
+                <span className="font-semibold first-letter: text-2xl">
+                  Oops!
+                </span>
+                , No items present in the cart please add Some items to checkout
+                😊
               </div>
             )}
             {/* display the item which added to the cart  */}

@@ -92,14 +92,6 @@ const ProductPerfomance = ({ products }) => {
                   >
                     <Box>
                       <Typography
-                        variant="h6"
-                        sx={{
-                          fontWeight: "600",
-                        }}
-                      >
-                        {product.name}
-                      </Typography>
-                      <Typography
                         color="textSecondary"
                         sx={{
                           fontSize: "13px",

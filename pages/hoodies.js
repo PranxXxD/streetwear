@@ -3,8 +3,8 @@ import Link from "next/link";
 import Product from "../models/Product";
 import mongoose from "mongoose";
 import { FaRupeeSign } from "react-icons/fa";
-import outofstock from "../images/outofstock.jpg";
-import Image from "next/image";
+// import outofstock from "../images/outofstock.jpg";
+// import Image from "next/image";
 import Head from "next/head";
 import Content from "../components/content";
 

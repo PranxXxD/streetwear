@@ -1,13 +1,15 @@
-import { Grid } from "@mui/material";
-import SalesOverview from "../../src/components/dashboard/SalesOverview";
-import DailyActivity from "../../src/components/dashboard/DailyActivity";
+import React from "react";
 import FullLayout from "../../src/layouts/FullLayout";
 import theme from "../../src/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
+import { Grid } from "@mui/material";
+import mongoose from "mongoose";
+import Product from "../../models/Product";
 import Performance from "./performance";
 
-export default function Index() {
+const Performanceofproducts = ({ products }) => {
+  console.log(products);
   return (
     <>
       <Head>
@@ -24,19 +26,28 @@ export default function Index() {
         <FullLayout>
           <Grid container spacing={0}>
             <Grid item xs={12} lg={12}>
-              <SalesOverview />
+              <Performance products={products} />
             </Grid>
-            {/* ------------------------- row 1 ------------------------- */}
-            <Grid item xs={12} lg={4}>
-              <DailyActivity />
-            </Grid>
-            <Grid item xs={12} lg={8}>
-              <Performance />
-            </Grid>
-            <Grid item xs={12} lg={12}></Grid>
           </Grid>
         </FullLayout>
       </ThemeProvider>
     </>
   );
+};
+
+// fetching the data from the mongodb
+export async function getServerSideProps(context) {
+  let error = null;
+
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+  // fetch the single item with the unique slug
+  let products = await Product.find();
+
+  return {
+    props: { products: JSON.parse(JSON.stringify(products)) }, // will be passed to the page component as props
+  };
 }
+
+export default Performanceofproducts;
