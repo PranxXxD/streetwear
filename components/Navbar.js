@@ -130,7 +130,7 @@ const Navbar = ({
         <div className="logo mr-auto md:mx-5">
           <Link href={"/"}>
             <a>
-              <Image width={60} height={50} src={logo} />]{" "}
+              <Image width={60} height={60} src={logo} />
             </a>
           </Link>
         </div>
@@ -171,12 +171,12 @@ const Navbar = ({
             </button>
           </div>
         )}
-        <div className="cart absolute items-center right-0 mx-5 top-4 cursor-pointer flex">
+        <div className="cart absolute items-center right-0 mx-5 top-6 cursor-pointer flex">
           {!user.value && (
             <>
               <Link href={"/login"}>
                 <a>
-                  <button className="flex text-center w-19 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
+                  <button className="flex text-center w-19 text-white bg-red-500 border-0 py-1 px-3 focus:outline-none hover:bg-red-400 rounded-md text-sm">
                     Login
                   </button>
                 </a>
