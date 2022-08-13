@@ -2,8 +2,8 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = class Email {
-  constructor(user, url) {
-    this.to = user.email;
+  constructor(url) {
+    this.to = "saipranayalishetty@gmail.com";
     this.url = url;
     this.fromEmail = "streetWear@mail.com";
     this.fromName = "streetWear";

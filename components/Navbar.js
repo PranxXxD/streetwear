@@ -74,7 +74,7 @@ const Navbar = ({
     <>
       {!sidebar && (
         <span
-          className="absolute right-11 top-4 z-30 cursor-pointer"
+          className="absolute right-11 top-6 z-30 cursor-pointer"
           onMouseOver={() => {
             setDropDown(true);
           }}
@@ -166,7 +166,7 @@ const Navbar = ({
               placeholder="Search"
               id="input"
             />
-            <button className="hover:bg-red-500 hover:text-black text-white border-2 float-right w-10 h-10 rounded-[50%] bg-red-400 flex justify-center items-center transition:0.4ms">
+            <button className="hover:bg-red-500 hover:text-black text-white border-2 float-right w-8 h-8 rounded-[50%] bg-red-400 my-2 flex justify-center items-center transition:0.4ms">
               <AiOutlineSearch id="Search" />
             </button>
           </div>
@@ -181,15 +181,9 @@ const Navbar = ({
                   </button>
                 </a>
               </Link>
-              <Link href={"/admin/adminlogin"}>
-                <a>
-                  <button className="flex text-center w-19 mx-2 text-white bg-red-500 border-0 py-1 px-2 focus:outline-none hover:bg-red-400 rounded-md text-sm">
-                    AdminLogin
-                  </button>
-                </a>
-              </Link>
             </>
           )}
+
           <AiOutlineShoppingCart
             onClick={toggleCart}
             className="text-xl md:text-3xl"

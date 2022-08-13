@@ -1,8 +1,8 @@
-import S3 from "aws-sdk/clients/s3";
+import aws from "aws-sdk";
 
 //  * PROFILE IMAGE STORING STARTS
 
-const s3 = new S3({
+const s3 = new aws.S3({
   region: "us-west-1",
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY_ID,

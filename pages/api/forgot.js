@@ -4,10 +4,13 @@ import User from "../../models/User";
 import connectDb from "../../middleware/mongoose";
 var CryptoJS = require("crypto-js");
 import jsonwebtoken from "jsonwebtoken";
-import sendEmail from "../../utilities/sendEmail";
+import emailjs from "emailjs-com";
 
 const handler = async (req, res) => {
   // check if the user exists in the database
+  var template_params = {
+    email: req.body.email,
+  };
   if (req.method == "POST") {
     let user = await User.findOne({ email: req.body.email });
     if (req.body.sendEmail) {
@@ -27,13 +30,21 @@ const handler = async (req, res) => {
       // sending reset email
 
       await forgot.save();
-      try {
-        await new sendEmail(user, token).sendMagicLink();
-        return res.status(200).json({ success: true });
-      } catch (error) {
-        user.token = undefined;
-        res.status(500).json({ error: true, message: "Internal Server Error" });
-      }
+      emailjs
+        .send(
+          process.env.SERVICE_ID,
+          process.env.TEMPLATE_ID,
+          template_params,
+          process.env.EMAIL_JS_USERID
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
     } else if (req.body.npassword == req.body.cpassword) {
       //   Reset User Password
 
@@ -55,3 +66,13 @@ const handler = async (req, res) => {
   }
 };
 export default connectDb(handler);
+
+// text: `We have sent you this email in response to your request to reset your password on       streetWear.com.
+// To reset your password, please follow the link below:
+// <a href="https://streetWear.com/forgotpwd?token=${token}">Click here to reset the password </a>
+
+// <br/><br/>
+
+// We recommend that you keep your password secure and not share it with aIf you feel your password has been compromised, you can change it by going to your My Account Page and change the password
+
+// <br/><br/>`,

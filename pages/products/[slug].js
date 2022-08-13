@@ -145,7 +145,7 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
               alt="ecommerce"
-              className="lg:w-1/2 w-full lg:h-auto px-24 md:px-36 object-cover object-top rounded"
+              className="lg:w-1/2 w-full lg:h-auto px-24 md:px-36 object-cover object-top rounded "
               src={product.img}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

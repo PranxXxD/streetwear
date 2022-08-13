@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
-import createEmotionCache from "../src/createEmotionCache";
-import "../styles/style.css";
+import createEmotionCache from "../../src/createEmotionCache";
 import { useRouter } from "next/router";
 import LoadingBar from "react-top-loading-bar";
 
