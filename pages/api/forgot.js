@@ -4,13 +4,16 @@ import User from "../../models/User";
 import connectDb from "../../middleware/mongoose";
 var CryptoJS = require("crypto-js");
 import jsonwebtoken from "jsonwebtoken";
-import emailjs from "emailjs-com";
-
+import emailjs from "emailjs";
 const handler = async (req, res) => {
   // check if the user exists in the database
-  var template_params = {
-    email: req.body.email,
-  };
+  const { email } = req.body;
+  const client = emailjs.server.connect({
+    user: process.env.MAIL,
+    password: process.env.PASSWORD,
+    host: "smtp.gmail.com",
+    ssl: true,
+  });
   if (req.method == "POST") {
     let user = await User.findOne({ email: req.body.email });
     if (req.body.sendEmail) {
@@ -30,21 +33,17 @@ const handler = async (req, res) => {
       // sending reset email
 
       await forgot.save();
-      emailjs
-        .send(
-          process.env.SERVICE_ID,
-          process.env.TEMPLATE_ID,
-          template_params,
-          process.env.EMAIL_JS_USERID
-        )
-        .then(
-          (result) => {
-            console.log(result.text);
-          },
-          (error) => {
-            console.log(error.text);
-          }
-        );
+      client.send({
+        text: `Just for testing purpose ${token}`,
+        from: process.env.MAIL,
+        to: email,
+        subject: "testing emailjs",
+      }),
+        function (err, message) {
+          console.log(err || message);
+        };
+
+      res.status(200).json({ message: "Send Mail" });
     } else if (req.body.npassword == req.body.cpassword) {
       //   Reset User Password
 

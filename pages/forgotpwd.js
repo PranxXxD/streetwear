@@ -47,7 +47,7 @@ const Forgotpwd = () => {
       },
       body: JSON.stringify(data),
     });
-    // console.log(data);
+    console.log(data);
     let res = await a.json();
     if (res.success) {
       toast.success("Reset passsword mail has been sent", {
@@ -72,6 +72,7 @@ const Forgotpwd = () => {
         type: "error",
       });
     }
+    setEmail("");
   };
 
   const resetPassword = async () => {
