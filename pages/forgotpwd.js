@@ -38,7 +38,7 @@ const Forgotpwd = () => {
   const SendResetEmail = async () => {
     let data = {
       email,
-      sendEmail: true,
+      // sendEmail: true,
     };
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/forgot`, {
       method: "POST", // or 'PUT'
@@ -126,6 +126,7 @@ const Forgotpwd = () => {
           content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
         />
       </Head>
+
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <ToastContainer
           position="top-center"
