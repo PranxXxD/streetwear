@@ -1,0 +1,103 @@
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
+const multer = require("multer");
+const path = require("path");
+
+//keys
+const s3 = new aws.S3({
+  accessKeyId: "AKIAXDK4HFOIXG2GCWX7",
+  secretAccessKey: "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",
+  Bucket: "propzingbucket",
+});
+
+/**
+ * Single Upload
+ */
+const profileImgUpload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "propzingbucket",
+    acl: "public-read",
+    key: function (req, file, cb) {
+      cb(null, `doc-${Date.now()}.pdf`);
+    },
+  }),
+  limits: { fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).single("image");
+
+/**
+ * Check File Type
+ * @param file
+ * @param cb
+ * @return {*}
+ */
+
+function checkFileType(file, cb) {
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif|pdf/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb("Error: Images Only!");
+  }
+}
+
+exports.uploadimages = (req, res) => {
+  profileImgUpload(req, res, (error) => {
+    // console.log("requestOkokok", req.file);
+    // console.log("error", error);
+    if (error) {
+      console.log("errors", error);
+      res.status(400).json({
+        status: "failure",
+        error: error.message,
+      });
+    } else {
+      // If File not found
+      if (req.file === undefined) {
+        console.log("Error: No File Selected!");
+        res.status(200).json({
+          status: "failure",
+          error: "No File Selected",
+        });
+      } else {
+        // If Success
+        const imageName = req.file.key;
+        const imageLocation = req.file.location;
+        // Save the file name into database into profile model
+        res.status(200).json({
+          status: "success",
+          message: {
+            key: imageName,
+            url: imageLocation,
+          },
+        });
+      }
+    }
+  });
+};
+
+exports.removeimages = (req, res) => {
+  const key = req.body.key;
+  console.log("req key", key);
+  var params = {
+    Bucket: "propzingbucket",
+    Key: key,
+  };
+
+  s3.deleteObject(params, function (err, data) {
+    if (err) {
+      console.log(err, err.stack);
+    } else {
+      res.status(200).json({ ok: "succesfully deleted" });
+      console.log(data);
+    }
+  });
+};

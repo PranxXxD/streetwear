@@ -5,10 +5,10 @@ import connectDb from "../../middleware/mongoose";
 var CryptoJS = require("crypto-js");
 import jsonwebtoken from "jsonwebtoken";
 import emailjs from "emailjs";
+
 const handler = async (req, res) => {
   // check if the user exists in the database
   const { email } = req.body;
-
   if (req.method == "POST") {
     let user = await User.findOne({ email: req.body.email });
     let token = jsonwebtoken.sign(
@@ -28,9 +28,9 @@ const handler = async (req, res) => {
       email_id: email,
       message: `We have sent you this email in response to your request to reset your password on streetWear.com.
     To reset your password, please follow the link below:
-    <a href="https://streetWear.com/forgotpwd?token=${token}">Click here to reset the password </a>
+    <a href="http://localhost:3000/forgotpwd?token=${token}">Click here to reset the password </a>
     <br/><br/>
-    We recommend that you keep your password secure and not share it with aIf you feel your password has been compromised, you can change it by going to your My Account Page and change the password
+    We recommend that you keep your password secure and not share it with if you feel your password has been compromised, you can change it by going to your My Account Page and change the password
     <br/><br/>`,
     };
     console.log(client);

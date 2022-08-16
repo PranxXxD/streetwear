@@ -18,7 +18,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import axios from "axios";
 
-const Bucket_Url = " https://streetwearbucket.s3.ap-south-1.amazonaws.com";
+const Bucket_Url = "us-west-1";
 
 // adding an image to database and showing in dashboard -> pending
 const ImageUploader = ({ products }) => {
@@ -75,6 +75,7 @@ const ImageUploader = ({ products }) => {
                   onChange={(e) => {
                     selectFile(e);
                   }}
+                  name="image"
                 />
                 {file && (
                   <>
