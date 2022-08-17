@@ -4,7 +4,6 @@ import Image from "next/image";
 import user1 from "../assets/images/backgrounds/u2.jpg";
 import user2 from "../assets/images/backgrounds/u3.jpg";
 import user3 from "../assets/images/backgrounds/u4.jpg";
-import transitions from "@material-ui/core/styles/transitions";
 const Content = () => {
   const blogs = [
     {
@@ -40,10 +39,9 @@ const Content = () => {
               </span>
               wear
             </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify, subway tile poke farm-to-table. Franzen you probably
-            </p>
+            <h3 className="lg:w-2/3 mx-auto leading-relaxed text-md">
+              The outFit that defines you!
+            </h3>
           </div>
           <Grid container>
             {blogs.map((blog, index) => (
@@ -65,6 +63,12 @@ const Content = () => {
                     borderRadius: "25px",
                     hover: "opacity 0",
                   }}
+                  className={`transition duration-100 ease-in-out hover:transform
+                    hover:-translate-y-1 hover:scale-110 ${
+                      blog.img
+                    } ? hover: opacity-25  : hover:opacity-100 ${
+                    blog.title && blog.subtitle
+                  } ? hover: opacity-100`}
                 >
                   <Image src={blog.img} alt="img" />
                   <CardContent

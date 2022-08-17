@@ -112,7 +112,7 @@ const ProfileDD = ({ logout }) => {
           </Box>
           <Divider />
           <Box p={2}>
-            <Link href={"admin/adminlogin"}>
+            <Link href={"../../../admin/adminlogin"}>
               <Button
                 onClick={logout}
                 fullWidth
