@@ -1,10 +1,6 @@
 import Head from "next/head";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import Image from "next/image";
 import Content from "../components/content";
-import mongoose from "mongoose";
-import Product from "../models/Product";
 
 // import slider from "../images/musician.jpg";
 
@@ -18,23 +14,9 @@ export default function Home({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex w-auto m-3 md:justify-center md:items-center ">
-        {/* <Image src={slider} alt="" height={800} /> */}
-        {products &&
-          products.map((product) => {
-            <div
-              key={product.id}
-              className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box"
-            >
-              <div className="carousel-item">
-                <Image src={product.img} className="rounded-box" />
-              </div>
-            </div>;
-          })}
-      </div>
       <div className="container mx-auto py-9 md:py-12 px-4 md:px-6">
-        <div className="flex items-strech justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8">
-          <div className="flex flex-col md:flex-row items-strech justify-between bg-gray-50 py-6 px-6 md:py-12 lg:px-12 md:w-8/12 lg:w-7/12 xl:w-8/12 2xl:w-9/12">
+        <div className="flex items-strech justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
+          <div className="flex flex-col md:flex-row items-strech justify-between bg-gray-50 py-6 px-6 md:py-12 lg:px-12 md:w-8/12 lg:w-7/12 xl:w-8/12 2xl:w-9/12 rounded-2xl">
             <div className="flex flex-col justify-center md:w-1/2">
               <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800">
                 Best Deal
@@ -42,29 +24,41 @@ export default function Home({ products }) {
               <p className="text-base lg:text-xl text-gray-800 mt-2">
                 Save upto <span className="font-bold">50%</span>
               </p>
+              <span className="text-gray-500">"All streetwear outfits"</span>
             </div>
             <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ReoKNd5g029hylmzar2NPQFr8oYmM-OOJQ&usqp=CAU"
+                src="https://cdn.pixabay.com/photo/2017/06/20/01/35/men-2421449__340.png"
                 alt=""
               />
-              {/* <img src="https://i.ibb.co/J2BtZdg/Rectangle-56-1.png" alt="" /> */}
+              <img
+                src="https://cdn.pixabay.com/photo/2017/06/27/09/17/keywords-2446791__340.png"
+                alt=""
+              />
+              <img
+                src="https://cdn.pixabay.com/photo/2016/06/02/16/03/freedom-1431380__340.png"
+                alt=""
+              />
             </div>
           </div>
-          <div className="md:w-4/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 bg-gray-50 py-6 px-6 md:py-0 md:px-4 lg:px-6 flex flex-col justify-center relative">
+          <div className="md:w-4/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 bg-gray-50 py-6 px-6 md:py-0 md:px-4 lg:px-6 flex flex-col justify-center relative rounded-2xl">
             <div className="flex flex-col justify-center">
-              <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800">
-                Game Console
-              </h1>
+              <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800"></h1>
               <p className="text-base lg:text-xl text-gray-800">
                 Save Upto <span className="font-bold">30%</span>
               </p>
+              <span className="text-gray-500">“All streetwear hoodies”</span>
             </div>
             <div className="flex justify-end md:absolute md:bottom-4 md:right-4 lg:bottom-0 lg:right-0">
-              <img
+              {/* <img
                 src="https://i.ibb.co/rGfP7mp/Rectangle-59-1.png"
                 alt=""
                 className="md:w-20 md:h-20 lg:w-full lg:h-full"
+              /> */}
+              <img
+                src="https://cdn.pixabay.com/photo/2015/03/01/21/44/bart-655318__340.png"
+                alt=""
+                className="md:w-20 md:h-20 lg:w-full lg:h-full mb-8"
               />
             </div>
           </div>
@@ -73,15 +67,4 @@ export default function Home({ products }) {
       <Content />
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  // Fetch data from external API
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URI);
-  }
-  const products = await Product.find();
-
-  // Pass data to the page via props
-  return { props: { products: JSON.parse(JSON.stringify(products)) } };
 }
