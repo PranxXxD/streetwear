@@ -17,16 +17,22 @@ export default function Home({ products }) {
       <div className="container mx-auto py-9 md:py-12 px-4 md:px-6">
         <div className="flex items-strech justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
           <div className="flex flex-col md:flex-row items-strech justify-between bg-gray-50 py-6 px-6 md:py-12 lg:px-12 md:w-8/12 lg:w-7/12 xl:w-8/12 2xl:w-9/12 rounded-2xl">
-            <div className="flex flex-col justify-center md:w-1/2">
-              <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800">
-                Best Deal
+            <div className="flex flex-col justify-center md:w-1/2 ">
+              <h1 className="">
+                <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block m-2 shadow-lg">
+                  <span className="relative text-white text-3xl">
+                    Best Deal
+                  </span>
+                </span>
               </h1>
-              <p className="text-base lg:text-xl text-gray-800 mt-2">
+              <p className="text-base lg:text-xl text-gray-800 mt-1">
                 Save upto <span className="font-bold">50%</span>
               </p>
-              <span className="text-gray-500">"All streetwear outfits"</span>
+              <span className="text-gray-500">
+                “All streetwear tshirts&Shirts”
+              </span>
             </div>
-            <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
+            <div className="md:w-1/4 mt-8 md:mt-0 flex justify-center md:justify-end">
               <img
                 src="https://cdn.pixabay.com/photo/2017/06/20/01/35/men-2421449__340.png"
                 alt=""
@@ -43,8 +49,14 @@ export default function Home({ products }) {
           </div>
           <div className="md:w-4/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 bg-gray-50 py-6 px-6 md:py-0 md:px-4 lg:px-6 flex flex-col justify-center relative rounded-2xl">
             <div className="flex flex-col justify-center">
-              <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800"></h1>
-              <p className="text-base lg:text-xl text-gray-800">
+              <h1 className="">
+                <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block m-2 shadow-lg">
+                  <span className="relative text-white text-3xl">
+                    Grab a Deal
+                  </span>
+                </span>
+              </h1>
+              <p className="text-base lg:text-xl text-gray-800 m-1">
                 Save Upto <span className="font-bold">30%</span>
               </p>
               <span className="text-gray-500">“All streetwear hoodies”</span>

@@ -66,7 +66,7 @@ const Content = () => {
                   className={`transition duration-100 ease-in-out hover:transform
                     hover:-translate-y-1 hover:scale-110 ${
                       blog.img
-                    } ? hover: opacity-25  : hover:opacity-100 ${
+                    } ? hover: opacity-20  : hover:opacity-100 ${
                     blog.title && blog.subtitle
                   } ? hover: opacity-100`}
                 >
