@@ -65,9 +65,11 @@ export default function Home({ products }) {
               <p className="text-base lg:text-xl text-gray-800 m-1">
                 Save Upto <span className="font-bold">30%</span>
               </p>
-              <span className="text-gray-500">“All streetwear hoodies”</span>
+              <span className="text-gray-500 text-sm">
+                “All streetwear hoodies”
+              </span>
             </div>
-            <div className="flex justify-end md:absolute md:bottom-4 md:right-4 lg:bottom-0 lg:right-0">
+            <div className="flex justify-end md:relative md:bottom-4 md:right-4 lg:bottom-0 lg:right-0">
               {/* <img
                 src="https://i.ibb.co/rGfP7mp/Rectangle-59-1.png"
                 alt=""
