@@ -159,16 +159,35 @@ const Navbar = ({
           </ul>
         </div>
         {user.value && (
-          <div className="h-[2.5rem] absolute right-0 mx-20 p-2.5 top-1 rounded-[2.5rem] w-0 hover:w-56 hover:pb-1">
+          <div className="absolute right-0 flex justify-start items-center p-3 mx-20 top-1 md:top-2">
             <input
-              className="border-none bg-none float-left p-0 text-gray-400 leading-10 w-0 hover:w-56 hover:bg-red-500 transition:0.4ms hover:pb-1"
+              className="text-xs md:text-sm bg-none leading-none text-left text-gray-600 w-full px-4 py-3 border border-gray-300 outline-none rounded-2xl "
               type="text"
               placeholder="Search"
-              id="input"
             />
-            <button className="hover:bg-red-500 hover:text-black text-white border-2 float-right w-8 h-8 rounded-[50%] bg-red-400 my-2 flex justify-center items-center transition:0.4ms">
-              <AiOutlineSearch id="Search" />
-            </button>
+            <svg
+              className="absolute right-3 z-10 cursor-pointer m-2"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 17C13.866 17 17 13.866 17 10C17 6.13401 13.866 3 10 3C6.13401 3 3 6.13401 3 10C3 13.866 6.13401 17 10 17Z"
+                stroke="#4B5563"
+                strokeWidth="1.66667"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M21 21L15 15"
+                stroke="#4B5563"
+                strokeWidth="1.66667"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
         )}
         <div className="cart absolute items-center right-0 mx-5 top-6 cursor-pointer flex">

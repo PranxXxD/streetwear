@@ -32,19 +32,25 @@ export default function Home({ products }) {
                 “All streetwear tshirts&Shirts”
               </span>
             </div>
-            <div className="md:w-1/4 mt-8 md:mt-0 flex justify-center md:justify-end">
-              <img
-                src="https://cdn.pixabay.com/photo/2017/06/20/01/35/men-2421449__340.png"
-                alt=""
-              />
-              <img
-                src="https://cdn.pixabay.com/photo/2017/06/27/09/17/keywords-2446791__340.png"
-                alt=""
-              />
-              <img
-                src="https://cdn.pixabay.com/photo/2016/06/02/16/03/freedom-1431380__340.png"
-                alt=""
-              />
+            <div className="md:w-1/1 mt-8 md:mt-0 flex justify-center md:justify-end">
+              <div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2017/06/20/01/35/men-2421449__340.png"
+                  alt=""
+                />
+              </div>
+              <div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2017/06/27/09/17/keywords-2446791__340.png"
+                  alt=""
+                />
+              </div>
+              <div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2016/06/02/16/03/freedom-1431380__340.png"
+                  alt=""
+                />
+              </div>
             </div>
           </div>
           <div className="md:w-4/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 bg-gray-50 py-6 px-6 md:py-0 md:px-4 lg:px-6 flex flex-col justify-center relative rounded-2xl">

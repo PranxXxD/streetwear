@@ -61,14 +61,11 @@ const Content = () => {
                     width: "100%",
                     m: 4,
                     borderRadius: "25px",
-                    hover: "opacity 0",
                   }}
                   className={`transition duration-100 ease-in-out hover:transform
                     hover:-translate-y-1 hover:scale-110 ${
-                      blog.img
-                    } ? hover: opacity-20  : hover:opacity-100 ${
-                    blog.title && blog.subtitle
-                  } ? hover: opacity-100`}
+                      blog.img && blog.title && blog.subtitle
+                    } ? hover: opacity-10 : hover:opacity-100 `}
                 >
                   <Image src={blog.img} alt="img" />
                   <CardContent
