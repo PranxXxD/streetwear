@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# E-commerce Website - streetWear.com
 
-## Getting Started
+streetWear is an minimal and aesthetic website which
+Sell men & women cloth wear with affordable price with good quality
+one can easily place an order with out login or creating an account.
+User can also check if the product is deliverable to his/her address
+which makes the user experiance better!
 
-First, run the development server:
+## Public commits
+
+One can make commits to this repo as i'm still working on it and ready to
+collab and scale the website!
+
+## Authors
+
+- [@PranxXxd](https://github.com/PranxXxD)
+
+## Deployment
+
+To deploy this project run
 
 ```bash
-npm run dev
-# or
-yarn dev
+  npm run deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+To run this project, you will need to add the following environment variables to your .env file
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+MONGO_URI = mongodb://localhost:27017/streetWear
+NEXT_PUBLIC_HOST = http://localhost:3000
+NEXT_PUBLIC_HOST_ADMIN = http://localhost:3000/admin
+NEXT_PUBLIC_PAYTM_HOST = your paytm host
+NEXT_PUBLIC_PAYTM_MID = your paytm mid
+PAYTM_MKEY = your paytm mkey
+AES_SECRET_KEY = your AES sceret key
+JWT_SECRET_KEY = your JWT secret key
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+AWS_ACCESS_KEY_ID = your AWS access key id
+AWS_SECRET_ACCESS_KEY = your AWS sceret access key
+AWS_BUCKET = your S3 bucket name
 
-## Learn More
+SERVICE_ID = emailjs service id
+TEMPLATE_ID = emailjs template id
+EMAIL_JS_USERID = emailjs user id
+MAIL = emailjs mail id
+PASSWORD = emailjs pwd
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Breif of me
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I'm a avid frontEnd developer with earger to develop and contribute to the community
+can ready to collab and contribute to open source. need some mentoring who can guide me to the proper way in devleoping world..
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+BackEnd.................Loading!
