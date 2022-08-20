@@ -151,7 +151,7 @@ export async function getServerSideProps(context) {
   let shirts = {};
   // looping through the product array
   for (let item of products) {
-    //push the new item color & size in thsirts array if it is not available
+    //push the new item color & size in the shirts array if it is not available
     // taking title as a key and shirts as a value
     if (item.title in shirts) {
       if (

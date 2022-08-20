@@ -1,7 +1,7 @@
 # E-commerce Website - streetWear.com
 
 streetWear is an minimal and aesthetic website which
-Sell men & women cloth wear with affordable price with good quality
+sell men & women cloth wear with affordable price with good quality
 one can easily place an order with out login or creating an account.
 User can also check if the product is deliverable to his/her address
 which makes the user experiance better!
