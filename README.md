@@ -20,7 +20,15 @@ collab and scale the website!
 To deploy this project run
 
 ```bash
-  npm run deploy
+  yarn run deploy
+```
+
+## Devlopment
+
+To run this project in development mode
+
+```bash
+yarn run dev
 ```
 
 ## Environment Variables
@@ -48,7 +56,7 @@ PASSWORD = emailjs pwd
 
 ## 🚀 Breif of me
 
-I'm a avid frontEnd developer with earger to develop and contribute to the community
-can ready to collab and contribute to open source. need some mentoring who can guide me to the proper way in devleoping world..
+I'm a avid frontEnd developer with minimal skills and eager to develop and contribute to the community,
+can ready to collab and contribute to open source. need some mentoring who can guide me to the proper way in devleoping world...
 
 BackEnd.................Loading!
