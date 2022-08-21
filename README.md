@@ -1,10 +1,21 @@
 # E-commerce Website - streetWear.com
 
-streetWear is an minimal and aesthetic website which
-sell men & women cloth wear with affordable price with good quality
-one can easily place an order with out login or creating an account.
-User can also check if the product is deliverable to his/her address
-which makes the user experiance better!
+streetWear is an minimal and aesthetic website developed by using nextjs of react
+framework which sell men & women cloth wear with affordable price with good quality
+one can easily place an order with out login or creating an account.User can also check if the product is deliverable to his/her address which makes the user experiance better!
+
+## Technologies used
+
+1. HTML
+2. CSS
+3. JavaScript
+4. nextjs => reactjs framework
+5. Tailwind CSS
+6. MongoDb
+7. AWS bucket for storing images
+8. JWT,Crypto-js => user authentication
+9. emailjs => email authentication
+10. material ui & react-icons
 
 ## Public commits
 
