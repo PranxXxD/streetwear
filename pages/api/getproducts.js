@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import Products from "../../models/Product";
+import Product from "../../models/Product";
 import connectDb from "../../middleware/mongoose";
 
 const handler = async (req, res) => {
-  let products = await Products.find();
+  let products = await Product.find();
   // tshirt is an object
   let tshirts = {};
   // looping through the product array
@@ -20,7 +20,7 @@ const handler = async (req, res) => {
       }
       if (
         !tshirts[item.title].size.includes(item.size) &&
-        item.availableQty > 0
+        item.availableQty < 0
       ) {
         tshirts[item.title].size.push(item.size);
       }
