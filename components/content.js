@@ -58,9 +58,9 @@ const Content = () => {
                 <Card
                   sx={{
                     p: 0,
-                    width: "100%",
-                    m: 4,
+                    m: 8,
                     borderRadius: "25px",
+                    width: "100%",
                   }}
                   className={`transition duration-100 ease-in-out hover:transform
                     hover:-translate-y-1 hover:scale-110 ${
