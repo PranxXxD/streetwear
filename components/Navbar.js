@@ -166,7 +166,7 @@ const Navbar = ({
               placeholder="Search"
             />
             <svg
-              className="absolute right-3 z-10 cursor-pointer m-2"
+              className="absolute right-3 z-5 cursor-pointer m-2"
               width={24}
               height={24}
               viewBox="0 0 24 24"
