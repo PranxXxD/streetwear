@@ -31,7 +31,6 @@ export default async function handler(req, res) {
       ContentType: type,
       ACL: "public-read",
     };
-    console.log(fileParams);
 
     //generating a signed ul which we used to upload a file
     const url = await s3.getSignedUrlPromise("putObject", fileParams);
