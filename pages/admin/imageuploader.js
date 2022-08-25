@@ -70,7 +70,6 @@ const ImageUploader = ({ products }) => {
           <Grid container spacing={0}>
             <Grid item xs={12} lg={12}>
               <BaseCard title="Upload an Image">
-<<<<<<< HEAD
                 <div className="flex bg-slate-100 p-4 border-2 rounded-md w-1/2 mb-2">
                   <input
                     className="font-sans "
@@ -83,14 +82,7 @@ const ImageUploader = ({ products }) => {
                 </div>
                 {uploadingStatus && <p>{uploadingStatus}</p>}
                 {fileUploaded && <img src={fileUploaded} />}
-=======
-                <input
-                  type="file"
-                  onChange={(e) => {
-                    selectFile(e);
-                  }}
-                />
->>>>>>> parent of 31ee624 (AWS integration)
+
                 {file && (
                   <>
                     {/* <p>Selected file: {file.name}</p> */}
