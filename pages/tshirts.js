@@ -5,8 +5,9 @@ import mongoose from "mongoose";
 import { FaRupeeSign } from "react-icons/fa";
 import Head from "next/head";
 import Content from "../components/content";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
-const Tshirts = ({ products }) => {
+const Tshirts = ({ products, addToCart }) => {
   // console.log(products);
   return (
     <div>
@@ -124,6 +125,25 @@ const Tshirts = ({ products }) => {
                         {products[item].color.includes("violet") && (
                           <button className="border-2 border-gray-300 ml-1 bg-violet-500 rounded-full w-6 h-6 focus:outline-none"></button>
                         )}
+                      </div>
+                      <div className="items-center text-red-350 justify-center first:text-red-350 hover:text-[#e75555] p-2 cursor-pointer flex">
+                        <AiOutlineShoppingCart
+                          disabled={products.availableQty <= 0}
+                          onClick={() =>
+                            addToCart(
+                              slug,
+                              1,
+                              products.price,
+                              products.title,
+                              size,
+                              color
+                            )
+                          }
+                          className="flex md:ml-6 mr-2 focus:outline-none text-md md:text-2xl"
+                        />
+                        <h3 className="text-md font-semibold pr-2">
+                          ADD TO CART
+                        </h3>
                       </div>
                     </div>
                   </div>

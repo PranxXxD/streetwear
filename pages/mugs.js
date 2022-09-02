@@ -7,8 +7,8 @@ import outofstock from "../images/outofstock.jpg";
 import Image from "next/image";
 import Head from "next/head";
 import Content from "../components/content";
-import { FaTag } from "react-icons/fa";
-const mugs = ({ products }) => {
+import { AiOutlineShoppingCart } from "react-icons/ai";
+const mugs = ({ products, addToCart }) => {
   // console.log(products);
   return (
     <div>
@@ -59,7 +59,7 @@ const mugs = ({ products }) => {
                   <>
                     <div className="lg:w-1/4 md:w-1/2 p-4 w-full cursor-pointer shadow-lg rounded-3xl m-2 md:m-2">
                       {/* <FaTag className="text-red-500 text-5xl m-2" /> */}
-                      <span className="bg-red-500 text-white text-md rounded-sm p-1 -m-4">
+                      <span className="bg-[#e75555] text-white text-md rounded-sm p-1 -m-4">
                         40% off
                       </span>
                       <a className="block relative rounded overflow-hidden">
@@ -85,33 +85,6 @@ const mugs = ({ products }) => {
                           </a>
                           {products[item].price}
                         </p>
-                        <div className="text-sm mt-1">
-                          {products[item].size.includes("S") && (
-                            <span className="border border-gray-300 mx-1 px-1">
-                              S
-                            </span>
-                          )}
-                          {products[item].size.includes("M") && (
-                            <span className="border border-gray-300 mx-1 px-1">
-                              M
-                            </span>
-                          )}
-                          {products[item].size.includes("L") && (
-                            <span className="border border-gray-300 mx-1 px-1">
-                              L
-                            </span>
-                          )}
-                          {products[item].size.includes("XL") && (
-                            <span className="border border-gray-300 mx-1 px-1">
-                              XL
-                            </span>
-                          )}
-                          {products[item].size.includes("XXL") && (
-                            <span className="border border-gray-300 mx-1 px-1">
-                              XXL
-                            </span>
-                          )}
-                        </div>
                         <div className="text-sm my-1">
                           {products[item].color.includes("black") && (
                             <button className="border-2 border-gray-300 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none"></button>
@@ -131,6 +104,25 @@ const mugs = ({ products }) => {
                           {products[item].color.includes("violet") && (
                             <button className="border-2 border-gray-300 ml-1 bg-violet-500 rounded-full w-6 h-6 focus:outline-none"></button>
                           )}
+                        </div>
+                        <div className="items-center text-red-350 justify-center first:text-red-350 hover:text-[#e75555] p-2 cursor-pointer flex">
+                          <AiOutlineShoppingCart
+                            disabled={products.availableQty <= 0}
+                            onClick={() =>
+                              addToCart(
+                                slug,
+                                1,
+                                products.price,
+                                products.title,
+                                size,
+                                color
+                              )
+                            }
+                            className="flex md:ml-6 mr-2 focus:outline-none text-md md:text-2xl"
+                          />
+                          <h3 className="text-md font-semibold pr-2">
+                            ADD TO CART
+                          </h3>
                         </div>
                       </div>
                     </div>

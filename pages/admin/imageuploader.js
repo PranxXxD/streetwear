@@ -70,27 +70,40 @@ const ImageUploader = ({ products }) => {
           <Grid container spacing={0}>
             <Grid item xs={12} lg={12}>
               <BaseCard title="Upload an Image">
-                <div className="flex bg-slate-100 p-4 border-2 rounded-md w-1/2 mb-2">
-                  <input
-                    className="font-sans "
-                    type="file"
-                    onChange={(e) => {
-                      selectFile(e);
-                    }}
-                    name="image"
-                  />
+                <div className="flex items-center">
+                  <label className="block">
+                    <span className="sr-only">Choose profile photo</span>
+                    <input
+                      type="file"
+                      className="block w-full text-sm text-slate-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                  file:bg-[#def2f6fb] file:text-[#4bd9f6fb]
+                                   hover:file:bg-[#c5eef6fb] cursor-pointer"
+                      onChange={(e) => {
+                        selectFile(e);
+                      }}
+                      name="image"
+                    />
+                  </label>
+                  {file && (
+                    <>
+                      {/* <p>Selected file: {file.name}</p> */}
+                      <Button
+                        onClick={uploadFile}
+                        className="flex"
+                        variant="outlined"
+                        mt={2}
+                      >
+                        Submit
+                      </Button>
+                    </>
+                  )}
                 </div>
+
                 {uploadingStatus && <p>{uploadingStatus}</p>}
                 {fileUploaded && <img src={fileUploaded} />}
-
-                {file && (
-                  <>
-                    {/* <p>Selected file: {file.name}</p> */}
-                    <Button onClick={uploadFile} variant="outlined" mt={2}>
-                      Submit
-                    </Button>
-                  </>
-                )}
 
                 <ImageList
                   sx={{ height: 400 }}
