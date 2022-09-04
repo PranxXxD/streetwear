@@ -393,8 +393,8 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
                 )}
                 {product.availableQty <= 0 && (
                   <>
-                    <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-gray-300 relative inline-block">
-                      <span class="relative text-black font-bold m-3">
+                    <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-gray-300 relative inline-block">
+                      <span className="relative text-black font-bold m-3">
                         out of stock!
                       </span>
                     </span>
