@@ -2,7 +2,7 @@ import Product from "../../models/Product";
 import connectDb from "../../middleware/mongoose";
 
 const handler = async (req, res) => {
-  let products = await Product.findOne({ title: Product.title });
+  let products = await Product.find();
   let clothes = {};
   console.log(products);
 
