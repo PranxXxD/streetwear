@@ -3,13 +3,49 @@ import connectDb from "../../middleware/mongoose";
 
 const handler = async (req, res) => {
   let products = await Product.findOne({ slug: req.query.slug });
-
-  //   console.log(products);
   // looping through the product array
   for (let item of Object.keys(products)) {
     products[item.title] = JSON.parse(JSON.stringify(item));
   }
   return res.status(200).json({ products });
+  let results = await Product.aggregate([
+    {
+      $search: {
+        index: "default",
+        compound: {
+          must: [
+            {
+              text: {
+                query: req.query.title,
+                path: "title",
+                fuzzy: {
+                  maxEdits: 1,
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        title: 1,
+        slug: 1,
+        desc: 1,
+        category: 1,
+        size: 1,
+        color: 1,
+        price: 1,
+        score: { $meta: "searchScore" },
+      },
+    },
+    {
+      $limit: 10,
+    },
+  ]).toArray();
+
+  return res.status(200).json({ results });
 
   //   try {
   //     if (req.query.title) {
