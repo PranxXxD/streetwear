@@ -6,6 +6,8 @@ import { FaRupeeSign } from "react-icons/fa";
 import Head from "next/head";
 import Content from "../components/content";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import outofstock from "../images/outofstock.jpg";
+import Image from "next/image";
 
 const Tshirts = ({ products, addToCart }) => {
   // console.log(products);
