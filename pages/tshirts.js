@@ -81,7 +81,7 @@ const Tshirts = ({ products, addToCart }) => {
                         </a>
                         {products[item].price}
                       </p>
-                      <div className="text-sm mt-1">
+                      {/* <div className="text-sm mt-1">
                         {products[item].size.includes("S") && (
                           <span className="border border-gray-300 mx-1 px-1">
                             S
@@ -107,7 +107,7 @@ const Tshirts = ({ products, addToCart }) => {
                             XXL
                           </span>
                         )}
-                      </div>
+                      </div> */}
                       <div className="text-sm my-1">
                         {products[item].color.includes("black") && (
                           <button className="border-2 border-gray-300 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none"></button>
