@@ -7,7 +7,6 @@ import {
   AiFillPlusCircle,
   AiFillMinusCircle,
   AiOutlineClear,
-  AiOutlineSearch,
 } from "react-icons/ai";
 import { FaWindowClose, FaRupeeSign } from "react-icons/fa";
 // import { GrClearOption } from "react-icons/gr";
@@ -17,6 +16,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Search from "../pages/search";
 
 const Navbar = ({
   logout,
@@ -158,38 +158,7 @@ const Navbar = ({
             </Link>
           </ul>
         </div>
-        {user.value && (
-          <div className="absolute right-0 flex justify-start items-center p-3 mx-20 top-1 md:top-2">
-            <input
-              className="text-xs md:text-sm bg-none leading-none text-left text-gray-600 w-full px-4 py-3 border border-gray-300 outline-none rounded-2xl "
-              type="text"
-              placeholder="Search"
-            />
-            <svg
-              className="absolute right-3 z-5 cursor-pointer m-2"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10 17C13.866 17 17 13.866 17 10C17 6.13401 13.866 3 10 3C6.13401 3 3 6.13401 3 10C3 13.866 6.13401 17 10 17Z"
-                stroke="#4B5563"
-                strokeWidth="1.66667"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M21 21L15 15"
-                stroke="#4B5563"
-                strokeWidth="1.66667"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        )}
+
         <div className="cart absolute items-center right-0 mx-5 top-6 cursor-pointer flex">
           {!user.value && (
             <>
@@ -202,7 +171,7 @@ const Navbar = ({
               </Link>
             </>
           )}
-
+          {user.value && <Search />}
           <AiOutlineShoppingCart
             onClick={toggleCart}
             className="text-xl md:text-3xl"

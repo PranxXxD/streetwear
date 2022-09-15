@@ -75,9 +75,9 @@ const Tshirts = ({ products, addToCart }) => {
                       >
                         {products[item].title}
                       </h2>
-                      <p className="mt-1 flex justify-center">
+                      <p className="mt-1 flex justify-center font-semibold">
                         <a>
-                          <FaRupeeSign className="text-md mt-1 px-1" />
+                          <FaRupeeSign className="text-md mt-1 px-1 font-bold" />
                         </a>
                         {products[item].price}
                       </p>
