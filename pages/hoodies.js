@@ -57,11 +57,14 @@ const hoodies = ({ products, addToCart }) => {
             {Object.keys(products).map((item) => {
               return (
                 <Link key={item._id} href={`/products/${products[item].slug}`}>
-                  <div className="lg:w-1/4 md:w-1/2 p-4 w-full cursor-pointer shadow-lg rounded-3xl m-2 md:m-2">
+                  <div
+                    className="lg:w-1/4 md:w-1/2 p-2 md:p-4 w-full cursor-pointer shadow-lg rounded-3xl m-4 md:m-4 transition duration-100 ease-in-out hover:transform
+                    hover:-translate-y-1 hover:scale-110"
+                  >
                     <a className="block relative rounded overflow-hidden">
                       <img
                         alt="ecommerce"
-                        className="h-[30vh] md:h-[36vh] block m-auto"
+                        className="h-[30vh] md:h-[24vh] block m-auto p-1"
                         src={products[item].img}
                       />
                     </a>
