@@ -100,7 +100,7 @@ const Home = ({ products }) => {
           return (
             <Link key={item._id} href={`/products/${products[item].slug}`}>
               <div
-                className="lg:w-1/4 md:w-1/2 p-2 md:p-4 w-full cursor-pointer shadow-lg rounded-3xl m-4 md:m-4 transition duration-100 ease-in-out hover:transform
+                className="lg:w-1/4 md:w-1/2 p-2 md:p-4 w-full cursor-pointer shadow-lg rounded-3xl m-4 md:m-4 transition duration-100 ease-in-out hover:transforms
                     hover:-translate-y-1 hover:scale-110"
               >
                 <a className="block relative rounded overflow-hidden">
