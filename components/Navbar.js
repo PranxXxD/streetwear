@@ -11,7 +11,9 @@ import {
 import { FaWindowClose, FaRupeeSign } from "react-icons/fa";
 // import { GrClearOption } from "react-icons/gr";
 import { FiShoppingBag } from "react-icons/fi";
-import { MdAccountCircle } from "react-icons/md";
+import { MdAccountCircle, MdOutlineManageAccounts } from "react-icons/md";
+import { BsCartCheck } from "react-icons/bs";
+import { FiLogOut, FiAlertTriangle } from "react-icons/fi";
 import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -90,27 +92,35 @@ const Navbar = ({
               onMouseLeave={() => {
                 setDropDown(false);
               }}
-              className="fixed right-14 bg-white shadow-lg border-2 top-9 py-4 rounded-md px-6 w-32 z-30"
+              className="fixed right-14 bg-white shadow-lg border-2 top-9 py-4 rounded-md px-6 w-46 z-30"
             >
-              <ul>
+              <ul className="flex-col justify-center items-center">
                 <Link href={"/myaccount"}>
                   <a>
-                    <li className="py-2 hover:text-red-400 text-black text-sm font-medium">
+                    <li className="flex py-2 hover:text-red-400 text-black text-md items-center font-medium">
+                      <MdOutlineManageAccounts className="mx-1" />
                       My Account
                     </li>
                   </a>
                 </Link>
                 <Link href={"/orders"}>
-                  <li className="py-2 hover:text-red-400  text-black text-sm font-medium">
-                    My Orders
+                  <li className="flex py-2 hover:text-red-400 text-black text-md items-center font-medium">
+                    <BsCartCheck className="mx-1" /> My Orders
                   </li>
                 </Link>
                 <Link href={"/login"}>
                   <li
                     onClick={logout}
-                    className="py-2 hover:text-red-400 text-black text-sm font-medium"
+                    className="flex py-2 hover:text-red-400 text-black text-md items-center font-medium"
                   >
+                    <FiLogOut className="mx-1" />
                     Logout
+                  </li>
+                </Link>
+                <Link href={"/contact"}>
+                  <li className="flex py-2 hover:text-red-400 text-black text-md items-center font-medium">
+                    <FiAlertTriangle className="mx-1" />
+                    Raise a Incident
                   </li>
                 </Link>
               </ul>
