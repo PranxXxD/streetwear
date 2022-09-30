@@ -120,7 +120,7 @@ const Navbar = ({
                 <Link href={"/contact"}>
                   <li className="flex py-2 hover:text-red-400 text-black text-md items-center font-medium">
                     <FiAlertTriangle className="mx-1" />
-                    Raise a Incident
+                    Raise an Incident
                   </li>
                 </Link>
               </ul>
