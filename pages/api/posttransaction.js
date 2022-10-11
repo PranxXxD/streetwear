@@ -45,7 +45,7 @@ const handler = async (req, res) => {
     );
 
     // update the stock inventory after the order is completed
-    let products = order.products;
+    let products = Order.products;
     for (slug in products) {
       // console.log(products[slug].qty);
       await Product.findOneAndUpdate(
@@ -69,7 +69,7 @@ const handler = async (req, res) => {
   //initiating shipping
 
   //Redirecting the user to the orders confrimation page
-  // res.redirect("/order?clrCart=1&id=" + order._id, 200);
+  res.redirect("/order?clrCart=1&id=" + order._id, 200);
   // res.redirect(200, "/order");
   res.status(200).json({ body: req.body });
   return;

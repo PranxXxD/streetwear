@@ -19,6 +19,7 @@
     "@mui/lab": "^5.0.0-alpha.65",
     "@mui/material": "^5.9.0",
     "@sendgrid/mail": "^7.7.0",
+    "@stripe/stripe-js": "^1.39.0",
     "apexcharts": "^3.23.1",
     "aws-sdk": "^2.1184.0",
     "axios": "^0.27.2",
