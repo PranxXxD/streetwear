@@ -85,7 +85,7 @@ const Signup = () => {
         <div className="max-w-md w-full space-y-8">
           <div>
             <div className="flex justify-center ">
-              <Image width={80} height={60} src={logo} />
+              <Image width={80} height={60} src={logo} alt="" />
             </div>
 
             <h2 className="mt-5 text-center text-3xl font-extrabold text-gray-900">
@@ -117,7 +117,7 @@ const Signup = () => {
                   name="name"
                   type="name"
                   onChange={handleChange}
-                  autocomplete="name"
+                  autoComplete="name"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                   placeholder="Name"
@@ -133,7 +133,7 @@ const Signup = () => {
                   name="email"
                   onChange={handleChange}
                   type="email"
-                  autocomplete="email"
+                  autoComplete="email"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
@@ -149,7 +149,7 @@ const Signup = () => {
                   name="password"
                   onChange={handleChange}
                   type="password"
-                  autocomplete="current-password"
+                  autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
@@ -172,9 +172,9 @@ const Signup = () => {
                     aria-hidden="true"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillrule="evenodd"
                       d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                      clip-rule="evenodd"
+                      cliprule="evenodd"
                     />
                   </svg>
                 </span>

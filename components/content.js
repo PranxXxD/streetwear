@@ -34,8 +34,8 @@ const Content = () => {
             </h2>
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
               High
-              <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block m-2">
-                <span class="relative text-white">street</span>
+              <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block m-2">
+                <span className="relative text-white">street</span>
               </span>
               wear
             </h1>
