@@ -2,7 +2,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import connectDb from "../../middleware/mongoose";
 import Product from "../../models/Product";
 import Order from "../../models/Order";
-const stripe = require("stripe")(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_API);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const handler = async (req, res) => {
   if (req.Method == "POST") {
