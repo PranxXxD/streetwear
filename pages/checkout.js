@@ -151,12 +151,12 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
 
         handler: {
           transactionStatus: function transactionStatus(paymentStatus) {
-            console.log(paymentStatus);
+            // console.log(paymentStatus);
           },
           notifyMerchant: function (eventName, data) {
             console.log("notifyMerchant handler function called");
             console.log("eventName => ", eventName);
-            console.log("data => ", data);
+            // console.log("data => ", data);
           },
         },
       };
@@ -211,7 +211,7 @@ const Checkout = ({ cart, clrCart, addToCart, removeFromCart, subTotal }) => {
       <Script
         type="application/javascript"
         crossorigin="anonymous"
-        src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_MID}.js`}
+        src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`}
       />
       <h1 className="font-bold my-8 text-center text-3xl">Checkout</h1>
       <h2 className="text-xl font-bold">1. Delivery Details</h2>

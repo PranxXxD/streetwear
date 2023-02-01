@@ -17,9 +17,9 @@ const ProductSchema = new mongoose.Schema(
 
 //preventing from creating the model everytime
 
-// mongoose.models = {};
-// export default mongoose.model("Product", ProductSchema);
+mongoose.models = {};
+export default mongoose.model("Product", ProductSchema);
 
 // works same as above lines 20 and 21
-export default mongoose.models.Product ||
-  mongoose.model("Product", ProductSchema);
+// export default mongoose.models.Product ||
+//   mongoose.model("Product", ProductSchema);
