@@ -59,13 +59,13 @@ const orders = () => {
                         scope="col"
                         className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
-                        email
+                        Email
                       </th>
                       <th
                         scope="col"
                         className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
-                        amount
+                        Amount
                       </th>
                       <th
                         scope="col"

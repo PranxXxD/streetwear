@@ -259,7 +259,7 @@ const MyAccount = () => {
         </div>
       </div>
       <button
-        className="flex mx-auto my-2 disabled:bg-red-300  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm"
+        className="flex mx-auto my-2 disabled:bg-red-300  text-white bg-red-500 border-0 p-3 focus:outline-none hover:bg-red-600 rounded-xl text-sm"
         onClick={handleUserSubmit}
       >
         Update
@@ -321,7 +321,7 @@ const MyAccount = () => {
         </div>
       </div>
       <button
-        className="flex mx-auto my-2 disabled:bg-red-300  text-white bg-red-500 border-0 py-2 px-2 focus:outline-none hover:bg-red-600 rounded text-sm"
+        className="flex mx-auto my-2 disabled:bg-red-300  text-white bg-red-500 border-0 p-3 focus:outline-none hover:bg-red-600 rounded-xl text-sm"
         onClick={handlePasswordSubmit}
       >
         Update

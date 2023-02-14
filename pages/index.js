@@ -133,7 +133,7 @@ const Home = ({ products }) => {
       </div>
 
       {/* Slider  */}
-      <div className="2xl:mx-auto 2xl:container flex justify-center">
+      <div className="2xl:mx-auto 2xl:container flex justify-center rounded-xl">
         <div className="2xl:px-20 px-6 py-12 w-full lg:w-4/5">
           {/* Carousel for Small-Sized Screen */}
           <CarouselProvider
@@ -195,7 +195,7 @@ const Home = ({ products }) => {
                 </Slide>
                 <Slide index={1}>
                   <div className="gallery-cell lg:mr-7 mr-6 lg:w-1/2 sm:w-96 w-full h-full">
-                    <div className="relative w-full h-full lg:block hidden">
+                    <div className="relative w-full h-full lg:block hidden`">
                       <Image
                         src={hoodiesbanner}
                         alt=""

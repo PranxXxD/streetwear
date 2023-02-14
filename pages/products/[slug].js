@@ -394,7 +394,7 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
                 {product.availableQty <= 0 && (
                   <>
                     <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-gray-300 relative inline-block">
-                      <span className="relative text-black font-bold m-3">
+                      <span className="relative text-black font-bold p-3 top-1.5">
                         out of stock!
                       </span>
                     </span>
@@ -469,11 +469,11 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
                   onClick={checkServiceAbility}
                   className="flex text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded"
                 >
-                  Check Pincode
+                  Check
                 </button>
               </div>
               {service && service != null && (
-                <div className="flex mt-3 text-green-500 text-sm">
+                <div className="flex mt-3 text-green-500 text-sm font-semibold ml-1">
                   Service available to this pincode!
                 </div>
               )}
