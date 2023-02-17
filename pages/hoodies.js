@@ -9,7 +9,7 @@ import Head from "next/head";
 import Content from "../components/content";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-const hoodies = ({ products, addToCart }) => {
+const Hoodies = ({ products, addToCart }) => {
   // console.log(products);
   return (
     <div>
@@ -207,4 +207,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default hoodies;
+export default Hoodies;
