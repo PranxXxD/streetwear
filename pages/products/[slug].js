@@ -21,6 +21,7 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
   // console.log(product, variants);
   const router = useRouter();
   const { slug } = router.query;
+  // console.log(router.query)
   const [pin, setPin] = useState();
   const [service, setService] = useState();
 
@@ -499,7 +500,7 @@ export async function getServerSideProps(context) {
   }
   // fetch the single item with the unique slug
   let product = await Product.findOne({ slug: context.query.slug });
-
+ console.log(context.query.slug)
   //display the error msg if user accessing the product which is not in database
   if (product == null) {
     return {
